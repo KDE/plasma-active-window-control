@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name=""/>
+
+    <group name="Appearance">
+        <entry name="showControlButtons" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="showMinimize" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showMaximize" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showPinToAllDesktops" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonOrder" type="String">
+            <default>close|maximize|minimize|pin</default>
+        </entry>
+        <entry name="customAuroraeThemePath" type="String">
+            <default></default>
+        </entry>
+        <entry name="customAuroraeThemeImageExtension" type="String">
+            <default>.svg</default>
+        </entry>
+        <entry name="doNotHideControlButtons" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonsStandalone" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonsBetweenIconAndText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonsDynamicWidth" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="slidingIconAndText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="showButtonOnlyWhenMaximized" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonsPosition" type="Enum">
+            <choices>
+                <choice name="UpperLeft"/>
+                <choice name="UpperRight"/>
+                <choice name="BottomLeft"/>
+                <choice name="BottomRight"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="buttonsVerticalCenter" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="buttonSize" type="Double">
+            <default>0.5</default>
+        </entry>
+        <entry name="controlButtonsSpacing" type="Double">
+            <default>10</default>
+        </entry>
+
+        <entry name="autoFillWidth" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="horizontalScreenWidthPercent" type="Double">
+            <default>0.2</default>
+        </entry>
+        <entry name="widthFineTuning" type="Double">
+            <default>0.0</default>
+        </entry>
+        <entry name="showWindowTitle" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="textType" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="fitText" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="tooltipTextType" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="useWindowTitleReplace" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="replaceTextRegex" type="String">
+            <default>^(.*)\s*[—–\-:]\s*(Mozilla )?([^—–\-:]+)$</default>
+        </entry>
+        <entry name="replaceTextReplacement" type="String">
+            <default>$3 — $1</default>
+        </entry>
+        <entry name="noWindowText" type="String">
+            <default>Plasma Desktop :: %activity%</default>
+        </entry>
+        <entry name="noWindowIcon" type="String">
+            <default></default>
+        </entry>
+        <entry name="limitTextWidth" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="textWidthLimit" type="Int">
+            <default>1000</default>
+        </entry>
+        <entry name="showWindowIcon" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="windowIconOnTheRight" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="boldFontWeight" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="fontFamily" type="String">
+            <default></default>
+        </entry>
+        <entry name="iconAndTextSpacing" type="Double">
+            <default>5</default>
+        </entry>
+        <entry name="fontSizeScale" type="Double">
+            <default>1</default>
+        </entry>
+    </group>
+
+    <group name="Behaviour">
+        <entry name="showForCurrentScreenOnly" type="Bool">
+            <default>false</default>
+        </entry>
+    </group>
+
+    <group name="AppMenu">
+        <entry name="appmenuEnabled" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuNextToButtons" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuFillHeight" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuFontBold" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuNextToIconAndText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuSwitchSidesWithIconAndText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuSeparatorEnabled" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="appmenuBoldTitleWhenMenuDisplayed" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="appmenuOuterSideMargin" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="appmenuIconAndTextOpacity" type="Double">
+            <default>0.1</default>
+        </entry>
+        <entry name="appmenuButtonTextSizeScale" type="Double">
+            <default>1.0</default>
+        </entry>
+    </group>
+
+    <group name="MouseControl">
+        <entry name="doubleClickMaximizes" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="leftClickAction" type="Enum">
+            <choices>
+                <choice name="Disabled"/>
+                <choice name="Expose"/>
+                <choice name="ExposeAll"/>
+                <choice name="ExposeClass"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="middleClickAction" type="Enum">
+            <choices>
+                <choice name="Disabled"/>
+                <choice name="Close"/>
+                <choice name="Fullscreen"/>
+            </choices>
+            <default>0</default>
+        </entry>
+        <entry name="wheelUpMaximizes" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="wheelDownAction" type="Enum">
+            <choices>
+                <choice name="Minimize"/>
+                <choice name="Unmaximize"/>
+            </choices>
+            <default>0</default>
+        </entry>
+    </group>
+
+</kcfg>
