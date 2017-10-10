@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Active Window Control
+Name[ca]=Control per a la finestra activa
+Name[nl]=Besturing van het actieve venster
+Name[pt]=Controlo da Janela Activa
+Name[sv]=Aktiv fönsterstyrning
+Name[uk]=Керування активним вікном
+Name[x-test]=xxActive Window Controlxx
 Comment=Plasmoid for advanced active window control.
+Comment[ca]=Plasmoide per al control avançat de les finestres actives.
+Comment[nl]=Plasmoid voor geavanceerde besturing van het actieve venster.
+Comment[pt]=Plasmóide para o controlo avançado da janela activa.
+Comment[sv]=Plasmoid för avancerad styrning av aktivt fönster.
+Comment[uk]=Плазмоїд для розширеного керування активним вікном.
+Comment[x-test]=xxPlasmoid for advanced active window control.xx
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Kotelnik
