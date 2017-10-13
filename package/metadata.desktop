@@ -2,6 +2,7 @@
 Name=Active Window Control
 Name[ca]=Control per a la finestra activa
 Name[ca@valencia]=Control per a la finestra activa
+Name[es]=Control de la ventana activa
 Name[nl]=Besturing van het actieve venster
 Name[pt]=Controlo da Janela Activa
 Name[sk]=Ovládanie aktívneho okna
@@ -11,6 +12,7 @@ Name[x-test]=xxActive Window Controlxx
 Comment=Plasmoid for advanced active window control.
 Comment[ca]=Plasmoide per al control avançat de les finestres actives.
 Comment[ca@valencia]=Plasmoide per al control avançat de les finestres actives.
+Comment[es]=Plasmoide para el control avanzado de la ventana activa.
 Comment[nl]=Plasmoid voor geavanceerde besturing van het actieve venster.
 Comment[pt]=Plasmóide para o controlo avançado da janela activa.
 Comment[sk]=Plazmoid na pokročilé ovládanie aktívnych okien.
