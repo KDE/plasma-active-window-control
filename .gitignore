@@ -1,2 +1,3 @@
-#the build directory
 build/
+update-translations.sh
+po
