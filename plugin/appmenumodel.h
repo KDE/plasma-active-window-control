@@ -20,6 +20,7 @@
  ******************************************************************/
 
 #include <QAbstractListModel>
+#include <QAbstractNativeEventFilter>
 #include <QStringList>
 #include <KWindowSystem>
 #include <QPointer>
@@ -27,9 +28,10 @@
 class QMenu;
 class QAction;
 class QModelIndex;
+class QDBusServiceWatcher;
 class KDBusMenuImporter;
 
-class AppMenuModel : public QAbstractListModel
+class AppMenuModel : public QAbstractListModel, public QAbstractNativeEventFilter
 {
     Q_OBJECT
 
@@ -44,14 +46,20 @@ public:
         ActionRole
     };
 
-    QVariant data(const QModelIndex &index, int role) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QHash<int, QByteArray> roleNames() const;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
+    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
     void updateApplicationMenu(const QString &serviceName, const QString &menuObjectPath);
 
     bool menuAvailable() const;
     void setMenuAvailable(bool set);
+
+signals:
+    void requestActivateIndex(int index);
+
+protected:
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long int *result) override;
 
 private Q_SLOTS:
     void onActiveWindowChanged(WId id);
@@ -64,10 +72,13 @@ signals:
 private:
     bool m_menuAvailable;
 
+    WId m_currentWindowId = 0;
+
     QPointer<QMenu> m_menu;
     QStringList m_activeMenu;
     QList<QAction *> m_activeActions;
 
+    QDBusServiceWatcher *m_serviceWatcher;
     QString m_serviceName;
     QString m_menuObjectPath;
 

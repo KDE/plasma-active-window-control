@@ -1,27 +1,24 @@
-set(activewindowcontrolplugin_SRCS
+set(appmenuapplet_SRCS
     appmenumodel.cpp
-    activewindowcontrolplugin.cpp
-    )
+    appmenuplugin.cpp
+)
 
-add_library(activewindowcontrolplugin SHARED ${activewindowcontrolplugin_SRCS})
+add_library(appmenuplugin SHARED ${appmenuapplet_SRCS})
 
-cmake_policy(SET CMP0053 NEW)
-cmake_policy(SET CMP0063 NEW)
-
+# load dbusmenuqt
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
-
+cmake_policy(SET CMP0063 NEW)
 add_subdirectory(libdbusmenuqt)
 
-target_link_libraries(activewindowcontrolplugin
+target_link_libraries(appmenuplugin
                       Qt5::Core
                       Qt5::Widgets
                       Qt5::Quick
-                      Qt5::DBus
                       KF5::Plasma
                       KF5::WindowSystem
-                      dbusmenuqt
-                      )
+                      dbusmenuqt)
 
+# load X11 libraries
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
                         URL "http://www.x.org"
@@ -45,15 +42,12 @@ endif()
 configure_file(config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
 
 if(HAVE_X11)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED X11Extras)
-    find_package(XCB MODULE REQUIRED COMPONENTS XCB RANDR)
+    find_package(XCB MODULE REQUIRED COMPONENTS XCB)
     set_package_properties(XCB PROPERTIES TYPE REQUIRED)
-    target_link_libraries(activewindowcontrolplugin
-                          Qt5::X11Extras
-                          XCB::XCB
-                          )
+    target_link_libraries(appmenuplugin Qt5::X11Extras XCB::XCB)
 endif()
 
-install(TARGETS activewindowcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)
+# install plugin
+install(TARGETS appmenuplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)
 
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)

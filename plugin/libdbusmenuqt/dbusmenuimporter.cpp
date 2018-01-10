@@ -362,6 +362,11 @@ void DBusMenuImporterPrivate::slotItemsPropertiesUpdated(const DBusMenuItemList 
     }
 }
 
+QAction *DBusMenuImporter::actionForId(int id) const
+{
+    return d->m_actionForId.value(id);
+}
+
 void DBusMenuImporter::slotItemActivationRequested(int id, uint /*timestamp*/)
 {
     QAction *action = d->m_actionForId.value(id);
@@ -426,12 +431,10 @@ void DBusMenuImporter::slotGetLayoutFinished(QDBusPendingCallWatcher *watcher)
                 sendClickedEvent(id);
             });
 
-            if (action->menu()) {
-                auto menu = action->menu();
-                connect(menu, &QMenu::aboutToShow, this, [menu, this]() {
-                   updateMenu(menu);
-                });
+            if (QMenu *menuAction = action->menu()) {
+                connect(menuAction, &QMenu::aboutToShow, this, &DBusMenuImporter::slotMenuAboutToShow, Qt::UniqueConnection);
             }
+            connect(menu, &QMenu::aboutToHide, this, &DBusMenuImporter::slotMenuAboutToHide, Qt::UniqueConnection);
 
             menu->addAction(action);
         } else {
@@ -441,6 +444,9 @@ void DBusMenuImporter::slotGetLayoutFinished(QDBusPendingCallWatcher *watcher)
             filteredKeys.removeOne("toggle-type");
             filteredKeys.removeOne("children-display");
             d->updateAction(*it, dbusMenuItem.properties, filteredKeys);
+            // Move the action to the tail so we can keep the order same as the dbus request.
+            menu->removeAction(action);
+            menu->addAction(action);
         }
     }
 
@@ -517,6 +523,8 @@ void DBusMenuImporter::slotMenuAboutToShow()
 {
     QMenu *menu = qobject_cast<QMenu*>(sender());
     Q_ASSERT(menu);
+
+    updateMenu(menu);
 
     QAction *action = menu->menuAction();
     Q_ASSERT(action);

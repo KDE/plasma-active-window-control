@@ -19,7 +19,7 @@
  *
  */
 
-#include "activewindowcontrolapplet.h"
+#include "appmenuapplet.h"
 #include "../plugin/appmenumodel.h"
 
 #include <QAction>
@@ -30,31 +30,61 @@
 #include <QQuickWindow>
 #include <QScreen>
 #include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
+#include <QDBusConnectionInterface>
+#include <QTimer>
 
-ActiveWindowControlApplet::ActiveWindowControlApplet(QObject *parent, const QVariantList &data)
+int AppMenuApplet::s_refs = 0;
+
+static const QString s_viewService(QStringLiteral("org.kde.kappmenuview"));
+
+AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
     : Plasma::Applet(parent, data)
 {
+    ++s_refs;
+    //if we're the first, regster the service
+    if (s_refs == 1) {
+        QDBusConnection::sessionBus().interface()->registerService(s_viewService,
+                QDBusConnectionInterface::QueueService,
+                QDBusConnectionInterface::DontAllowReplacement);
+    }
+    /*it registers or unregisters the service when the destroyed value of the applet change,
+      and not in the dtor, because:
+      when we "delete" an applet, it just hides it for about a minute setting its status
+      to destroyed, in order to be able to do a clean undo: if we undo, there will be
+      another destroyedchanged and destroyed will be false.
+      When this happens, if we are the only appmenu applet existing, the dbus interface
+      will have to be registered again*/
+    connect(this, &Applet::destroyedChanged, this, [this](bool destroyed) {
+        if (destroyed) {
+            //if we were the last, unregister
+            if (--s_refs == 0) {
+                QDBusConnection::sessionBus().interface()->unregisterService(s_viewService);
+            }
+        } else {
+            //if we're the first, regster the service
+            if (++s_refs == 1) {
+                QDBusConnection::sessionBus().interface()->registerService(s_viewService,
+                    QDBusConnectionInterface::QueueService,
+                    QDBusConnectionInterface::DontAllowReplacement);
+            }
+        }
+    });
 }
 
-ActiveWindowControlApplet::~ActiveWindowControlApplet() = default;
+AppMenuApplet::~AppMenuApplet() = default;
 
-void ActiveWindowControlApplet::init()
+void AppMenuApplet::init()
 {
-    // TODO Wayland PlasmaShellSurface stuff
-    QDBusConnection::sessionBus().connect(QStringLiteral("org.kde.kappmenu"),
-                                          QStringLiteral("/KAppMenu"),
-                                          QStringLiteral("org.kde.kappmenu"),
-                                          QStringLiteral("reconfigured"),
-                                          this, SLOT(updateAppletEnabled()));
-    updateAppletEnabled();
 }
 
-AppMenuModel *ActiveWindowControlApplet::model() const
+AppMenuModel *AppMenuApplet::model() const
 {
     return m_model;
 }
 
-void ActiveWindowControlApplet::setModel(AppMenuModel *model)
+void AppMenuApplet::setModel(AppMenuModel *model)
 {
     if (m_model != model) {
         m_model = model;
@@ -62,12 +92,12 @@ void ActiveWindowControlApplet::setModel(AppMenuModel *model)
     }
 }
 
-int ActiveWindowControlApplet::view() const
+int AppMenuApplet::view() const
 {
     return m_viewType;
 }
 
-void ActiveWindowControlApplet::setView(int type)
+void AppMenuApplet::setView(int type)
 {
     if (m_viewType != type) {
         m_viewType = type;
@@ -75,12 +105,12 @@ void ActiveWindowControlApplet::setView(int type)
     }
 }
 
-int ActiveWindowControlApplet::currentIndex() const
+int AppMenuApplet::currentIndex() const
 {
     return m_currentIndex;
 }
 
-void ActiveWindowControlApplet::setCurrentIndex(int currentIndex)
+void AppMenuApplet::setCurrentIndex(int currentIndex)
 {
     if (m_currentIndex != currentIndex) {
         m_currentIndex = currentIndex;
@@ -88,12 +118,12 @@ void ActiveWindowControlApplet::setCurrentIndex(int currentIndex)
    }
 }
 
-QQuickItem *ActiveWindowControlApplet::buttonGrid() const
+QQuickItem *AppMenuApplet::buttonGrid() const
 {
     return m_buttonGrid;
 }
 
-void ActiveWindowControlApplet::setButtonGrid(QQuickItem *buttonGrid)
+void AppMenuApplet::setButtonGrid(QQuickItem *buttonGrid)
 {
     if (m_buttonGrid != buttonGrid) {
         m_buttonGrid = buttonGrid;
@@ -101,33 +131,10 @@ void ActiveWindowControlApplet::setButtonGrid(QQuickItem *buttonGrid)
     }
 }
 
-bool ActiveWindowControlApplet::appletEnabled() const
-{
-    return m_appletEnabled;
-}
-
-void ActiveWindowControlApplet::updateAppletEnabled()
-{
-    KConfigGroup config(KSharedConfig::openConfig(QStringLiteral("kdeglobals")), QStringLiteral("Appmenu Style"));
-    const QString &menuStyle = config.readEntry(QStringLiteral("Style"));
-
-    const bool enabled = (menuStyle == QLatin1String("Widget"));
-
-    if (m_appletEnabled != enabled) {
-        m_appletEnabled = enabled;
-        emit appletEnabledChanged();
-    }
-}
-
-QMenu *ActiveWindowControlApplet::createMenu(int idx) const
+QMenu *AppMenuApplet::createMenu(int idx) const
 {
     QMenu *menu = nullptr;
     QAction *action = nullptr;
-
-    if (!m_model) {
-        qDebug() << "model not available";
-        return menu;
-    }
 
     if (view() == CompactView) {
        menu = new QMenu();
@@ -150,24 +157,40 @@ QMenu *ActiveWindowControlApplet::createMenu(int idx) const
     return menu;
 }
 
-void ActiveWindowControlApplet::onMenuAboutToHide()
+void AppMenuApplet::onMenuAboutToHide()
 {
     setCurrentIndex(-1);
 }
 
-void ActiveWindowControlApplet::trigger(QQuickItem *ctx, int idx)
+void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
 {
     if (m_currentIndex == idx) {
+        return;
+    }
+
+    if (!ctx || !ctx->window() || !ctx->window()->screen()) {
         return;
     }
 
     QMenu *actionMenu = createMenu(idx);
     if (actionMenu) {
 
-        if (ctx && ctx->window() && ctx->window()->mouseGrabberItem()) {
-            // FIXME event forge thing enters press and hold move mode :/
-            ctx->window()->mouseGrabberItem()->ungrabMouse();
-        }
+        //this is a workaround where Qt will fail to realise a mouse has been released
+        // this happens if a window which does not accept focus spawns a new window that takes focus and X grab
+        // whilst the mouse is depressed
+        // https://bugreports.qt.io/browse/QTBUG-59044
+        // this causes the next click to go missing
+
+        //by releasing manually we avoid that situation
+        auto ungrabMouseHack = [ctx]() {
+            if (ctx && ctx->window() && ctx->window()->mouseGrabberItem()) {
+                // FIXME event forge thing enters press and hold move mode :/
+                ctx->window()->mouseGrabberItem()->ungrabMouse();
+            }
+        };
+
+        QTimer::singleShot(0, ctx, ungrabMouseHack);
+        //end workaround
 
         const auto &geo = ctx->window()->screen()->availableVirtualGeometry();
 
@@ -185,7 +208,15 @@ void ActiveWindowControlApplet::trigger(QQuickItem *ctx, int idx)
             actionMenu->installEventFilter(this);
         }
 
+        setStatus(Plasma::Types::AcceptingInputStatus);
+        actionMenu->winId();//create window handle
+        actionMenu->windowHandle()->setTransientParent(ctx->window());
+
         actionMenu->popup(pos);
+
+        //we can return to passive immediately, an autohide panel will stay open whilst
+        //any transient window is showing
+        setStatus(Plasma::Types::PassiveStatus);
 
         if (view() == FullView) {
             // hide the old menu only after showing the new one to avoid brief flickering
@@ -200,13 +231,13 @@ void ActiveWindowControlApplet::trigger(QQuickItem *ctx, int idx)
         setCurrentIndex(idx);
 
         // FIXME TODO connect only once
-        connect(actionMenu, &QMenu::aboutToHide, this, &ActiveWindowControlApplet::onMenuAboutToHide, Qt::UniqueConnection);
+        connect(actionMenu, &QMenu::aboutToHide, this, &AppMenuApplet::onMenuAboutToHide, Qt::UniqueConnection);
         return;
     }
 }
 
 // FIXME TODO doesn't work on submenu
-bool ActiveWindowControlApplet::eventFilter(QObject *watched, QEvent *event)
+bool AppMenuApplet::eventFilter(QObject *watched, QEvent *event)
 {
     auto *menu = qobject_cast<QMenu *>(watched);
     if (!menu) {
@@ -258,6 +289,6 @@ bool ActiveWindowControlApplet::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(activewindowcontrol, ActiveWindowControlApplet, "metadata.json")
+K_EXPORT_PLASMA_APPLET_WITH_JSON(appmenu, AppMenuApplet, "metadata.json")
 
-#include "activewindowcontrolapplet.moc"
+#include "appmenuapplet.moc"

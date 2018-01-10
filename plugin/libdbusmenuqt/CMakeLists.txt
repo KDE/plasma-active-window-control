@@ -18,5 +18,3 @@ target_link_libraries(dbusmenuqt
     Qt5::DBus
     Qt5::Widgets
 )
-
-add_subdirectory(test)

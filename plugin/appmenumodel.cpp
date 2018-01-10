@@ -25,21 +25,27 @@
 
 #include <config-X11.h>
 
-#ifdef HAVE_X11
+#if HAVE_X11
 #include <QX11Info>
 #include <xcb/xcb.h>
 #endif
 
 #include <QAction>
+#include <QGuiApplication>
 #include <QMenu>
 #include <QDebug>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+#include <QDBusServiceWatcher>
 
 #include <dbusmenuimporter.h>
 
 static const QByteArray s_x11AppMenuServiceNamePropertyName = QByteArrayLiteral("_KDE_NET_WM_APPMENU_SERVICE_NAME");
 static const QByteArray s_x11AppMenuObjectPathPropertyName = QByteArrayLiteral("_KDE_NET_WM_APPMENU_OBJECT_PATH");
+
+#if HAVE_X11
+static QHash<QByteArray, xcb_atom_t> s_atoms;
+#endif
 
 class KDBusMenuImporter : public DBusMenuImporter
 {
@@ -60,17 +66,19 @@ protected:
 };
 
 AppMenuModel::AppMenuModel(QObject *parent)
-            : QAbstractListModel(parent)
+            : QAbstractListModel(parent),
+              m_serviceWatcher(new QDBusServiceWatcher(this))
 {
     connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &AppMenuModel::onActiveWindowChanged);
     connect(this, &AppMenuModel::modelNeedsUpdate, this, &AppMenuModel::update, Qt::UniqueConnection);
     onActiveWindowChanged(KWindowSystem::activeWindow());
 
+    m_serviceWatcher->setConnection(QDBusConnection::sessionBus());
     //if our current DBus connection gets lost, close the menu
     //we'll select the new menu when the focus changes
-    connect(QDBusConnection::sessionBus().interface(), &QDBusConnectionInterface::serviceOwnerChanged, this, [this](const QString &serviceName, const QString &oldOwner, const QString &newOwner)
+    connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName)
     {
-        if (serviceName == m_serviceName && newOwner.isEmpty()) {
+        if (serviceName == m_serviceName) {
             setMenuAvailable(false);
             emit modelNeedsUpdate();
         }
@@ -120,11 +128,17 @@ void AppMenuModel::update()
 
 void AppMenuModel::onActiveWindowChanged(WId id)
 {
-#ifdef HAVE_X11
+    qApp->removeNativeEventFilter(this);
+
+    if (!id) {
+        setMenuAvailable(false);
+        emit modelNeedsUpdate();
+        return;
+    }
+
+#if HAVE_X11
     if (KWindowSystem::isPlatformX11()) {
         auto *c = QX11Info::connection();
-
-        static QHash<QByteArray, xcb_atom_t> s_atoms;
 
         auto getWindowPropertyString = [c, this](WId id, const QByteArray &name) -> QByteArray {
             QByteArray value;
@@ -190,6 +204,11 @@ void AppMenuModel::onActiveWindowChanged(WId id)
             return;
         }
 
+        // monitor whether an app menu becomes available later
+        // this can happen when an app starts, shows its window, and only later announces global menu (e.g. Firefox)
+        qApp->installNativeEventFilter(this);
+        m_currentWindowId = id;
+
         //no menu found, set it to unavailable
         setMenuAvailable(false);
         emit modelNeedsUpdate();
@@ -234,6 +253,8 @@ void AppMenuModel::updateApplicationMenu(const QString &serviceName, const QStri
     }
 
     m_serviceName = serviceName;
+    m_serviceWatcher->setWatchedServices(QStringList({m_serviceName}));
+
     m_menuObjectPath = menuObjectPath;
 
     if (m_importer) {
@@ -259,5 +280,46 @@ void AppMenuModel::updateApplicationMenu(const QString &serviceName, const QStri
         setMenuAvailable(true);
         emit modelNeedsUpdate();
     });
+
+    connect(m_importer.data(), &DBusMenuImporter::actionActivationRequested, this, [this](QAction *action) {
+        // TODO submenus
+        auto it = std::find(m_activeActions.constBegin(), m_activeActions.constEnd(), action);
+        if (it != m_activeActions.constEnd()) {
+            requestActivateIndex(it - m_activeActions.constBegin());
+        }
+    });
+}
+
+bool AppMenuModel::nativeEventFilter(const QByteArray &eventType, void *message, long *result)
+{
+    Q_UNUSED(result);
+
+    if (!KWindowSystem::isPlatformX11() || eventType != "xcb_generic_event_t") {
+        return false;
+    }
+
+#if HAVE_X11
+    auto e = static_cast<xcb_generic_event_t *>(message);
+    const uint8_t type = e->response_type & ~0x80;
+    if (type == XCB_PROPERTY_NOTIFY) {
+        auto *event = reinterpret_cast<xcb_property_notify_event_t *>(e);
+        if (event->window == m_currentWindowId) {
+
+            auto serviceNameAtom = s_atoms.value(s_x11AppMenuServiceNamePropertyName);
+            auto objectPathAtom = s_atoms.value(s_x11AppMenuObjectPathPropertyName);
+
+            if (serviceNameAtom != XCB_ATOM_NONE && objectPathAtom != XCB_ATOM_NONE) { // shouldn't happen
+                if (event->atom == serviceNameAtom || event->atom == objectPathAtom) {
+                    // see if we now have a menu
+                    onActiveWindowChanged(KWindowSystem::activeWindow());
+                }
+            }
+        }
+    }
+#else
+    Q_UNUSED(message);
+#endif
+
+    return false;
 }
 

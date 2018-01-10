@@ -19,12 +19,12 @@
  *
  ******************************************************************/
 
-#ifndef ACTIVEWINDOWCONTROLPLUGIN_H
-#define ACTIVEWINDOWCONTROLPLUGIN_H
+#ifndef APPMENUPLUGIN_H
+#define APPMENUPLUGIN_H
 
 #include <QQmlExtensionPlugin>
 
-class ActiveWindowControlPlugin : public QQmlExtensionPlugin
+class AppmenuPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

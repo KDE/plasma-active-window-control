@@ -29,11 +29,9 @@ class QQuickItem;
 class QMenu;
 class AppMenuModel;
 
-class ActiveWindowControlApplet : public Plasma::Applet
+class AppMenuApplet : public Plasma::Applet
 {
     Q_OBJECT
-
-    Q_PROPERTY(bool appletEnabled READ appletEnabled NOTIFY appletEnabledChanged)
 
     Q_PROPERTY(AppMenuModel* model READ model WRITE setModel NOTIFY modelChanged)
 
@@ -49,8 +47,8 @@ public:
         CompactView
     };
 
-    explicit ActiveWindowControlApplet(QObject *parent, const QVariantList &data);
-    ~ActiveWindowControlApplet() override;
+    explicit AppMenuApplet(QObject *parent, const QVariantList &data);
+    ~AppMenuApplet() override;
 
     void init() override;
 
@@ -65,22 +63,18 @@ public:
     int view() const;
     void setView(int type);
 
-    bool appletEnabled() const;
-
 signals:
     void modelChanged();
     void viewChanged();
     void currentIndexChanged();
     void buttonGridChanged();
-    void appletEnabledChanged();
     void requestActivateIndex(int index);
 
 public slots:
-    void updateAppletEnabled();
     void trigger(QQuickItem *ctx, int idx);
 
 protected:
-    bool eventFilter(QObject *watched, QEvent *event);
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 private:
     QMenu *createMenu(int idx) const;
@@ -90,8 +84,8 @@ private:
 
     int m_currentIndex = -1;
     int m_viewType = FullView;
-    bool m_appletEnabled = true;
     QPointer<QMenu> m_currentMenu;
     QPointer<QQuickItem> m_buttonGrid;
     QPointer<AppMenuModel> m_model;
+    static int s_refs;
 };
