@@ -35,6 +35,8 @@ class AppMenuApplet : public Plasma::Applet
 
     Q_PROPERTY(AppMenuModel* model READ model WRITE setModel NOTIFY modelChanged)
 
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+
     Q_PROPERTY(int view READ view WRITE setView NOTIFY viewChanged)
 
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
@@ -60,11 +62,18 @@ public:
     AppMenuModel *model() const;
     void setModel(AppMenuModel *model);
 
+    bool enabled() const;
+    void setEnabled(bool enabled);
+
     int view() const;
     void setView(int type);
 
+    void registerService();
+    void unregisterService();
+
 signals:
     void modelChanged();
+    void enabledChanged();
     void viewChanged();
     void currentIndexChanged();
     void buttonGridChanged();
@@ -74,15 +83,15 @@ public slots:
     void trigger(QQuickItem *ctx, int idx);
 
 protected:
-    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
     QMenu *createMenu(int idx) const;
     void setCurrentIndex(int currentIndex);
     void onMenuAboutToHide();
 
-
     int m_currentIndex = -1;
+    bool m_enabled = false;
     int m_viewType = FullView;
     QPointer<QMenu> m_currentMenu;
     QPointer<QQuickItem> m_buttonGrid;

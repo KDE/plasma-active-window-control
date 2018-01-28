@@ -42,13 +42,6 @@ static const QString s_viewService(QStringLiteral("org.kde.kappmenuview"));
 AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
     : Plasma::Applet(parent, data)
 {
-    ++s_refs;
-    //if we're the first, regster the service
-    if (s_refs == 1) {
-        QDBusConnection::sessionBus().interface()->registerService(s_viewService,
-                QDBusConnectionInterface::QueueService,
-                QDBusConnectionInterface::DontAllowReplacement);
-    }
     /*it registers or unregisters the service when the destroyed value of the applet change,
       and not in the dtor, because:
       when we "delete" an applet, it just hides it for about a minute setting its status
@@ -58,17 +51,9 @@ AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
       will have to be registered again*/
     connect(this, &Applet::destroyedChanged, this, [this](bool destroyed) {
         if (destroyed) {
-            //if we were the last, unregister
-            if (--s_refs == 0) {
-                QDBusConnection::sessionBus().interface()->unregisterService(s_viewService);
-            }
+            unregisterService();
         } else {
-            //if we're the first, regster the service
-            if (++s_refs == 1) {
-                QDBusConnection::sessionBus().interface()->registerService(s_viewService,
-                    QDBusConnectionInterface::QueueService,
-                    QDBusConnectionInterface::DontAllowReplacement);
-            }
+            registerService();
         }
     });
 }
@@ -82,6 +67,50 @@ void AppMenuApplet::init()
 AppMenuModel *AppMenuApplet::model() const
 {
     return m_model;
+}
+
+void AppMenuApplet::registerService()
+{
+    qDebug() << "registering appmenu service";
+    ++s_refs;
+    //if we're the first, regster the service
+    if (s_refs == 1) {
+        qDebug() << " -> connecting to DBus";
+        QDBusConnection::sessionBus().interface()->registerService(s_viewService,
+                QDBusConnectionInterface::QueueService,
+                QDBusConnectionInterface::DontAllowReplacement);
+    }
+}
+
+void AppMenuApplet::unregisterService()
+{
+    qDebug() << "unregistering from appmenu service";
+    //if we were the last, unregister
+    if (--s_refs == 0) {
+        qDebug() << " -> disconnecting from DBus";
+        QDBusConnection::sessionBus().interface()->unregisterService(s_viewService);
+    }
+    if (s_refs < 0) {
+        s_refs = 0;
+    }
+}
+
+bool AppMenuApplet::enabled() const
+{
+    return m_enabled;
+}
+
+void AppMenuApplet::setEnabled(bool enabled)
+{
+    if (enabled == m_enabled) {
+        return;
+    }
+    if (enabled) {
+        registerService();
+    } else {
+        unregisterService();
+    }
+    m_enabled = enabled;
 }
 
 void AppMenuApplet::setModel(AppMenuModel *model)

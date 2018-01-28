@@ -45,6 +45,7 @@ Item {
 
         Component.onCompleted: {
             plasmoid.nativeInterface.buttonGrid = buttonGrid
+            plasmoid.nativeInterface.enabled = appmenuEnabled
         }
 
         Connections {
@@ -163,6 +164,9 @@ Item {
 
     onAppmenuEnabledChanged: {
         appmenu.resetAppmenuModel()
+        if (appMenuModel !== null) {
+            plasmoid.nativeInterface.enabled = appmenuEnabled
+        }
     }
 
 }
