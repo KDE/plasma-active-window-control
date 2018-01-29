@@ -37,7 +37,7 @@ Item {
 
         property double placementOffsetButtons: appmenuNextToButtons && controlButtonsArea.visible ? controlButtonsArea.width + appmenuSideMargin : 0
         property double placementOffset: appmenuNextToIconAndText && appmenuSwitchSidesWithIconAndText
-                                            ? activeWindowListView.anchors.leftMargin + windowTitleText.anchors.leftMargin + Math.min(windowTitleText.implicitWidth, windowTitleText.width) + appmenuSideMargin
+                                            ? activeWindowListView.anchors.leftMargin + windowTitleText.anchors.leftMargin + windowTitleText.contentWidth + appmenuSideMargin
                                             : placementOffsetButtons
 
         anchors.leftMargin: (bp === 1 || bp === 3) ? parent.width - width - placementOffset : placementOffset
