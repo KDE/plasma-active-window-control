@@ -583,7 +583,7 @@ Item {
         plasmoid.setAction('minimise', i18n('Minimise'), 'draw-arrow-down');
         plasmoid.setAction('pinToAllDesktops', i18n('Toggle Pin To All Desktops'), 'window-pin');
         plasmoid.setActionSeparator("separator0")
-        plasmoid.setAction('reloadTheme', i18n('Reload Theme'), 'restart');
+        plasmoid.setAction('reloadTheme', i18n('Reload Theme'), 'system-reboot');
         reAddActivityActions()
     }
 
