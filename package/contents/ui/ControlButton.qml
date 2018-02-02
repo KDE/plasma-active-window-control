@@ -28,10 +28,10 @@ MouseArea {
     property bool iconActive: (iconName !== 'alldesktops' && iconName !== 'maximize') || (iconName === 'alldesktops' && main.isActiveWindowPinned) || (iconName === 'maximize' && main.currentWindowMaximized)
 
     property string themeName: textColorLight ? 'breeze-dark' : 'default'
-    property string customAuroraeThemePath: plasmoid.configuration.customAuroraeThemePath
+    property string customAuroraeThemePath: plasmoid.nativeInterface.auroraeThemePath
+    property string customAuroraeImageExt: plasmoid.nativeInterface.auroraeThemeType
     property bool usingAuroraeTheme: customAuroraeThemePath ? true : false
-    property string customAuroraeThemeImageExtension: plasmoid.configuration.customAuroraeThemeImageExtension
-    property string buttonImagePath: customAuroraeThemePath ? customAuroraeThemePath + '/' + iconName + customAuroraeThemeImageExtension : Qt.resolvedUrl('../icons/' + themeName + '/' + iconName + '.svg')
+    property string buttonImagePath: customAuroraeThemePath ? customAuroraeThemePath + '/' + iconName + '.' + customAuroraeImageExt : Qt.resolvedUrl('../icons/' + themeName + '/' + iconName + '.svg')
     property string svgElementId: usingAuroraeTheme
                                     ? (iconActive && iconName === 'alldesktops') ? (mouseInside ? 'pressed-center' : 'pressed-center') : (mouseInside ? 'hover-center' : 'active-center')
                                     : iconActive ? (mouseInside ? 'active-hover' : 'active-idle') : (mouseInside ? 'inactive-hover' : 'inactive-idle')

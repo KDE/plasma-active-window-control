@@ -540,6 +540,10 @@ Item {
         togglePinToAllDesktops()
     }
 
+    function action_reloadTheme() {
+        plasmoid.nativeInterface.refreshAuroraeTheme();
+    }
+
     function actionTriggered(actionName) {
         if (actionName.indexOf("switchToActivity_") == 0) {
             var activityIndex = actionName.replace("switchToActivity_", "")
@@ -549,18 +553,18 @@ Item {
     }
 
     function reAddActivityActions() {
-        plasmoid.removeAction("separator0")
+        plasmoid.removeAction("separator1")
         for (var i = 0; i < activityActionCount; i++) {
             plasmoid.removeAction('switchToActivity_' + i)
         }
-        plasmoid.removeAction("separator1")
+        plasmoid.removeAction("separator2")
 
         var runningActivities = activityInfo.runningActivities()
         activityActionCount = runningActivities.length
         if (activityActionCount === 0) {
             return
         }
-        plasmoid.setActionSeparator("separator0")
+        plasmoid.setActionSeparator("separator1")
         activityInfo.runningActivities().forEach(function (activityId, index) {
             if (activityId === activityInfo.currentActivity) {
                 return;
@@ -568,7 +572,7 @@ Item {
             var activityName = activityInfo.activityName(activityId)
             plasmoid.setAction('switchToActivity_' + index, i18n('Switch to activity: %1', activityName), 'preferences-activities')
         })
-        plasmoid.setActionSeparator("separator1")
+        plasmoid.setActionSeparator("separator2")
     }
 
     Component.onCompleted: {
@@ -578,6 +582,8 @@ Item {
         plasmoid.setAction('maximise', i18n('Toggle Maximise'), 'arrow-up-double');
         plasmoid.setAction('minimise', i18n('Minimise'), 'draw-arrow-down');
         plasmoid.setAction('pinToAllDesktops', i18n('Toggle Pin To All Desktops'), 'window-pin');
+        plasmoid.setActionSeparator("separator0")
+        plasmoid.setAction('reloadTheme', i18n('Reload Theme'), 'restart');
         reAddActivityActions()
     }
 

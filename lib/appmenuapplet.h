@@ -43,6 +43,10 @@ class AppMenuApplet : public Plasma::Applet
 
     Q_PROPERTY(QQuickItem *buttonGrid READ buttonGrid WRITE setButtonGrid NOTIFY buttonGridChanged)
 
+    Q_PROPERTY(QString auroraeThemePath READ auroraeThemePath NOTIFY auroraeThemePathChanged)
+
+    Q_PROPERTY(QString auroraeThemeType READ auroraeThemeType NOTIFY auroraeThemeTypeChanged)
+
 public:
     enum ViewType {
         FullView,
@@ -71,6 +75,10 @@ public:
     void registerService();
     void unregisterService();
 
+    QString auroraeThemePath() const;
+    QString auroraeThemeType() const;
+    Q_INVOKABLE void refreshAuroraeTheme();
+
 signals:
     void modelChanged();
     void enabledChanged();
@@ -78,6 +86,8 @@ signals:
     void currentIndexChanged();
     void buttonGridChanged();
     void requestActivateIndex(int index);
+    void auroraeThemePathChanged();
+    void auroraeThemeTypeChanged();
 
 public slots:
     void trigger(QQuickItem *ctx, int idx);
@@ -97,4 +107,6 @@ private:
     QPointer<QQuickItem> m_buttonGrid;
     QPointer<AppMenuModel> m_model;
     static int s_refs;
+    QString m_auroraeDecorationPath = QString();
+    QString m_auroraeDecorationType = QString("svg");
 };

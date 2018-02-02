@@ -35,6 +35,8 @@
 #include <QDBusConnectionInterface>
 #include <QTimer>
 
+#include <KConfig>
+
 int AppMenuApplet::s_refs = 0;
 
 static const QString s_viewService(QStringLiteral("org.kde.kappmenuview"));
@@ -56,6 +58,9 @@ AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
             registerService();
         }
     });
+
+    // get current aurorae decoration theme if there is one set
+    refreshAuroraeTheme();
 }
 
 AppMenuApplet::~AppMenuApplet() = default;
@@ -67,6 +72,44 @@ void AppMenuApplet::init()
 AppMenuModel *AppMenuApplet::model() const
 {
     return m_model;
+}
+
+void AppMenuApplet::refreshAuroraeTheme()
+{
+    const KConfig kwinConfig(QString("kwinrc"), KConfig::OpenFlag::SimpleConfig);
+    const QByteArray decorationGroupName = QString("org.kde.kdecoration2").toUtf8();
+    if (!kwinConfig.hasGroup(decorationGroupName)) {
+        return;
+    }
+    const KConfigGroup decorationGroup = kwinConfig.group(decorationGroupName);
+    const QString decorationLibrary = decorationGroup.readEntry(QString("library"), QString());
+    if (decorationLibrary == QString("org.kde.kwin.aurorae")) {
+        const QString decorationTheme = decorationGroup.readEntry(QString("theme"), QString());
+        if (decorationTheme.startsWith(QString("__aurorae__"))) {
+            const QString themeName = decorationTheme.section(QString("__"), -1, -1);
+            const QString themeType = decorationTheme.section(QString("__"), -2, -2);
+            QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("aurorae/themes/") + themeName, QStandardPaths::LocateDirectory);
+            if (!themePath.isEmpty()) {
+                m_auroraeDecorationPath = themePath;
+                m_auroraeDecorationType = themeType;
+                emit auroraeThemePathChanged();
+                emit auroraeThemeTypeChanged();
+                return;
+            }
+        }
+    }
+    m_auroraeDecorationPath = QString();
+    emit auroraeThemePathChanged();
+}
+
+QString AppMenuApplet::auroraeThemePath() const
+{
+    return m_auroraeDecorationPath;
+}
+
+QString AppMenuApplet::auroraeThemeType() const
+{
+    return m_auroraeDecorationType;
 }
 
 void AppMenuApplet::registerService()
