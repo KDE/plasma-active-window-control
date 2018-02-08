@@ -441,7 +441,7 @@ Item {
             property double buttonsBetweenMargin: buttonsBetweenIconAndText ? activeWindowListView.appmenuOffsetLeft + activeWindowListView.appmenuOffsetRight + iconItem.width + iconAndTextSpacing : 0
 
             orientation: ListView.Horizontal
-            visible: showControlButtons && (doNotHideControlButtons || mouseInWidget) && (currentWindowMaximized || !showButtonOnlyWhenMaximized) && !noWindowActive
+            visible: showControlButtons && (doNotHideControlButtons || mouseInWidget || appmenu.appmenuOpened) && (currentWindowMaximized || !showButtonOnlyWhenMaximized) && !noWindowActive
 
             spacing: controlButtonsSpacing
 

@@ -11,6 +11,7 @@ Item {
     property bool appmenuNextToButtons: plasmoid.configuration.appmenuNextToButtons
     property bool appmenuFillHeight: plasmoid.configuration.appmenuFillHeight
     property bool appmenuFontBold: plasmoid.configuration.appmenuFontBold
+    property bool appmenuDoNotHide: plasmoid.configuration.appmenuDoNotHide
     property bool appmenuEnabledAndNonEmpty: appmenuEnabled && appMenuModel !== null && appMenuModel.menuAvailable
     property bool appmenuOpened: appmenuEnabled && plasmoid.nativeInterface.currentIndex > -1
     property var appMenuModel: null
@@ -20,7 +21,7 @@ Item {
                                                 ? appmenu.childrenRect.width + (appmenuButtonsOffsetEnabled ? controlButtonsArea.width : 0) + appmenuSideMargin*2
                                                 : 0
 
-    visible: appmenuEnabledAndNonEmpty && !noWindowActive && (appmenuNextToIconAndText || mouseHover || appmenuOpened)
+    visible: appmenuEnabledAndNonEmpty && !noWindowActive && (appmenuDoNotHide || mouseHover || appmenuOpened)
 
     GridLayout {
         id: buttonGrid

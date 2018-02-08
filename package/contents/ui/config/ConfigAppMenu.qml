@@ -9,6 +9,7 @@ Item {
     property alias cfg_appmenuNextToButtons: appmenuNextToButtons.checked
     property alias cfg_appmenuFillHeight: appmenuFillHeight.checked
     property alias cfg_appmenuFontBold: appmenuFontBold.checked
+    property alias cfg_appmenuDoNotHide: appmenuDoNotHide.checked
     property alias cfg_appmenuNextToIconAndText: appmenuNextToIconAndText.checked
     property alias cfg_appmenuSwitchSidesWithIconAndText: appmenuSwitchSidesWithIconAndText.checked
     property alias cfg_appmenuSeparatorEnabled: appmenuSeparatorEnabled.checked
@@ -42,6 +43,11 @@ Item {
                 id: appmenuFontBold
                 text: i18n("Bold font")
                 Layout.columnSpan: 2
+            }
+
+            CheckBox {
+                id: appmenuDoNotHide
+                text: i18n("Do not hide on mouse out")
             }
 
             CheckBox {
