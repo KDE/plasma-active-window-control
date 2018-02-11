@@ -37,6 +37,7 @@
 #include <QTimer>
 
 #include <KConfig>
+#include <KShell>
 
 int AppMenuApplet::s_refs = 0;
 
@@ -128,6 +129,12 @@ QString AppMenuApplet::extensionForTheme(const QString &themeDirectoryPath)
         return QString("svgz");
     }
     return QString("svg");
+}
+
+QString AppMenuApplet::translateThemePath(const QString &themeDirectoryPath)
+{
+    qDebug() << "translating path " << themeDirectoryPath;
+    return KShell::tildeExpand(themeDirectoryPath);
 }
 
 void AppMenuApplet::registerService()

@@ -78,6 +78,7 @@ public:
     QString auroraeThemePath() const;
     QString auroraeThemeType() const;
     Q_INVOKABLE QString extensionForTheme(const QString &themeDirectoryPath);
+    Q_INVOKABLE QString translateThemePath(const QString &themeDirectoryPath);
     Q_INVOKABLE void refreshAuroraeTheme();
 
 signals:

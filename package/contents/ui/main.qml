@@ -97,7 +97,7 @@ Item {
 
     property bool automaticButtonThemeEnabled: plasmoid.configuration.automaticButtonThemeEnabled
     property string manualAuroraeThemePath: plasmoid.configuration.customAuroraeThemePath
-    property string manualAuroraeThemePathResolved: Qt.resolvedUrl(manualAuroraeThemePath)
+    property string manualAuroraeThemePathResolved: ''
     property string manualAuroraeThemeExtension: 'svg'
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
@@ -470,8 +470,9 @@ Item {
         id: controlButtonsModel
     }
 
-    onManualAuroraeThemePathResolvedChanged: {
+    onManualAuroraeThemePathChanged: {
         manualAuroraeThemeExtension = plasmoid.nativeInterface.extensionForTheme(manualAuroraeThemePath);
+        manualAuroraeThemePathResolved = plasmoid.nativeInterface.translateThemePath(manualAuroraeThemePath);
         print('manualAuroraeThemePath=' + manualAuroraeThemePath)
         print('manualAuroraeThemePathResolved=' + manualAuroraeThemePathResolved)
         print('manualAuroraeThemeExtension=' + manualAuroraeThemeExtension)
