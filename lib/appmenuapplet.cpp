@@ -23,16 +23,17 @@
 #include "../plugin/appmenumodel.h"
 
 #include <QAction>
+#include <QDir>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
+#include <QDBusConnectionInterface>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QScreen>
-#include <QDBusConnection>
-#include <QDBusMessage>
-#include <QDBusPendingCall>
-#include <QDBusConnectionInterface>
 #include <QTimer>
 
 #include <KConfig>
@@ -86,8 +87,9 @@ void AppMenuApplet::refreshAuroraeTheme()
     if (decorationLibrary == QString("org.kde.kwin.aurorae")) {
         const QString decorationTheme = decorationGroup.readEntry(QString("theme"), QString());
         if (decorationTheme.startsWith(QString("__aurorae__"))) {
-            const QString themeName = decorationTheme.section(QString("__"), -1, -1);
-            const QString themeType = decorationTheme.section(QString("__"), -2, -2);
+            const QString separator("__");
+            const QString themeName = decorationTheme.section(separator, -1, -1);
+            const QString themeType = decorationTheme.section(separator, -2, -2);
             QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("aurorae/themes/") + themeName, QStandardPaths::LocateDirectory);
             if (!themePath.isEmpty()) {
                 m_auroraeDecorationPath = themePath;
@@ -110,6 +112,22 @@ QString AppMenuApplet::auroraeThemePath() const
 QString AppMenuApplet::auroraeThemeType() const
 {
     return m_auroraeDecorationType;
+}
+
+QString AppMenuApplet::extensionForTheme(const QString &themeDirectoryPath)
+{
+    if (themeDirectoryPath.isEmpty()) {
+        return QString();
+    }
+    qDebug() << "determine theme extension from path " << themeDirectoryPath;
+    QDir themeDir(themeDirectoryPath);
+    QStringList nameFilters(QString("close.svgz"));
+    QStringList filteredFiles = themeDir.entryList(nameFilters);
+    qDebug() << "filtered: " << filteredFiles;
+    if (!filteredFiles.isEmpty()) {
+        return QString("svgz");
+    }
+    return QString("svg");
 }
 
 void AppMenuApplet::registerService()

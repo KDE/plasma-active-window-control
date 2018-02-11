@@ -28,8 +28,8 @@ MouseArea {
     property bool iconActive: (iconName !== 'alldesktops' && iconName !== 'maximize') || (iconName === 'alldesktops' && main.isActiveWindowPinned) || (iconName === 'maximize' && main.currentWindowMaximized)
 
     property string themeName: textColorLight ? 'breeze-dark' : 'default'
-    property string customAuroraeThemePath: plasmoid.nativeInterface.auroraeThemePath
-    property string customAuroraeImageExt: plasmoid.nativeInterface.auroraeThemeType
+    property string customAuroraeThemePath: main.automaticButtonThemeEnabled ? plasmoid.nativeInterface.auroraeThemePath : manualAuroraeThemePathResolved
+    property string customAuroraeImageExt: main.automaticButtonThemeEnabled ? plasmoid.nativeInterface.auroraeThemeType : manualAuroraeThemeExtension
     property bool usingAuroraeTheme: customAuroraeThemePath ? true : false
     property string buttonImagePath: customAuroraeThemePath ? customAuroraeThemePath + '/' + iconName + '.' + customAuroraeImageExt : Qt.resolvedUrl('../icons/' + themeName + '/' + iconName + '.svg')
     property string svgElementId: usingAuroraeTheme

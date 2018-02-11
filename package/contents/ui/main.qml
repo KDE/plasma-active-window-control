@@ -95,6 +95,11 @@ Item {
     property var activeTaskLocal: null
     property int activityActionCount: 0
 
+    property bool automaticButtonThemeEnabled: plasmoid.configuration.automaticButtonThemeEnabled
+    property string manualAuroraeThemePath: plasmoid.configuration.customAuroraeThemePath
+    property string manualAuroraeThemePathResolved: Qt.resolvedUrl(manualAuroraeThemePath)
+    property string manualAuroraeThemeExtension: 'svg'
+
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
 
@@ -463,6 +468,13 @@ Item {
 
     ListModel {
         id: controlButtonsModel
+    }
+
+    onManualAuroraeThemePathResolvedChanged: {
+        manualAuroraeThemeExtension = plasmoid.nativeInterface.extensionForTheme(manualAuroraeThemePath);
+        print('manualAuroraeThemePath=' + manualAuroraeThemePath)
+        print('manualAuroraeThemePathResolved=' + manualAuroraeThemePathResolved)
+        print('manualAuroraeThemeExtension=' + manualAuroraeThemeExtension)
     }
 
     function addButton(preparedArray, buttonName) {

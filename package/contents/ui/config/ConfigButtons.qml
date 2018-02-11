@@ -20,6 +20,8 @@ Item {
     property alias cfg_buttonSize: buttonSize.value
     property alias cfg_controlButtonsSpacing: controlButtonsSpacing.value
     property string cfg_buttonOrder
+    property alias cfg_automaticButtonThemeEnabled: automaticButtonThemeEnabled.checked
+    property alias cfg_customAuroraeThemePath: customAuroraeThemePath.text
 
     onCfg_buttonsPositionChanged: {
         switch (cfg_buttonsPosition) {
@@ -280,6 +282,29 @@ Item {
                 maximumValue: 20
                 tickmarksEnabled: true
                 width: parent.width
+            }
+
+            Item {
+                width: 2
+                height: 10
+                Layout.columnSpan: 2
+            }
+
+            Label {
+                text: i18n("Theme")
+                Layout.columnSpan: parent.columns
+                font.bold: true
+            }
+            CheckBox {
+                id: automaticButtonThemeEnabled
+                text: i18n("Automatic")
+            }
+            TextField {
+                id: customAuroraeThemePath
+                placeholderText: i18n("Absolute path to aurorae button theme folder")
+                Layout.preferredWidth: 350
+                onTextChanged: cfg_customAuroraeThemePath = text
+                enabled: !automaticButtonThemeEnabled.checked
             }
         }
     }
