@@ -305,15 +305,10 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
             actionMenu->installEventFilter(this);
         }
 
-        setStatus(Plasma::Types::AcceptingInputStatus);
         actionMenu->winId();//create window handle
         actionMenu->windowHandle()->setTransientParent(ctx->window());
 
         actionMenu->popup(pos);
-
-        //we can return to passive immediately, an autohide panel will stay open whilst
-        //any transient window is showing
-        setStatus(Plasma::Types::PassiveStatus);
 
         if (view() == FullView) {
             // hide the old menu only after showing the new one to avoid brief flickering
@@ -321,6 +316,9 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
             QMenu *oldMenu = m_currentMenu;
             m_currentMenu = actionMenu;
             if (oldMenu && oldMenu != actionMenu) {
+                //! dont trigger initialization of index because there is a new menu created
+                disconnect(oldMenu, &QMenu::aboutToHide, this, &AppMenuApplet::onMenuAboutToHide);
+                
                 oldMenu->hide();
             }
         }

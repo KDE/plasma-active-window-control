@@ -102,7 +102,15 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
-
+    Plasmoid.status: {
+        if (appmenu.appmenuOpened) {
+            return PlasmaCore.Types.NeedsAttentionStatus;
+        } else if (!appmenu.appmenuOpened && appmenu.appmenuEnabledAndNonEmpty){
+            return PlasmaCore.Types.ActiveStatus;
+        } else {
+            return PlasmaCore.Types.PassiveStatus;
+        }
+    }
 
     //
     // MODEL
