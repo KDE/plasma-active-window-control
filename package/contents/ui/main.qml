@@ -207,7 +207,7 @@ Item {
             windowTitleText.text = composeNoWindowText()
             iconItem.source = plasmoid.configuration.noWindowIcon
         } else {
-            windowTitleText.text = textType === 1 ? actTask.AppName : replaceTitle(actTask.display)
+            windowTitleText.text = (textType === 1 ? actTask.AppName : null) || replaceTitle(actTask.display)
             iconItem.source = actTask.decoration
         }
         updateTooltip()
