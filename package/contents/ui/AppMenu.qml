@@ -87,7 +87,10 @@ Item {
 
                 PlasmaComponents.Label {
                     id: appmenuButtonTitle
-                    anchors.centerIn: appmenuButtonBackground
+                    anchors.top: appmenuButtonBackground.top
+                    anchors.bottom: appmenuButtonBackground.bottom
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.horizontalCenter: appmenuButtonBackground.horizontalCenter
                     font.pixelSize: fontPixelSize * plasmoid.configuration.appmenuButtonTextSizeScale
                     text: activeMenu.replace('&', '')
                     font.weight: appmenuFontBold ? Font.Bold : theme.defaultFont.weight
