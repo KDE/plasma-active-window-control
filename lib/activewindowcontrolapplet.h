@@ -29,7 +29,7 @@ class QQuickItem;
 class QMenu;
 class AppMenuModel;
 
-class AppMenuApplet : public Plasma::Applet
+class ActiveWindowControlApplet : public Plasma::Applet
 {
     Q_OBJECT
 
@@ -53,8 +53,8 @@ public:
         CompactView
     };
 
-    explicit AppMenuApplet(QObject *parent, const QVariantList &data);
-    ~AppMenuApplet() override;
+    explicit ActiveWindowControlApplet(QObject *parent, const QVariantList &data);
+    ~ActiveWindowControlApplet() override;
 
     void init() override;
 

@@ -16,7 +16,7 @@ Item {
     opacity: showItem ? 1 : 0
 
     height: main.buttonsVerticalCenter ? parent.height : controlButtonsHeight
-    width: controlButtonsHeight + ((model.count - 1) * (controlButtonsHeight + main.controlButtonsSpacing))
+    width: controlButtonsHeight + ((controlButtonsModel.count - 1) * (controlButtonsHeight + main.controlButtonsSpacing))
 
     ListView {
 

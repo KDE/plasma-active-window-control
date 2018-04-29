@@ -19,13 +19,13 @@
  *
  ******************************************************************/
 
-#include "appmenuplugin.h"
+#include "activewindowcontrolplugin.h"
 #include "appmenumodel.h"
 
 #include <QtQml>
 #include <QQmlEngine>
 
-void AppmenuPlugin::registerTypes(const char *uri)
+void ActiveWindowControlPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.private.activeWindowControl"));
     qmlRegisterType<AppMenuModel>(uri, 1, 0, "AppMenuModel");

@@ -1,16 +1,16 @@
-set(appmenuapplet_SRCS
+set(activewindowcontrolapplet_SRCS
     appmenumodel.cpp
-    appmenuplugin.cpp
+    activewindowcontrolplugin.cpp
 )
 
-add_library(appmenuplugin SHARED ${appmenuapplet_SRCS})
+add_library(activewindowcontrolplugin SHARED ${activewindowcontrolapplet_SRCS})
 
 # load dbusmenuqt
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
 cmake_policy(SET CMP0063 NEW)
 add_subdirectory(libdbusmenuqt)
 
-target_link_libraries(appmenuplugin
+target_link_libraries(activewindowcontrolplugin
                       Qt5::Core
                       Qt5::Widgets
                       Qt5::Quick
@@ -44,10 +44,10 @@ configure_file(config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
 if(HAVE_X11)
     find_package(XCB MODULE REQUIRED COMPONENTS XCB)
     set_package_properties(XCB PROPERTIES TYPE REQUIRED)
-    target_link_libraries(appmenuplugin Qt5::X11Extras XCB::XCB)
+    target_link_libraries(activewindowcontrolplugin Qt5::X11Extras XCB::XCB)
 endif()
 
 # install plugin
-install(TARGETS appmenuplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)
+install(TARGETS activewindowcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)
 
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/activeWindowControl)

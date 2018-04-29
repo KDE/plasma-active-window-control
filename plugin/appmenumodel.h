@@ -38,17 +38,17 @@ class AppMenuModel : public QAbstractListModel, public QAbstractNativeEventFilte
     Q_PROPERTY(bool menuAvailable READ menuAvailable WRITE setMenuAvailable NOTIFY menuAvailableChanged)
 
 public:
-    explicit AppMenuModel(QObject *parent = 0);
-    ~AppMenuModel();
+    explicit AppMenuModel(QObject *parent = nullptr);
+    ~AppMenuModel() override;
 
     enum AppMenuRole {
-        MenuRole = Qt::UserRole+1,
+        MenuRole = Qt::UserRole+1, // TODO this should be Qt::DisplayRole
         ActionRole
     };
 
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
-    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
     void updateApplicationMenu(const QString &serviceName, const QString &menuObjectPath);
 
@@ -71,12 +71,11 @@ signals:
 
 private:
     bool m_menuAvailable;
+    bool m_updatePending = false;
 
     WId m_currentWindowId = 0;
 
     QPointer<QMenu> m_menu;
-    QStringList m_activeMenu;
-    QList<QAction *> m_activeActions;
 
     QDBusServiceWatcher *m_serviceWatcher;
     QString m_serviceName;
