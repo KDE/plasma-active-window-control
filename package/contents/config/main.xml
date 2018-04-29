@@ -5,6 +5,74 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <kcfgfile name=""/>
 
+    <group name="Layout">
+        <entry name="controlPartOrder" type="String">
+            <default>buttons|icon|title|menu</default>
+        </entry>
+        <entry name="controlPartSpacing" type="Double">
+            <default>5.0</default>
+        </entry>
+        <entry name="controlPartButtonsPosition" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartButtonsShowOnMouseIn" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartButtonsShowOnMouseOut" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartButtonsHorizontalAlignment" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartIconPosition" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartIconShowOnMouseIn" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartIconShowOnMouseOut" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartIconHorizontalAlignment" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartTitlePosition" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartTitleShowOnMouseIn" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartTitleShowOnMouseOut" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartTitleHorizontalAlignment" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartMenuPosition" type="Int">
+            <default>0</default>
+        </entry>
+        <entry name="controlPartMenuShowOnMouseIn" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartMenuShowOnMouseOut" type="Bool">
+            <default>true</default>
+        </entry>
+        <entry name="controlPartMenuHorizontalAlignment" type="Int">
+            <default>0</default>
+        </entry>
+        <!--
+        - for each:
+            - occupy | floating-layer | absolute
+            - left | right
+            - show on mouse out
+            - show on mouse in
+            - restrict show mousearea to item viewport
+        - for appmenu and buttons:
+            - height (in %)
+            - vertical alignment - top | bottom | center
+        -->
+    </group>
+
     <group name="Appearance">
         <entry name="showControlButtons" type="Bool">
             <default>true</default>

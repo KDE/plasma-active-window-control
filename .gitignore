@@ -1,2 +1,3 @@
-build/
+build*
 update-translations.sh
+*.kdev4
