@@ -1,5 +1,6 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.3
+import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
@@ -34,22 +35,45 @@ Item {
             listViewParent: listView.parent
 
             Item {
-                height: itemWidth
-                width: itemHeight
+                height: itemHeight
+                width: itemWidth
 
                 PlasmaCore.Svg {
                     id: buttonSvg
-                    imagePath: Qt.resolvedUrl('../../icons/' + themeName + '/' + model.text + '.svg')
+                    imagePath: Qt.resolvedUrl('../../icons/' + themeName + '/' + model.iconName + '.svg')
+                }
+
+                // item border
+                Rectangle {
+                    border.width: 1
+                    border.color: theme.textColor
+                    radius: units.gridUnit / 4
+                    color: 'transparent'
+                    opacity: 0.5
+                    anchors.fill: parent
                 }
 
                 // icon
                 PlasmaCore.SvgItem {
                     id: svgItem
-                    anchors.fill: parent
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     width: parent.width
                     height: width
                     svg: buttonSvg
                     elementId: 'active-idle'
+                    visible: !!model.iconName
+                }
+
+                // text
+                Label {
+                    text: model.text
+                    anchors.fill: parent
+                    anchors.leftMargin: svgItem.visible ? svgItem.width + units.smallSpacing : 0
+                    visible: !!model.text
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
 

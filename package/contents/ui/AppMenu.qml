@@ -7,6 +7,8 @@ Item {
     id: appmenu
     anchors.fill: parent
 
+    property bool mouseInWidget: false
+
     property bool appmenuEnabled: plasmoid.configuration.appmenuEnabled
     property bool appmenuNextToButtons: plasmoid.configuration.appmenuNextToButtons
     property bool appmenuFillHeight: plasmoid.configuration.appmenuFillHeight
@@ -18,10 +20,10 @@ Item {
 
     property bool appmenuButtonsOffsetEnabled: !buttonsStandalone && appmenuNextToButtons && childrenRect.width > 0
     property double appmenuOffsetWidth: visible && appmenuNextToIconAndText && !appmenuSwitchSidesWithIconAndText
-                                                ? appmenu.childrenRect.width + (appmenuButtonsOffsetEnabled ? controlButtonsArea.width : 0) + appmenuSideMargin*2
+                                                ? appmenu.childrenRect.width + (appmenuButtonsOffsetEnabled ? buttonsItem.width : 0) + appmenuSideMargin*2
                                                 : 0
 
-    visible: appmenuEnabledAndNonEmpty && !noWindowActive && (appmenuDoNotHide || mouseHover || appmenuOpened)
+    visible: appmenuEnabledAndNonEmpty && !noWindowActive && (appmenuDoNotHide || main.mouseHover || appmenuOpened)
 
     GridLayout {
         id: buttonGrid
@@ -36,9 +38,10 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
 
-        property double placementOffsetButtons: appmenuNextToButtons && controlButtonsArea.visible ? controlButtonsArea.width + appmenuSideMargin : 0
+        property double placementOffsetButtons: appmenuNextToButtons && buttonsItem.visible ? buttonsItem.width + appmenuSideMargin : 0
         property double placementOffset: appmenuNextToIconAndText && appmenuSwitchSidesWithIconAndText
-                                            ? activeWindowListView.anchors.leftMargin + windowTitleText.anchors.leftMargin + windowTitleText.contentWidth + appmenuSideMargin
+                                            //? activeWindowListView.anchors.leftMargin + windowTitle.anchors.leftMargin +
+                                            ? windowTitle.anchors.leftMargin + windowTitle.contentWidthwindowTitle.contentWidth + appmenuSideMargin
                                             : placementOffsetButtons
 
         anchors.leftMargin: (bp === 1 || bp === 3) ? parent.width - width - placementOffset : placementOffset

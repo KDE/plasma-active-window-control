@@ -50,33 +50,37 @@ Item {
     ListModel {
         id: buttonsToSpend
         ListElement {
-            text: "close"
+            name: 'close'
+            iconName: 'close'
         }
         ListElement {
-            text: "minimize"
+            name: 'minimize'
+            iconName: 'minimize'
         }
         ListElement {
-            text: "maximize"
+            name: 'maximize'
+            iconName: 'maximize'
         }
         ListElement {
-            text: "alldesktops"
+            name: 'alldesktops'
+            iconName: 'alldesktops'
         }
     }
 
     function sortButtonOrder() {
-        cfg_buttonOrder.split('|').forEach(function (buttonName, index) {
-            if (buttonName === 'close') {
-                print('adding ' + buttonName);
+        cfg_buttonOrder.split('|').forEach(function (itemId, index) {
+            if (itemId === 'close') {
+                print('adding ' + itemId);
                 buttonOrder.model.insert(index, buttonsToSpend.get(0));
-            } else if (buttonName === 'minimize') {
+            } else if (itemId === 'minimize') {
                 buttonOrder.model.insert(index, buttonsToSpend.get(1));
-                print('adding ' + buttonName);
-            } else if (buttonName === 'maximize') {
+                print('adding ' + itemId);
+            } else if (itemId === 'maximize') {
                 buttonOrder.model.insert(index, buttonsToSpend.get(2));
-                print('adding ' + buttonName);
-            } else if (buttonName === 'pin' || buttonName === 'alldesktops') {
+                print('adding ' + itemId);
+            } else if (itemId === 'pin' || itemId === 'alldesktops') {
                 buttonOrder.model.insert(index, buttonsToSpend.get(3));
-                print('adding ' + buttonName);
+                print('adding ' + itemId);
             }
         });
     }
@@ -150,7 +154,7 @@ Item {
                         if (orderStr.length > 0) {
                             orderStr += '|';
                         }
-                        orderStr += item.text;
+                        orderStr += item.name;
                     }
                     cfg_buttonOrder = orderStr;
                     print('written: ' + cfg_buttonOrder);

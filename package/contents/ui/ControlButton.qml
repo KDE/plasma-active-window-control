@@ -21,8 +21,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 MouseArea {
     id: controlButton
 
-    height: controlButtonsArea.height
-    width: controlButtonsArea.controlButtonsHeight
+    height: controlButtons.height
+    width: controlButtons.controlButtonsHeight
 
     property bool mouseInside: false
     property bool iconActive: (iconName !== 'alldesktops' && iconName !== 'maximize') || (iconName === 'alldesktops' && main.isActiveWindowPinned) || (iconName === 'maximize' && main.currentWindowMaximized)
@@ -55,15 +55,20 @@ MouseArea {
 
     onEntered: {
         mouseInside = true
+        controlButtons.mouseInWidget = true
     }
 
     onExited: {
         mouseInside = false
+        controlButtons.mouseInWidget = false
     }
 
     // trigger active window action
     onClicked: {
-        controlButtonsArea.mouseInWidget = true
+        if (!controlButtons.showItem) {
+            return;
+        }
+        controlButtons.mouseInWidget = true
         main.performActiveWindowAction(windowOperation)
     }
 }
