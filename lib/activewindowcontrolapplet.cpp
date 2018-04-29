@@ -19,7 +19,7 @@
  *
  */
 
-#include "appmenuapplet.h"
+#include "activewindowcontrolapplet.h"
 #include "../plugin/appmenumodel.h"
 
 #include <QAction>
@@ -39,11 +39,13 @@
 #include <KConfig>
 #include <KShell>
 
-int AppMenuApplet::s_refs = 0;
+int ActiveWindowControlApplet::s_refs = 0;
 
-static const QString s_viewService(QStringLiteral("org.kde.kappmenuview"));
+namespace {
+QString viewService() { return QStringLiteral("org.kde.kappmenuview"); }
+}
 
-AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
+ActiveWindowControlApplet::ActiveWindowControlApplet(QObject *parent, const QVariantList &data)
     : Plasma::Applet(parent, data)
 {
     /*it registers or unregisters the service when the destroyed value of the applet change,
@@ -65,18 +67,18 @@ AppMenuApplet::AppMenuApplet(QObject *parent, const QVariantList &data)
     refreshAuroraeTheme();
 }
 
-AppMenuApplet::~AppMenuApplet() = default;
+ActiveWindowControlApplet::~ActiveWindowControlApplet() = default;
 
-void AppMenuApplet::init()
+void ActiveWindowControlApplet::init()
 {
 }
 
-AppMenuModel *AppMenuApplet::model() const
+AppMenuModel *ActiveWindowControlApplet::model() const
 {
     return m_model;
 }
 
-void AppMenuApplet::refreshAuroraeTheme()
+void ActiveWindowControlApplet::refreshAuroraeTheme()
 {
     const KConfig kwinConfig(QString("kwinrc"), KConfig::OpenFlag::SimpleConfig);
     const QByteArray decorationGroupName = QString("org.kde.kdecoration2").toUtf8();
@@ -105,17 +107,17 @@ void AppMenuApplet::refreshAuroraeTheme()
     emit auroraeThemePathChanged();
 }
 
-QString AppMenuApplet::auroraeThemePath() const
+QString ActiveWindowControlApplet::auroraeThemePath() const
 {
     return m_auroraeDecorationPath;
 }
 
-QString AppMenuApplet::auroraeThemeType() const
+QString ActiveWindowControlApplet::auroraeThemeType() const
 {
     return m_auroraeDecorationType;
 }
 
-QString AppMenuApplet::extensionForTheme(const QString &themeDirectoryPath)
+QString ActiveWindowControlApplet::extensionForTheme(const QString &themeDirectoryPath)
 {
     if (themeDirectoryPath.isEmpty()) {
         return QString();
@@ -131,44 +133,44 @@ QString AppMenuApplet::extensionForTheme(const QString &themeDirectoryPath)
     return QString("svg");
 }
 
-QString AppMenuApplet::translateThemePath(const QString &themeDirectoryPath)
+QString ActiveWindowControlApplet::translateThemePath(const QString &themeDirectoryPath)
 {
     qDebug() << "translating path " << themeDirectoryPath;
     return KShell::tildeExpand(themeDirectoryPath);
 }
 
-void AppMenuApplet::registerService()
+void ActiveWindowControlApplet::registerService()
 {
     qDebug() << "registering appmenu service";
     ++s_refs;
-    //if we're the first, regster the service
+            //if we're the first, regster the service
     if (s_refs == 1) {
         qDebug() << " -> connecting to DBus";
-        QDBusConnection::sessionBus().interface()->registerService(s_viewService,
-                QDBusConnectionInterface::QueueService,
-                QDBusConnectionInterface::DontAllowReplacement);
-    }
-}
+        QDBusConnection::sessionBus().interface()->registerService(viewService(),
+                    QDBusConnectionInterface::QueueService,
+                    QDBusConnectionInterface::DontAllowReplacement);
+            }
+        }
 
-void AppMenuApplet::unregisterService()
+void ActiveWindowControlApplet::unregisterService()
 {
     qDebug() << "unregistering from appmenu service";
     //if we were the last, unregister
     if (--s_refs == 0) {
         qDebug() << " -> disconnecting from DBus";
-        QDBusConnection::sessionBus().interface()->unregisterService(s_viewService);
+        QDBusConnection::sessionBus().interface()->unregisterService(viewService());
     }
     if (s_refs < 0) {
         s_refs = 0;
     }
 }
 
-bool AppMenuApplet::enabled() const
+bool ActiveWindowControlApplet::enabled() const
 {
     return m_enabled;
 }
 
-void AppMenuApplet::setEnabled(bool enabled)
+void ActiveWindowControlApplet::setEnabled(bool enabled)
 {
     if (enabled == m_enabled) {
         return;
@@ -181,7 +183,7 @@ void AppMenuApplet::setEnabled(bool enabled)
     m_enabled = enabled;
 }
 
-void AppMenuApplet::setModel(AppMenuModel *model)
+void ActiveWindowControlApplet::setModel(AppMenuModel *model)
 {
     if (m_model != model) {
         m_model = model;
@@ -189,12 +191,12 @@ void AppMenuApplet::setModel(AppMenuModel *model)
     }
 }
 
-int AppMenuApplet::view() const
+int ActiveWindowControlApplet::view() const
 {
     return m_viewType;
 }
 
-void AppMenuApplet::setView(int type)
+void ActiveWindowControlApplet::setView(int type)
 {
     if (m_viewType != type) {
         m_viewType = type;
@@ -202,12 +204,12 @@ void AppMenuApplet::setView(int type)
     }
 }
 
-int AppMenuApplet::currentIndex() const
+int ActiveWindowControlApplet::currentIndex() const
 {
     return m_currentIndex;
 }
 
-void AppMenuApplet::setCurrentIndex(int currentIndex)
+void ActiveWindowControlApplet::setCurrentIndex(int currentIndex)
 {
     if (m_currentIndex != currentIndex) {
         m_currentIndex = currentIndex;
@@ -215,12 +217,12 @@ void AppMenuApplet::setCurrentIndex(int currentIndex)
    }
 }
 
-QQuickItem *AppMenuApplet::buttonGrid() const
+QQuickItem *ActiveWindowControlApplet::buttonGrid() const
 {
     return m_buttonGrid;
 }
 
-void AppMenuApplet::setButtonGrid(QQuickItem *buttonGrid)
+void ActiveWindowControlApplet::setButtonGrid(QQuickItem *buttonGrid)
 {
     if (m_buttonGrid != buttonGrid) {
         m_buttonGrid = buttonGrid;
@@ -228,7 +230,7 @@ void AppMenuApplet::setButtonGrid(QQuickItem *buttonGrid)
     }
 }
 
-QMenu *AppMenuApplet::createMenu(int idx) const
+QMenu *ActiveWindowControlApplet::createMenu(int idx) const
 {
     QMenu *menu = nullptr;
     QAction *action = nullptr;
@@ -254,12 +256,12 @@ QMenu *AppMenuApplet::createMenu(int idx) const
     return menu;
 }
 
-void AppMenuApplet::onMenuAboutToHide()
+void ActiveWindowControlApplet::onMenuAboutToHide()
 {
     setCurrentIndex(-1);
 }
 
-void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
+void ActiveWindowControlApplet::trigger(QQuickItem *ctx, int idx)
 {
     if (m_currentIndex == idx) {
         return;
@@ -316,9 +318,8 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
             QMenu *oldMenu = m_currentMenu;
             m_currentMenu = actionMenu;
             if (oldMenu && oldMenu != actionMenu) {
-                //! dont trigger initialization of index because there is a new menu created
-                disconnect(oldMenu, &QMenu::aboutToHide, this, &AppMenuApplet::onMenuAboutToHide);
-                
+                //dont initialize the currentIndex when another menu is already shown
+                disconnect(oldMenu, &QMenu::aboutToHide, this, &ActiveWindowControlApplet::onMenuAboutToHide);
                 oldMenu->hide();
             }
         }
@@ -326,13 +327,19 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
         setCurrentIndex(idx);
 
         // FIXME TODO connect only once
-        connect(actionMenu, &QMenu::aboutToHide, this, &AppMenuApplet::onMenuAboutToHide, Qt::UniqueConnection);
-        return;
+        connect(actionMenu, &QMenu::aboutToHide, this, &ActiveWindowControlApplet::onMenuAboutToHide, Qt::UniqueConnection);
+    } else { // is it just an action without a menu?
+        const QVariant data = m_model->index(idx, 0).data(AppMenuModel::ActionRole);
+        QAction *action = static_cast<QAction *>(data.value<void *>());
+        if (action) {
+            Q_ASSERT(!action->menu());
+            action->trigger();
+        }
     }
 }
 
 // FIXME TODO doesn't work on submenu
-bool AppMenuApplet::eventFilter(QObject *watched, QEvent *event)
+bool ActiveWindowControlApplet::eventFilter(QObject *watched, QEvent *event)
 {
     auto *menu = qobject_cast<QMenu *>(watched);
     if (!menu) {
@@ -384,6 +391,6 @@ bool AppMenuApplet::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(appmenu, AppMenuApplet, "metadata.json")
+K_EXPORT_PLASMA_APPLET_WITH_JSON(activewindowcontrol, ActiveWindowControlApplet, "metadata.json")
 
-#include "appmenuapplet.moc"
+#include "activewindowcontrolapplet.moc"

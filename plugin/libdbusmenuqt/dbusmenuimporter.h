@@ -22,7 +22,7 @@
 #define DBUSMENUIMPORTER_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QAction;
 class QDBusPendingCallWatcher;
@@ -43,7 +43,7 @@ public:
     /**
      * Creates a DBusMenuImporter listening over DBus on service, path
      */
-    DBusMenuImporter(const QString &service, const QString &path, QObject *parent = 0);
+    DBusMenuImporter(const QString &service, const QString &path, QObject *parent = nullptr);
 
     ~DBusMenuImporter() override;
 

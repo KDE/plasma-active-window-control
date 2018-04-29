@@ -1,8 +1,8 @@
-set(appmenuapplet_SRCS
-    appmenuapplet.cpp
+set(activewindowcontrolapplet_SRCS
+    activewindowcontrolapplet.cpp
 )
 
-add_library(plasma_applet_activewindowcontrol MODULE ${appmenuapplet_SRCS})
+add_library(plasma_applet_activewindowcontrol MODULE ${activewindowcontrolapplet_SRCS})
 
 kcoreaddons_desktop_to_json(plasma_applet_activewindowcontrol ../package/metadata.desktop)
 

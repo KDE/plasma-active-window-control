@@ -87,10 +87,12 @@ Item {
     property bool isActiveWindowPinned: false
     property bool isActiveWindowMaximized: false
 
-    property bool appmenuNextToIconAndText: plasmoid.configuration.appmenuNextToIconAndText
-    property double appmenuSideMargin: plasmoid.configuration.appmenuOuterSideMargin
-    property bool appmenuSwitchSidesWithIconAndText: plasmoid.configuration.appmenuSwitchSidesWithIconAndText
-    property bool appmenuBoldTitleWhenMenuDisplayed: plasmoid.configuration.appmenuBoldTitleWhenMenuDisplayed
+//     property bool appmenuNextToIconAndText: plasmoid.configuration.appmenuNextToIconAndText
+//     property double appmenuSideMargin: plasmoid.configuration.appmenuOuterSideMargin
+//     property bool appmenuSwitchSidesWithIconAndText: plasmoid.configuration.appmenuSwitchSidesWithIconAndText
+//     property bool appmenuBoldTitleWhenMenuDisplayed: plasmoid.configuration.appmenuBoldTitleWhenMenuDisplayed
+
+    property bool controlPartMouseAreaRestrictedToWidget: plasmoid.configuration.controlPartMouseAreaRestrictedToWidget
 
     property var activeTaskLocal: null
     property int activityActionCount: 0
@@ -248,79 +250,23 @@ Item {
         }
     }
 
-    //
-    // ACTIVE WINDOW INFO
-    //
-//     Item {
-//         id: activeWindowListView
-// 
-//         anchors.top: parent.top
-//         anchors.bottom: parent.bottom
-// 
-//         property double appmenuOffsetLeft: (bp === 0 || bp === 2) ? appmenu.appmenuOffsetWidth : 0
-//         property double appmenuOffsetRight: (bp === 1 || bp === 3) ? appmenu.appmenuOffsetWidth : 0
-//         property double controlButtonsAreaWidth: noWindowActive ? 0 : buttonsItem.width
-//         property bool buttonsVisible: buttonsStandalone && (!slidingIconAndText || buttonsItem.mouseInWidget || doNotHideControlButtons) && (canShowButtonsAccordingMaximized || !slidingIconAndText)
-//         property double buttonsBetweenAddition: buttonsVisible && buttonsBetweenIconAndText ? controlButtonsAreaWidth + iconAndTextSpacing : 0
-// 
-//         anchors.left: parent.left
-//         anchors.leftMargin: buttonsVisible && (bp === 0 || bp === 2) && !buttonsBetweenIconAndText ? controlButtonsAreaWidth + iconAndTextSpacing + appmenuOffsetLeft : 0 + appmenuOffsetLeft
-//         anchors.right: parent.right
-//         anchors.rightMargin: buttonsVisible && (bp === 1 || bp === 3) && !buttonsBetweenIconAndText ? controlButtonsAreaWidth + iconAndTextSpacing + appmenuOffsetRight : 0 + appmenuOffsetRight
-// 
-//         Behavior on anchors.leftMargin {
-//             NumberAnimation {
-//                 duration: 150
-//                 easing.type: Easing.Linear
-//             }
-//         }
-//         Behavior on anchors.rightMargin {
-//             NumberAnimation {
-//                 duration: 150
-//                 easing.type: Easing.Linear
-//             }
-//         }
-// 
-//         width: parent.width - anchors.leftMargin - anchors.rightMargin
-// 
-//         opacity: appmenu.visible && !appmenuNextToIconAndText ? plasmoid.configuration.appmenuIconAndTextOpacity : 1
-// 
-//         Item {
-//             width: parent.width
-//             height: main.height
-// 
-//             WindowIcon {
-//                 id: iconItem
-// 
-//                 anchors.left: parent.left
-//                 anchors.leftMargin: windowIconOnTheRight ? parent.width - iconItem.width : 0
-//             }
-// 
-//             WindowTitle {
-//                 id: titleItem
-// 
-//                 property double iconMarginForAnchor: noWindowActive && plasmoid.configuration.noWindowIcon === '' ? 0 : iconMargin
-// 
-//                 anchors.left: parent.left
-//                 anchors.leftMargin: windowIconOnTheRight ? 0 : iconMarginForAnchor + iconAndTextSpacing + activeWindowListView.buttonsBetweenAddition
-//                 anchors.top: parent.top
-//                 anchors.bottom: parent.bottom
-//             }
-// 
-//         }
-//     }
-
     function getConfigName(itemName) {
         return itemName.substring(0, 1).toUpperCase() + itemName.substring(1)
     }
 
+    /*
+     * Position can be:
+     *   0 ... occupy
+     *   1 ... floating layer (second occupy)
+     *   2 ... absolute
+     */
     function getPosition(itemName) {
         var configName = getConfigName(itemName)
         print('getPosition: ' + configName)
         print('POS: ' + plasmoid.configuration['controlPart' + configName + 'Position'])
         return plasmoid.configuration['controlPart' + configName + 'Position']
     }
-    
+
     function isRelevant(itemName) {
         var configName = getConfigName(itemName)
         print('isRelevant: ' + configName)
@@ -348,10 +294,10 @@ Item {
     }
 
     function getItemWidth(itemName) {
-        return getItem().width
+        return getItem(itemName).width
     }
 
-    function anchorsLeftMargin(itemName) {
+    function getLeftMargin(itemName) {
         var itemPosition = getPosition(itemName)
         print('position of ' + itemName + ' is ' + itemPosition)
         if (itemPosition === 2) {
@@ -374,11 +320,39 @@ Item {
         return anchorSize
     }
 
-    function refreshItemMargin() {
-        iconItem.anchors.leftMargin = anchorsLeftMargin('icon')
-        titleItem.anchors.leftMargin = anchorsLeftMargin('title')
-        menuItem.anchors.leftMargin = anchorsLeftMargin('menu')
-        buttonsItem.anchors.leftMargin = anchorsLeftMargin('buttons')
+    function getWidth(itemName) {
+        var itemPosition = getPosition(itemName)
+        print('getWidth(): position of ' + itemName + ' is ' + itemPosition)
+        if (itemPosition === 2) {
+            return 0
+        }
+        var computedWidth = main.width
+        itemPartOrder.forEach(function (iName, index) {
+            print('iterating: ' + iName)
+            if (iName === itemName) {
+                return;
+            }
+            if (getPosition(iName) === itemPosition && isRelevant(iName)) {
+                var currentItemWidth = getItemWidth(iName)
+                print('width of ' + iName + ' is ' + currentItemWidth)
+                computedWidth -= currentItemWidth
+                computedWidth -= plasmoid.configuration.controlPartSpacing
+            }
+        });
+        print('computedWidth of ' + itemName + ' is ' + computedWidth)
+        return computedWidth
+    }
+
+    function refreshItemPosition() {
+        titleItem.width = getWidth('title')
+        menuItem.width = getWidth('menu')
+
+        iconItem.x = getLeftMargin('icon')
+        titleItem.x = getLeftMargin('title')
+        menuItem.x = getLeftMargin('menu')
+        buttonsItem.x = getLeftMargin('buttons')
+
+        textSeparator.x = getLeftMargin('menu') - (plasmoid.configuration.controlPartSpacing / 2)
     }
 
     function replaceTitle(title) {
@@ -469,58 +443,63 @@ Item {
             }
         }
     }
-    
+
+    property bool mouseInWidget: mouseHover || buttonsItem.mouseInWidget || menuItem.mouseInWidget
+
     ListModel {
         id: controlButtonsModel
     }
-    
+
     WindowIcon {
         id: iconItem
 
-        x: anchorsLeftMargin('icon')
+        visible: ((mouseInWidget && plasmoid.configuration.controlPartIconShowOnMouseIn)
+                    || (!mouseInWidget && plasmoid.configuration.controlPartIconShowOnMouseOut))
 
-        visible: ((mouseHover && plasmoid.configuration.controlPartIconShowOnMouseIn)
-                    || (!mouseHover && plasmoid.configuration.controlPartIconShowOnMouseOut))
-
-        onWidthChanged: refreshItemMargin()
+        onWidthChanged: refreshItemPosition()
     }
 
     WindowTitle {
         id: titleItem
 
-        x: anchorsLeftMargin('title')
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-
-        visible: ((mouseHover && plasmoid.configuration.controlPartTitleShowOnMouseIn)
-                    || (!mouseHover && plasmoid.configuration.controlPartTitleShowOnMouseOut))
+        visible: ((mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseIn)
+                    || (!mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseOut))
     }
 
     AppMenu {
         id: menuItem
 
-        x: anchorsLeftMargin('menu')
+        property bool mouseIn: controlPartMouseAreaRestrictedToWidget ? menuItem.mouseInWidget : main.mouseInWidget
 
-        visible: ((mouseHover && plasmoid.configuration.controlPartMenuShowOnMouseIn)
-                    || (!mouseHover && plasmoid.configuration.controlPartMenuShowOnMouseOut))
+        height: main.height
+
+        showItem: ((mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseIn)
+                    || (!mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseOut))
     }
 
     ControlButtons {
         id: buttonsItem
 
-        x: anchorsLeftMargin('buttons')
-
-        visible: true
+        property bool mouseIn: controlPartMouseAreaRestrictedToWidget ? buttonsItem.mouseInWidget : main.mouseInWidget
 
         controlButtonsModel: controlButtonsModel
 
-        showItem: ((mouseInWidget && plasmoid.configuration.controlPartButtonsShowOnMouseIn)
-            || (!mouseInWidget && plasmoid.configuration.controlPartButtonsShowOnMouseOut))
+        showItem: ((mouseIn && plasmoid.configuration.controlPartButtonsShowOnMouseIn)
+            || (!mouseIn && plasmoid.configuration.controlPartButtonsShowOnMouseOut))
 
+        onWidthChanged: refreshItemPosition()
     }
 
-    property bool mouseInWidget: mouseHover || buttonsItem.mouseInWidget || menuItem.mouseInWidget
+    Rectangle {
+        id: textSeparator
+        x: 0
+        anchors.verticalCenter: main.verticalCenter
+        height: 0.8 * parent.height
+        width: 1
+        visible: plasmoid.configuration.appmenuSeparatorEnabled && menuItem.showItem
+        color: theme.textColor
+        opacity: 0.4
+    }
 
     onMouseHoverChanged: {
         print('mouse hover changed: ' + mouseHover);
@@ -656,11 +635,12 @@ Item {
             getItem(itemName).z = index
         });
         print('itemPartOrder initialized: ' + itemPartOrder)
+        refreshItemPosition()
     }
 
     Component.onCompleted: {
         refreshControlPartOrder()
-        refreshItemMargin()
+        refreshItemPosition()
         initializeControlButtonsModel()
         updateActiveWindowInfo()
         plasmoid.setAction('close', i18n('Close'), 'window-close');

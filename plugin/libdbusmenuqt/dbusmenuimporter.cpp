@@ -61,7 +61,7 @@ static const char *DBUSMENU_PROPERTY_ICON_DATA_HASH = "_dbusmenu_icon_data_hash"
 
 static QAction *createKdeTitle(QAction *action, QWidget *parent)
 {
-    QToolButton *titleWidget = new QToolButton(0);
+    QToolButton *titleWidget = new QToolButton(nullptr);
     QFont font = titleWidget->font();
     font.setBold(true);
     titleWidget->setFont(font);
@@ -258,7 +258,7 @@ public:
         }
         QAction *action = m_actionForId.value(id);
         if (!action) {
-            return 0;
+            return nullptr;
         }
         return action->menu();
     }
@@ -279,7 +279,7 @@ DBusMenuImporter::DBusMenuImporter(const QString &service, const QString &path, 
 
     d->q = this;
     d->m_interface = new DBusMenuInterface(service, path, QDBusConnection::sessionBus(), this);
-    d->m_menu = 0;
+    d->m_menu = nullptr;
 
     d->m_pendingLayoutUpdateTimer = new QTimer(this);
     d->m_pendingLayoutUpdateTimer->setSingleShot(true);
@@ -327,7 +327,7 @@ void DBusMenuImporter::processPendingLayoutUpdates()
 QMenu *DBusMenuImporter::menu() const
 {
     if (!d->m_menu) {
-        d->m_menu = d->createMenu(0);
+        d->m_menu = d->createMenu(nullptr);
     }
     return d->m_menu;
 }
@@ -409,6 +409,7 @@ void DBusMenuImporter::slotGetLayoutFinished(QDBusPendingCallWatcher *watcher)
     for (QAction *action: menu->actions()) {
         int id = action->property(DBUSMENU_PROPERTY_ID).toInt();
         if (! newDBusMenuItemIds.contains(id)) {
+            menu->removeAction(action);
             action->deleteLater();
             d->m_actionForId.remove(id);
         }
@@ -477,6 +478,9 @@ void DBusMenuImporter::updateMenu(QMenu * menu)
     watcher->setProperty(DBUSMENU_PROPERTY_ID, id);
     connect(watcher, &QDBusPendingCallWatcher::finished, this,
         &DBusMenuImporter::slotAboutToShowDBusCallFinished);
+
+    // Firefox deliberately ignores "aboutToShow" whereas Qt ignores" opened", so we'll just send both all the time...
+    d->sendEvent(id, QStringLiteral("opened"));
 }
 
 void DBusMenuImporter::slotAboutToShowDBusCallFinished(QDBusPendingCallWatcher *watcher)
@@ -525,12 +529,6 @@ void DBusMenuImporter::slotMenuAboutToShow()
     Q_ASSERT(menu);
 
     updateMenu(menu);
-
-    QAction *action = menu->menuAction();
-    Q_ASSERT(action);
-
-    int id = action->property(DBUSMENU_PROPERTY_ID).toInt();
-    d->sendEvent(id, QStringLiteral("opened"));
 }
 
 QMenu *DBusMenuImporter::createMenu(QWidget *parent)

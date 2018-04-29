@@ -8,20 +8,21 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 PlasmaComponents.Label {
     id: titleItem
 
-    property double iconMargin: (plasmoid.configuration.showWindowIcon ? iconItem.width : 0)
-    property double properWidth: parent.width - iconMargin - iconAndTextSpacing
+//     property double iconMargin: (plasmoid.configuration.showWindowIcon ? iconItem.width : 0)
+//     property double properWidth: parent.width - iconMargin - iconAndTextSpacing
     property double properHeight: parent.height
     property bool noElide: fitText === 2 || (fitText === 1 && mouseHover)
     property int allowFontSizeChange: 3
     property int minimumPixelSize: 8
-    property bool limitTextWidth: plasmoid.configuration.limitTextWidth
-    property int textWidthLimit: plasmoid.configuration.textWidthLimit
-    property double computedWidth: (limitTextWidth ? (implicitWidth > textWidthLimit ? textWidthLimit : implicitWidth) : properWidth)// - activeWindowListView.buttonsBetweenAddition
+//     property bool limitTextWidth: plasmoid.configuration.limitTextWidth
+//     property int textWidthLimit: plasmoid.configuration.textWidthLimit
+//     property double computedWidth: (limitTextWidth ? (implicitWidth > textWidthLimit ? textWidthLimit : implicitWidth) : properWidth)// - activeWindowListView.buttonsBetweenAddition
 
     verticalAlignment: Text.AlignVCenter
     text: plasmoid.configuration.noWindowText
     wrapMode: Text.Wrap
-    width: computedWidth
+//     width: computedWidth
+    height: properHeight
     elide: noElide ? Text.ElideNone : Text.ElideRight
     visible: plasmoid.configuration.showWindowTitle
     font.pixelSize: fontPixelSize

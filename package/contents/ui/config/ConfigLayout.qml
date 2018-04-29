@@ -30,6 +30,8 @@ Item {
     property alias cfg_controlPartMenuHorizontalAlignment: controlPartMenuHorizontalAlignment.currentIndex
     // GENERATED config (end)
 
+    property alias cfg_controlPartMouseAreaRestrictedToWidget: controlPartMouseAreaRestrictedToWidget.checked
+
     ListModel {
         id: partsToSpend
         ListElement {
@@ -308,6 +310,18 @@ Item {
             }
         }
         // GENERATED controls (end)
+
+        Item {
+            width: units.largeSpacing
+            height: units.largeSpacing
+            Layout.columnSpan: 3
+        }
+
+        CheckBox {
+            id: controlPartMouseAreaRestrictedToWidget
+            text: i18n('Restrict mouse area to widget')
+            Layout.columnSpan: 2
+        }
 
     }
 

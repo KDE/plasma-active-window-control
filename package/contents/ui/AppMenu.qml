@@ -3,27 +3,25 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-Item {
+MouseArea {
     id: appmenu
-    anchors.fill: parent
 
-    property bool mouseInWidget: false
+    property bool mouseInWidget: appmenuOpened || appmenu.containsMouse
 
     property bool appmenuEnabled: plasmoid.configuration.appmenuEnabled
-    property bool appmenuNextToButtons: plasmoid.configuration.appmenuNextToButtons
     property bool appmenuFillHeight: plasmoid.configuration.appmenuFillHeight
     property bool appmenuFontBold: plasmoid.configuration.appmenuFontBold
-    property bool appmenuDoNotHide: plasmoid.configuration.appmenuDoNotHide
     property bool appmenuEnabledAndNonEmpty: appmenuEnabled && appMenuModel !== null && appMenuModel.menuAvailable
     property bool appmenuOpened: appmenuEnabled && plasmoid.nativeInterface.currentIndex > -1
     property var appMenuModel: null
 
-    property bool appmenuButtonsOffsetEnabled: !buttonsStandalone && appmenuNextToButtons && childrenRect.width > 0
-    property double appmenuOffsetWidth: visible && appmenuNextToIconAndText && !appmenuSwitchSidesWithIconAndText
-                                                ? appmenu.childrenRect.width + (appmenuButtonsOffsetEnabled ? buttonsItem.width : 0) + appmenuSideMargin*2
-                                                : 0
+    visible: appmenuEnabledAndNonEmpty && !main.noWindowActive
 
-    visible: appmenuEnabledAndNonEmpty && !noWindowActive && (appmenuDoNotHide || main.mouseHover || appmenuOpened)
+    property bool showItem
+
+    opacity: showItem ? 1 : 0
+
+    hoverEnabled: true
 
     GridLayout {
         id: buttonGrid
@@ -37,15 +35,6 @@ Item {
 
         anchors.top: parent.top
         anchors.left: parent.left
-
-        property double placementOffsetButtons: appmenuNextToButtons && buttonsItem.visible ? buttonsItem.width + appmenuSideMargin : 0
-        property double placementOffset: appmenuNextToIconAndText && appmenuSwitchSidesWithIconAndText
-                                            //? activeWindowListView.anchors.leftMargin + windowTitle.anchors.leftMargin +
-                                            ? windowTitle.anchors.leftMargin + windowTitle.contentWidthwindowTitle.contentWidth + appmenuSideMargin
-                                            : placementOffsetButtons
-
-        anchors.leftMargin: (bp === 1 || bp === 3) ? parent.width - width - placementOffset : placementOffset
-        anchors.topMargin: (bp === 2 || bp === 3) ? 0 : parent.height - height
 
         Component.onCompleted: {
             plasmoid.nativeInterface.buttonGrid = buttonGrid
@@ -112,18 +101,6 @@ Item {
                 }
             }
         }
-    }
-
-    Rectangle {
-        id: separator
-        anchors.left: buttonGrid.left
-        anchors.leftMargin: appmenuSwitchSidesWithIconAndText ? - appmenuSideMargin * 0.5 : buttonGrid.width + appmenuSideMargin * 0.5
-        anchors.verticalCenter: buttonGrid.verticalCenter
-        height: 0.8 * parent.height
-        width: 1
-        visible: appmenuNextToIconAndText && plasmoid.configuration.appmenuSeparatorEnabled
-        color: theme.textColor
-        opacity: 0.4
     }
 
     function initializeAppModel() {
