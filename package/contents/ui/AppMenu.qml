@@ -8,7 +8,7 @@ MouseArea {
 
     property bool mouseInWidget: appmenuOpened || appmenu.containsMouse
 
-    property bool appmenuEnabled: plasmoid.configuration.appmenuEnabled
+    property bool appmenuEnabled: plasmoid.configuration.controlPartMenuShowOnMouseIn || plasmoid.configuration.controlPartMenuShowOnMouseOut
     property bool appmenuFillHeight: plasmoid.configuration.appmenuFillHeight
     property bool appmenuFontBold: plasmoid.configuration.appmenuFontBold
     property bool appmenuEnabledAndNonEmpty: appmenuEnabled && appMenuModel !== null && appMenuModel.menuAvailable
@@ -18,8 +18,11 @@ MouseArea {
     visible: appmenuEnabledAndNonEmpty && !main.noWindowActive
 
     property bool showItem
+    property double recommendedWidth
 
     opacity: showItem ? 1 : 0
+
+    width: recommendedWidth
 
     hoverEnabled: true
 
@@ -83,7 +86,7 @@ MouseArea {
                     anchors.bottom: appmenuButtonBackground.bottom
                     verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: appmenuButtonBackground.horizontalCenter
-                    font.pixelSize: fontPixelSize * plasmoid.configuration.appmenuButtonTextSizeScale
+                    font.pixelSize: main.fontPixelSize * plasmoid.configuration.appmenuButtonTextSizeScale
                     text: activeMenu.replace('&', '')
                     font.weight: appmenuFontBold ? Font.Bold : theme.defaultFont.weight
                 }

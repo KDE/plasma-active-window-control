@@ -8,31 +8,48 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 PlasmaComponents.Label {
     id: titleItem
 
-//     property double iconMargin: (plasmoid.configuration.showWindowIcon ? iconItem.width : 0)
-//     property double properWidth: parent.width - iconMargin - iconAndTextSpacing
     property double properHeight: parent.height
-    property bool noElide: fitText === 2 || (fitText === 1 && mouseHover)
+    property int fontBold: plasmoid.configuration.textFontBold
+    property string fontFamily: plasmoid.configuration.fontFamily
+    property int fitText: plasmoid.configuration.fitText
+    property bool noElide: fitText === 2 || (fitText === 1 && mainMouseArea.containsMouse)
     property int allowFontSizeChange: 3
     property int minimumPixelSize: 8
-//     property bool limitTextWidth: plasmoid.configuration.limitTextWidth
-//     property int textWidthLimit: plasmoid.configuration.textWidthLimit
-//     property double computedWidth: (limitTextWidth ? (implicitWidth > textWidthLimit ? textWidthLimit : implicitWidth) : properWidth)// - activeWindowListView.buttonsBetweenAddition
+    property bool limitTextWidth: plasmoid.configuration.limitTextWidth
+    property int textWidthLimit: plasmoid.configuration.textWidthLimit
+
+    property double recommendedWidth
+
+    onRecommendedWidthChanged: {
+        if (limitTextWidth) {
+            width = undefined
+            if (implicitWidth > textWidthLimit) {
+                width = textWidthLimit
+            } else {
+                width = recommendedWidth
+            }
+        } else {
+            width = recommendedWidth
+        }
+    }
 
     verticalAlignment: Text.AlignVCenter
     text: plasmoid.configuration.noWindowText
     wrapMode: Text.Wrap
-//     width: computedWidth
+    width: recommendedWidth
     height: properHeight
     elide: noElide ? Text.ElideNone : Text.ElideRight
-    visible: plasmoid.configuration.showWindowTitle
     font.pixelSize: fontPixelSize
     font.pointSize: -1
-    font.weight: fontBold || (appmenuBoldTitleWhenMenuDisplayed && appmenu.visible) ? Font.Bold : theme.defaultFont.weight
+    font.weight: fontBold === 1 || (fontBold === 2 && menuItem.showItem) ? Font.Bold : theme.defaultFont.weight
     font.family: fontFamily || theme.defaultFont.family
+
+    opacity: menuItem.showItem ? plasmoid.configuration.appmenuIconAndTextOpacity : 1
 
     onTextChanged: {
         font.pixelSize = fontPixelSize
         allowFontSizeChange = 3
+        recommendedWidthChanged()
     }
 
     onNoElideChanged: {

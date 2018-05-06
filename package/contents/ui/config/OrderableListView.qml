@@ -68,7 +68,7 @@ Item {
 
                 // text
                 Label {
-                    text: model.text
+                    text: model.text || ''
                     anchors.fill: parent
                     anchors.leftMargin: svgItem.visible ? svgItem.width + units.smallSpacing : 0
                     visible: !!model.text

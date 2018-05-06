@@ -4,16 +4,12 @@ import QtQuick.Layouts 1.1
 import QtQml.Models 2.1
 
 Item {
+    id: configLayout
 
     property string cfg_controlPartOrder
     property alias cfg_controlPartSpacing: controlPartSpacing.value
 
     // GENERATED config (start)
-    property alias cfg_controlPartButtonsPosition: controlPartButtonsPosition.currentIndex
-    property alias cfg_controlPartButtonsShowOnMouseIn: controlPartButtonsShowOnMouseIn.checked
-    property alias cfg_controlPartButtonsShowOnMouseOut: controlPartButtonsShowOnMouseOut.checked
-    property alias cfg_controlPartButtonsHorizontalAlignment: controlPartButtonsHorizontalAlignment.currentIndex
-
     property alias cfg_controlPartIconPosition: controlPartIconPosition.currentIndex
     property alias cfg_controlPartIconShowOnMouseIn: controlPartIconShowOnMouseIn.checked
     property alias cfg_controlPartIconShowOnMouseOut: controlPartIconShowOnMouseOut.checked
@@ -24,6 +20,11 @@ Item {
     property alias cfg_controlPartTitleShowOnMouseOut: controlPartTitleShowOnMouseOut.checked
     property alias cfg_controlPartTitleHorizontalAlignment: controlPartTitleHorizontalAlignment.currentIndex
 
+    property alias cfg_controlPartButtonsPosition: controlPartButtonsPosition.currentIndex
+    property alias cfg_controlPartButtonsShowOnMouseIn: controlPartButtonsShowOnMouseIn.checked
+    property alias cfg_controlPartButtonsShowOnMouseOut: controlPartButtonsShowOnMouseOut.checked
+    property alias cfg_controlPartButtonsHorizontalAlignment: controlPartButtonsHorizontalAlignment.currentIndex
+
     property alias cfg_controlPartMenuPosition: controlPartMenuPosition.currentIndex
     property alias cfg_controlPartMenuShowOnMouseIn: controlPartMenuShowOnMouseIn.checked
     property alias cfg_controlPartMenuShowOnMouseOut: controlPartMenuShowOnMouseOut.checked
@@ -31,6 +32,10 @@ Item {
     // GENERATED config (end)
 
     property alias cfg_controlPartMouseAreaRestrictedToWidget: controlPartMouseAreaRestrictedToWidget.checked
+
+    property alias cfg_autoFillWidth: autoFillWidth.checked
+    property alias cfg_horizontalScreenWidthPercent: horizontalScreenWidthPercent.value
+    property alias cfg_widthFineTuning: widthFineTuning.value
 
     ListModel {
         id: partsToSpend
@@ -75,6 +80,18 @@ Item {
 
     GridLayout {
         columns: 3
+
+        Label {
+            text: i18n('Plasmoid version: ') + '1.8.0-git'
+            Layout.alignment: Qt.AlignRight
+            Layout.columnSpan: 3
+        }
+
+        Item {
+            width: 2
+            height: units.largeSpacing
+            Layout.columnSpan: 3
+        }
 
         Label {
             text: i18n("Item order:")
@@ -129,51 +146,6 @@ Item {
             }
 
             Label {
-                text: i18n('Buttons')
-                font.bold: true
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n('Position:')
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            }
-
-            ComboBox {
-                id: controlPartButtonsPosition
-                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
-            }
-
-            CheckBox {
-                id: controlPartButtonsShowOnMouseIn
-                text: i18n('Show on mouse in')
-                Layout.columnSpan: 2
-            }
-
-            CheckBox {
-                id: controlPartButtonsShowOnMouseOut
-                text: i18n('Show on mouse out')
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n('Horizontal alignment:')
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            }
-
-            ComboBox {
-                id: controlPartButtonsHorizontalAlignment
-                model: [i18n('Left'), i18n('Right')]
-            }
-
-
-            Item {
-                width: 2
-                height: units.largeSpacing
-                Layout.columnSpan: 2
-            }
-
-            Label {
                 text: i18n('Icon')
                 font.bold: true
                 Layout.columnSpan: 2
@@ -208,6 +180,51 @@ Item {
 
             ComboBox {
                 id: controlPartIconHorizontalAlignment
+                model: [i18n('Left'), i18n('Right')]
+            }
+
+
+            Item {
+                width: 2
+                height: units.largeSpacing
+                Layout.columnSpan: 2
+            }
+
+            Label {
+                text: i18n('Buttons')
+                font.bold: true
+                Layout.columnSpan: 2
+            }
+
+            Label {
+                text: i18n('Position:')
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            }
+
+            ComboBox {
+                id: controlPartButtonsPosition
+                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
+            }
+
+            CheckBox {
+                id: controlPartButtonsShowOnMouseIn
+                text: i18n('Show on mouse in')
+                Layout.columnSpan: 2
+            }
+
+            CheckBox {
+                id: controlPartButtonsShowOnMouseOut
+                text: i18n('Show on mouse out')
+                Layout.columnSpan: 2
+            }
+
+            Label {
+                text: i18n('Horizontal alignment:')
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            }
+
+            ComboBox {
+                id: controlPartButtonsHorizontalAlignment
                 model: [i18n('Left'), i18n('Right')]
             }
         }
@@ -320,7 +337,53 @@ Item {
         CheckBox {
             id: controlPartMouseAreaRestrictedToWidget
             text: i18n('Restrict mouse area to widget')
-            Layout.columnSpan: 2
+            Layout.columnSpan: 3
+        }
+
+        Item {
+            width: units.largeSpacing
+            height: units.largeSpacing
+            Layout.columnSpan: 3
+        }
+
+        Label {
+            text: i18n("Width in horizontal panel:")
+            font.bold: true
+            Layout.alignment: Qt.AlignLeft
+            Layout.columnSpan: 3
+        }
+
+        CheckBox {
+            id: autoFillWidth
+            text: i18n("Fill width")
+            Layout.columnSpan: 3
+        }
+
+        GridLayout {
+            columns: 2
+            Layout.columnSpan: 3
+            enabled: !autoFillWidth.checked
+
+            Slider {
+                id: horizontalScreenWidthPercent
+                stepSize: 0.001
+                minimumValue: 0.001
+                maximumValue: 1
+                Layout.preferredWidth: configLayout.width
+                Layout.columnSpan: 2
+            }
+
+            Label {
+                text: i18n("Fine tuning:")
+                Layout.alignment: Qt.AlignRight
+            }
+            SpinBox {
+                id: widthFineTuning
+                decimals: 1
+                stepSize: 0.5
+                minimumValue: -100
+                maximumValue: 100
+            }
         }
 
     }

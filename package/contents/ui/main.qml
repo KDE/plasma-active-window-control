@@ -30,44 +30,18 @@ Item {
     property bool vertical: (plasmoid.formFactor == PlasmaCore.Types.Vertical)
 
     property double horizontalScreenWidthPercent: plasmoid.configuration.horizontalScreenWidthPercent
-//     property double buttonSize: plasmoid.configuration.buttonSize
     property bool autoFillWidth: plasmoid.configuration.autoFillWidth
-    property double widthForHorizontalPanel: (Screen.width * horizontalScreenWidthPercent + plasmoid.configuration.widthFineTuning) - ((!buttonsItem.visible && buttonsStandalone && plasmoid.configuration.buttonsDynamicWidth) ? buttonsItem.width : 0)
-    anchors.fill: parent
-    Layout.fillWidth: plasmoid.configuration.autoFillWidth
-    Layout.preferredWidth: autoFillWidth ? -1 : (vertical ? parent.width : (widthForHorizontalPanel > 0 ? widthForHorizontalPanel : 0.0001))
-    Layout.minimumWidth: Layout.preferredWidth
-    Layout.maximumWidth: Layout.preferredWidth
-    Layout.preferredHeight: parent === null ? 0 : vertical ? Math.min(theme.defaultFont.pointSize * 4, parent.width) : parent.height
-    Layout.minimumHeight: Layout.preferredHeight
-    Layout.maximumHeight: Layout.preferredHeight
+    property double widthForHorizontalPanel: (Screen.width * horizontalScreenWidthPercent + plasmoid.configuration.widthFineTuning)
 
     property int textType: plasmoid.configuration.textType
-    property int fitText: plasmoid.configuration.fitText
     property int tooltipTextType: plasmoid.configuration.tooltipTextType
     property string tooltipText: ''
 
-    property bool windowIconOnTheRight: plasmoid.configuration.windowIconOnTheRight
-    property double iconAndTextSpacing: plasmoid.configuration.iconAndTextSpacing
-    property bool slidingIconAndText: plasmoid.configuration.slidingIconAndText
     property double fontPixelSize: theme.defaultFont.pixelSize * plasmoid.configuration.fontSizeScale
-    property bool fontBold: plasmoid.configuration.boldFontWeight
-    property string fontFamily: plasmoid.configuration.fontFamily
 
     property bool noWindowActive: true
     property bool currentWindowMaximized: false
-    property bool canShowButtonsAccordingMaximized: showButtonOnlyWhenMaximized ? currentWindowMaximized : true
 
-    property int controlButtonsSpacing: plasmoid.configuration.controlButtonsSpacing
-
-    property int bp: plasmoid.configuration.buttonsPosition;
-    property bool buttonsVerticalCenter: plasmoid.configuration.buttonsVerticalCenter
-    property bool showControlButtons: plasmoid.configuration.showControlButtons
-    property bool showButtonOnlyWhenMaximized: plasmoid.configuration.showButtonOnlyWhenMaximized
-    property bool showMinimize: showControlButtons && plasmoid.configuration.showMinimize
-    property bool showMaximize: showControlButtons && plasmoid.configuration.showMaximize
-    property bool showPinToAllDesktops: showControlButtons && plasmoid.configuration.showPinToAllDesktops
-    property string buttonOrder: plasmoid.configuration.buttonOrder
     property bool doubleClickMaximizes: plasmoid.configuration.doubleClickMaximizes
     property int leftClickAction: plasmoid.configuration.leftClickAction
     property string chosenLeftClickSource: leftClickAction === 1 ? shortcutDS.presentWindows : leftClickAction === 2 ? shortcutDS.presentWindowsAll : leftClickAction === 3 ? shortcutDS.presentWindowsClass : ''
@@ -77,32 +51,29 @@ Item {
     property bool wheelDownMinimizes: plasmoid.configuration.wheelDownAction === 1
     property bool wheelDownUnmaximizes: plasmoid.configuration.wheelDownAction === 2
 
-    property bool buttonsStandalone: showControlButtons && plasmoid.configuration.buttonsStandalone
-    property bool buttonsBetweenIconAndText: buttonsStandalone && plasmoid.configuration.buttonsBetweenIconAndText
-    property bool doNotHideControlButtons: showControlButtons && plasmoid.configuration.doNotHideControlButtons
-
     property bool textColorLight: ((theme.textColor.r + theme.textColor.g + theme.textColor.b) / 3) > 0.5
 
-    property bool mouseHover: false
     property bool isActiveWindowPinned: false
     property bool isActiveWindowMaximized: false
-
-//     property bool appmenuNextToIconAndText: plasmoid.configuration.appmenuNextToIconAndText
-//     property double appmenuSideMargin: plasmoid.configuration.appmenuOuterSideMargin
-//     property bool appmenuSwitchSidesWithIconAndText: plasmoid.configuration.appmenuSwitchSidesWithIconAndText
-//     property bool appmenuBoldTitleWhenMenuDisplayed: plasmoid.configuration.appmenuBoldTitleWhenMenuDisplayed
 
     property bool controlPartMouseAreaRestrictedToWidget: plasmoid.configuration.controlPartMouseAreaRestrictedToWidget
 
     property var activeTaskLocal: null
     property int activityActionCount: 0
 
-    property bool automaticButtonThemeEnabled: plasmoid.configuration.automaticButtonThemeEnabled
-    property string manualAuroraeThemePath: plasmoid.configuration.customAuroraeThemePath
-    property string manualAuroraeThemePathResolved: ''
-    property string manualAuroraeThemeExtension: 'svg'
-
     property var itemPartOrder: []
+
+    property bool mouseInWidget: mainMouseArea.containsMouse || buttonsItem.mouseInWidget || menuItem.mouseInWidget
+
+    anchors.fill: parent
+
+    Layout.fillWidth: plasmoid.configuration.autoFillWidth
+    Layout.preferredWidth: autoFillWidth ? -1 : (vertical ? parent.width : (widthForHorizontalPanel > 0 ? widthForHorizontalPanel : 0.0001))
+    Layout.minimumWidth: Layout.preferredWidth
+    Layout.maximumWidth: Layout.preferredWidth
+    Layout.preferredHeight: parent === null ? 0 : vertical ? Math.min(theme.defaultFont.pointSize * 4, parent.width) : parent.height
+    Layout.minimumHeight: Layout.preferredHeight
+    Layout.maximumHeight: Layout.preferredHeight
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 
@@ -164,8 +135,6 @@ Item {
         return activeTaskLocal.display !== undefined
     }
 
-    onTooltipTextTypeChanged: updateTooltip()
-
     function updateTooltip() {
         if (tooltipTextType === 1) {
             tooltipText = replaceTitle(activeTask().display || '')
@@ -175,6 +144,8 @@ Item {
             tooltipText = ''
         }
     }
+
+    onTooltipTextTypeChanged: updateTooltip()
 
     function composeNoWindowText() {
         return plasmoid.configuration.noWindowText.replace('%activity%', activityInfo.activityName(activityInfo.currentActivity))
@@ -326,7 +297,7 @@ Item {
         if (itemPosition === 2) {
             return 0
         }
-        var computedWidth = main.width
+        var computedWidth = widthForHorizontalPanel
         itemPartOrder.forEach(function (iName, index) {
             print('iterating: ' + iName)
             if (iName === itemName) {
@@ -344,8 +315,8 @@ Item {
     }
 
     function refreshItemPosition() {
-        titleItem.width = getWidth('title')
-        menuItem.width = getWidth('menu')
+        titleItem.recommendedWidth = getWidth('title')
+        menuItem.recommendedWidth = getWidth('menu')
 
         iconItem.x = getLeftMargin('icon')
         titleItem.x = getLeftMargin('title')
@@ -362,22 +333,16 @@ Item {
         return title.replace(new RegExp(plasmoid.configuration.replaceTextRegex), plasmoid.configuration.replaceTextReplacement);
     }
 
+    onWidthForHorizontalPanelChanged: refreshItemPosition()
+
     MouseArea {
+        id: mainMouseArea
+
         anchors.fill: parent
 
         hoverEnabled: true
 
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-
-        onEntered: {
-            mouseHover = true
-            buttonsItem.mouseInWidget = showControlButtons && !noWindowActive
-        }
-
-        onExited: {
-            mouseHover = false
-            buttonsItem.mouseInWidget = false
-        }
 
         onWheel: {
             if (wheel.angleDelta.y > 0) {
@@ -444,8 +409,6 @@ Item {
         }
     }
 
-    property bool mouseInWidget: mouseHover || buttonsItem.mouseInWidget || menuItem.mouseInWidget
-
     ListModel {
         id: controlButtonsModel
     }
@@ -473,7 +436,7 @@ Item {
 
         height: main.height
 
-        showItem: ((mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseIn)
+        showItem: !noWindowActive && ((mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseIn)
                     || (!mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseOut))
     }
 
@@ -482,9 +445,7 @@ Item {
 
         property bool mouseIn: controlPartMouseAreaRestrictedToWidget ? buttonsItem.mouseInWidget : main.mouseInWidget
 
-        controlButtonsModel: controlButtonsModel
-
-        showItem: ((mouseIn && plasmoid.configuration.controlPartButtonsShowOnMouseIn)
+        showItem: !noWindowActive && ((mouseIn && plasmoid.configuration.controlPartButtonsShowOnMouseIn)
             || (!mouseIn && plasmoid.configuration.controlPartButtonsShowOnMouseOut))
 
         onWidthChanged: refreshItemPosition()
@@ -499,76 +460,6 @@ Item {
         visible: plasmoid.configuration.appmenuSeparatorEnabled && menuItem.showItem
         color: theme.textColor
         opacity: 0.4
-    }
-
-    onMouseHoverChanged: {
-        print('mouse hover changed: ' + mouseHover);
-    }
-
-    onMouseInWidgetChanged: {
-        print('mouseInWidget: ' + mouseInWidget);
-    }
-
-    onManualAuroraeThemePathChanged: {
-        manualAuroraeThemeExtension = plasmoid.nativeInterface.extensionForTheme(manualAuroraeThemePath);
-        manualAuroraeThemePathResolved = plasmoid.nativeInterface.translateThemePath(manualAuroraeThemePath);
-        print('manualAuroraeThemePath=' + manualAuroraeThemePath)
-        print('manualAuroraeThemePathResolved=' + manualAuroraeThemePathResolved)
-        print('manualAuroraeThemeExtension=' + manualAuroraeThemeExtension)
-    }
-
-    function addButton(preparedArray, buttonName) {
-        if (buttonName === 'close') {
-            preparedArray.push({
-                iconName: 'close',
-                windowOperation: 'close'
-            });
-        } else if (buttonName === 'maximize' && showMaximize) {
-            preparedArray.push({
-                iconName: 'maximize',
-                windowOperation: 'toggleMaximized'
-            });
-        } else if (buttonName === 'minimize' && showMinimize) {
-            preparedArray.push({
-                iconName: 'minimize',
-                windowOperation: 'toggleMinimized'
-            });
-        } else if ((buttonName === 'pin' || buttonName === 'alldesktops') && showPinToAllDesktops) {
-            preparedArray.push({
-                iconName: 'alldesktops',
-                windowOperation: 'togglePinToAllDesktops'
-            });
-        }
-    }
-
-    function initializeControlButtonsModel() {
-
-        var preparedArray = []
-        buttonOrder.split('|').forEach(function (buttonName) {
-            addButton(preparedArray, buttonName);
-        });
-
-        controlButtonsModel.clear()
-
-        preparedArray.forEach(function (item) {
-            print('adding item to buttons: ' + item.iconName);
-            controlButtonsModel.append(item);
-        });
-    }
-
-    function performActiveWindowAction(windowOperation) {
-        if (bp === 4) {
-            return;
-        }
-        if (windowOperation === 'close') {
-            toggleClose()
-        } else if (windowOperation === 'toggleMaximized') {
-            toggleMaximized()
-        } else if (windowOperation === 'toggleMinimized') {
-            toggleMinimized()
-        } else if (windowOperation === 'togglePinToAllDesktops') {
-            togglePinToAllDesktops()
-        }
     }
 
     function action_close() {
@@ -641,8 +532,8 @@ Item {
     Component.onCompleted: {
         refreshControlPartOrder()
         refreshItemPosition()
-        initializeControlButtonsModel()
         updateActiveWindowInfo()
+        // actions
         plasmoid.setAction('close', i18n('Close'), 'window-close');
         plasmoid.setAction('maximise', i18n('Toggle Maximise'), 'arrow-up-double');
         plasmoid.setAction('minimise', i18n('Minimise'), 'draw-arrow-down');
@@ -651,12 +542,6 @@ Item {
         plasmoid.setAction('reloadTheme', i18n('Reload Theme'), 'system-reboot');
         reAddActivityActions()
     }
-
-    onShowMaximizeChanged: initializeControlButtonsModel()
-    onShowMinimizeChanged: initializeControlButtonsModel()
-    onShowPinToAllDesktopsChanged: initializeControlButtonsModel()
-    onBpChanged: initializeControlButtonsModel()
-    onButtonOrderChanged: initializeControlButtonsModel()
 
     PlasmaCore.DataSource {
         id: shortcutDS

@@ -11,5 +11,6 @@ PlasmaCore.IconItem {
     height: parent.height
 
     source: plasmoid.configuration.noWindowIcon
-    visible: plasmoid.configuration.showWindowIcon
+
+    opacity: menuItem.showItem ? plasmoid.configuration.appmenuIconAndTextOpacity : 1
 }

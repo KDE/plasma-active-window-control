@@ -8,14 +8,14 @@ ConfigModel {
          source: "config/ConfigLayout.qml"
     }
     ConfigCategory {
-         name: i18n("Appearance")
-         icon: "preferences-desktop-color"
-         source: "config/ConfigAppearance.qml"
-    }
-    ConfigCategory {
          name: i18n("Behaviour")
          icon: "preferences-desktop"
          source: "config/ConfigBehaviour.qml"
+    }
+    ConfigCategory {
+         name: i18n("Title and Icon")
+         icon: "preferences-desktop-color"
+         source: "config/ConfigTitleAndIcon.qml"
     }
     ConfigCategory {
          name: i18n("Buttons")
@@ -23,13 +23,13 @@ ConfigModel {
          source: "config/ConfigButtons.qml"
     }
     ConfigCategory {
-         name: i18n("Mouse Control")
-         icon: "preferences-desktop-mouse"
-         source: "config/ConfigMouseControl.qml"
-    }
-    ConfigCategory {
          name: i18n("Application Menu")
          icon: "application-menu"
          source: "config/ConfigAppMenu.qml"
+    }
+    ConfigCategory {
+         name: i18n("Mouse Control")
+         icon: "preferences-desktop-mouse"
+         source: "config/ConfigMouseControl.qml"
     }
 }

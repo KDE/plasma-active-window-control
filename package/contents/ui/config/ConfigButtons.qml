@@ -5,45 +5,40 @@ import QtQml.Models 2.1
 
 Item {
 
-    property alias cfg_showControlButtons: showControlButtons.checked
-    property alias cfg_doNotHideControlButtons: doNotHideControlButtons.checked
-    property int cfg_buttonsPosition
-    property alias cfg_buttonsVerticalCenter: buttonsVerticalCenter.checked
-    property alias cfg_buttonsStandalone: buttonsStandalone.checked
-    property alias cfg_buttonsBetweenIconAndText: buttonsBetweenIconAndText.checked
-    property alias cfg_buttonsDynamicWidth: buttonsDynamicWidth.checked
-    property alias cfg_slidingIconAndText: slidingIconAndText.checked
-    property alias cfg_showButtonOnlyWhenMaximized: showButtonOnlyWhenMaximized.checked
+    property string cfg_buttonOrder
+
     property alias cfg_showMinimize: showMinimize.checked
     property alias cfg_showMaximize: showMaximize.checked
     property alias cfg_showPinToAllDesktops: showPinToAllDesktops.checked
+
+    property alias cfg_showButtonOnlyWhenMaximized: showButtonOnlyWhenMaximized.checked
+
     property alias cfg_buttonSize: buttonSize.value
+    property int cfg_buttonsVerticalPosition
     property alias cfg_controlButtonsSpacing: controlButtonsSpacing.value
-    property string cfg_buttonOrder
+
     property alias cfg_automaticButtonThemeEnabled: automaticButtonThemeEnabled.checked
     property alias cfg_customAuroraeThemePath: customAuroraeThemePath.text
 
-    onCfg_buttonsPositionChanged: {
-        switch (cfg_buttonsPosition) {
+    onCfg_buttonsVerticalPositionChanged: {
+        switch (cfg_buttonsVerticalPosition) {
         case 0:
-            buttonsPositionGroup.current = upperLeftRadio;
+            buttonsVertialPositionGroup.current = topRadio;
             break;
         case 1:
-            buttonsPositionGroup.current = upperRightRadio;
+            buttonsVertialPositionGroup.current = middleRadio;
             break;
         case 2:
-            buttonsPositionGroup.current = bottomLeftRadio;
-            break;
-        case 3:
-            buttonsPositionGroup.current = bottomRightRadio;
+            buttonsVertialPositionGroup.current = bottomRadio;
             break;
         default:
-            buttonsPositionGroup.current = upperLeftRadio;
+            buttonsVertialPositionGroup.current = topRadio;
         }
     }
 
     Component.onCompleted: {
-        cfg_buttonsPositionChanged()
+        cfg_buttonsVerticalPositionChanged()
+        print('intially calling sortButtonOrder()')
         sortButtonOrder()
     }
 
@@ -86,232 +81,170 @@ Item {
     }
 
     ExclusiveGroup {
-        id: buttonsPositionGroup
+        id: buttonsVertialPositionGroup
     }
 
-    GroupBox {
-        id: showControlButtons
-        title: i18n("Enable Control Buttons")
-        checkable: true
-        flat: true
+    GridLayout {
+        columns: 2
 
-        GridLayout {
-            columns: 2
+        Label {
+            text: i18n("Button order:")
+            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+        }
 
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
+        OrderableListView {
+            id: buttonOrder
+            height: units.gridUnit * 2
+            width: height * 4
+            model: ListModel {
+                // will be filled initially by sortButtonOrder() method
             }
+            orientation: ListView.Horizontal
+            itemWidth: width / 4
+            itemHeight: itemWidth
 
-            Item {
-                width: 2
-                height: 2
-                Layout.rowSpan: 3
-            }
-
-            CheckBox {
-                id: showMinimize
-                text: i18n("Show minimize button")
-            }
-
-            CheckBox {
-                id: showMaximize
-                text: i18n("Show maximize button")
-            }
-
-            CheckBox {
-                id: showPinToAllDesktops
-                text: i18n("Show pin to all desktops")
-            }
-
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n("Button order:")
-                Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
-            }
-
-            OrderableListView {
-                id: buttonOrder
-                height: units.gridUnit * 2
-                width: height * 4
-                model: ListModel {
-                    // will be filled initially by sortButtonOrder() method
-                }
-                orientation: ListView.Horizontal
-                itemWidth: width / 4
-                itemHeight: itemWidth
-
-                onModelOrderChanged: {
-                    var orderStr = '';
-                    for (var i = 0; i < model.count; i++) {
-                        var item = model.get(i)
-                        if (orderStr.length > 0) {
-                            orderStr += '|';
-                        }
-                        orderStr += item.name;
+            onModelOrderChanged: {
+                var orderStr = '';
+                for (var i = 0; i < model.count; i++) {
+                    var item = model.get(i)
+                    if (orderStr.length > 0) {
+                        orderStr += '|';
                     }
-                    cfg_buttonOrder = orderStr;
-                    print('written: ' + cfg_buttonOrder);
+                    orderStr += item.name;
                 }
-            }
-
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n("Behaviour:")
-                Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
-            }
-
-            CheckBox {
-                id: doNotHideControlButtons
-                text: i18n("Do not hide on mouse out")
-            }
-
-            Item {
-                width: 2
-                height: 2
-                Layout.rowSpan: 5
-            }
-
-            CheckBox {
-                id: showButtonOnlyWhenMaximized
-                text: i18n("Show only when maximized")
-            }
-
-            CheckBox {
-                id: buttonsStandalone
-                text: i18n("Buttons next to icon and text")
-            }
-
-            CheckBox {
-                id: buttonsBetweenIconAndText
-                text: i18n("Buttons between icon and text")
-                enabled: buttonsStandalone.checked
-            }
-
-            CheckBox {
-                id: buttonsDynamicWidth
-                text: i18n("Dynamic width")
-                enabled: buttonsStandalone.checked
-            }
-
-            CheckBox {
-                id: slidingIconAndText
-                text: i18n("Sliding icon and text")
-                enabled: buttonsStandalone.checked
-            }
-
-
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n("Position:")
-                Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
-            }
-            RadioButton {
-                id: upperLeftRadio
-                exclusiveGroup: buttonsPositionGroup
-                text: i18n("Upper left")
-                onCheckedChanged: if (checked) cfg_buttonsPosition = 0;
-            }
-            Item {
-                width: 2
-                height: 2
-                Layout.rowSpan: 4
-            }
-            RadioButton {
-                id: upperRightRadio
-                exclusiveGroup: buttonsPositionGroup
-                text: i18n("Upper right")
-                onCheckedChanged: if (checked) cfg_buttonsPosition = 1;
-            }
-            RadioButton {
-                id: bottomLeftRadio
-                exclusiveGroup: buttonsPositionGroup
-                text: i18n("Bottom left")
-                onCheckedChanged: if (checked) cfg_buttonsPosition = 2;
-            }
-            RadioButton {
-                id: bottomRightRadio
-                exclusiveGroup: buttonsPositionGroup
-                text: i18n("Bottom right")
-                onCheckedChanged: if (checked) cfg_buttonsPosition = 3;
-            }
-
-            CheckBox {
-                id: buttonsVerticalCenter
-                text: i18n("Vertical center")
-            }
-
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n("Button size:")
-                Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
-            }
-            Slider {
-                id: buttonSize
-                stepSize: 0.1
-                minimumValue: 0.1
-                tickmarksEnabled: true
-                width: parent.width
-            }
-
-            Label {
-                text: i18n("Buttons spacing:")
-                Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
-            }
-            Slider {
-                id: controlButtonsSpacing
-                stepSize: 1
-                minimumValue: 0
-                maximumValue: 20
-                tickmarksEnabled: true
-                width: parent.width
-            }
-
-            Item {
-                width: 2
-                height: 10
-                Layout.columnSpan: 2
-            }
-
-            Label {
-                text: i18n("Theme")
-                Layout.columnSpan: parent.columns
-                font.bold: true
-            }
-            CheckBox {
-                id: automaticButtonThemeEnabled
-                text: i18n("Automatic")
-            }
-            TextField {
-                id: customAuroraeThemePath
-                placeholderText: i18n("Absolute path to aurorae button theme folder")
-                Layout.preferredWidth: 350
-                onTextChanged: cfg_customAuroraeThemePath = text
-                enabled: !automaticButtonThemeEnabled.checked
+                cfg_buttonOrder = orderStr;
+                print('written: ' + cfg_buttonOrder);
             }
         }
-    }
 
+        Item {
+            width: 2
+            height: 10
+            Layout.columnSpan: 2
+        }
+
+        Label {
+            text: i18n("Show:")
+            Layout.alignment: Qt.AlignRight
+        }
+        CheckBox {
+            id: showMinimize
+            text: i18n("Minimize button")
+        }
+        Item {
+            width: 2
+            height: 2
+            Layout.rowSpan: 2
+        }
+        CheckBox {
+            id: showMaximize
+            text: i18n("Maximize button")
+        }
+        CheckBox {
+            id: showPinToAllDesktops
+            text: i18n("Pin to all desktops")
+        }
+
+        Item {
+            width: 2
+            height: 10
+            Layout.columnSpan: 2
+        }
+
+        Label {
+            text: i18n("Behaviour:")
+            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+        }
+
+        CheckBox {
+            id: showButtonOnlyWhenMaximized
+            text: i18n("Show only when maximized")
+        }
+
+        Item {
+            width: 2
+            height: 10
+            Layout.columnSpan: 2
+        }
+
+        Label {
+            text: i18n("Buttons spacing:")
+            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+        }
+        Slider {
+            id: controlButtonsSpacing
+            stepSize: 1
+            minimumValue: 0
+            maximumValue: 20
+            tickmarksEnabled: true
+            width: parent.width
+        }
+
+        Label {
+            text: i18n("Button size:")
+            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+        }
+        Slider {
+            id: buttonSize
+            stepSize: 0.1
+            minimumValue: 0.1
+            tickmarksEnabled: true
+            width: parent.width
+        }
+
+        Label {
+            text: i18n("Position:")
+            Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
+        }
+        RadioButton {
+            id: topRadio
+            exclusiveGroup: buttonsVertialPositionGroup
+            text: i18n("Top")
+            onCheckedChanged: if (checked) cfg_buttonsVerticalPosition = 0;
+            enabled: buttonSize.value < 1
+        }
+        Item {
+            width: 2
+            height: 2
+            Layout.rowSpan: 4
+        }
+        RadioButton {
+            id: middleRadio
+            exclusiveGroup: buttonsVertialPositionGroup
+            text: i18n("Middle")
+            onCheckedChanged: if (checked) cfg_buttonsVerticalPosition = 1;
+            enabled: buttonSize.value < 1
+        }
+        RadioButton {
+            id: bottomRadio
+            exclusiveGroup: buttonsVertialPositionGroup
+            text: i18n("Bottom")
+            onCheckedChanged: if (checked) cfg_buttonsVerticalPosition = 2;
+            enabled: buttonSize.value < 1
+        }
+
+        Item {
+            width: 2
+            height: 10
+            Layout.columnSpan: 2
+        }
+
+        Label {
+            text: i18n("Theme")
+            Layout.columnSpan: parent.columns
+            font.bold: true
+        }
+        CheckBox {
+            id: automaticButtonThemeEnabled
+            text: i18n("Automatic")
+        }
+        TextField {
+            id: customAuroraeThemePath
+            placeholderText: i18n("Absolute path to aurorae button theme folder")
+            Layout.preferredWidth: 350
+            onTextChanged: cfg_customAuroraeThemePath = text
+            enabled: !automaticButtonThemeEnabled.checked
+        }
+    }
 
 }
