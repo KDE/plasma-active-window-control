@@ -18,25 +18,33 @@ PlasmaComponents.Label {
     property bool limitTextWidth: plasmoid.configuration.limitTextWidth
     property int textWidthLimit: plasmoid.configuration.textWidthLimit
 
-    property double recommendedWidth
+    property double recommendedMaxWidth
+    property bool useUpPossibleWidth: main.useUpWidthItem === 0
+    property bool doNotRestrictWidth: useUpPossibleWidth && autoFillWidth
 
-    onRecommendedWidthChanged: {
-        if (limitTextWidth) {
+    onRecommendedMaxWidthChanged: {
+        var maxWidth = limitTextWidth ? Math.min(textWidthLimit, recommendedMaxWidth) : recommendedMaxWidth
+        width = undefined
+        if (useUpPossibleWidth || (limitTextWidth && implicitWidth > maxWidth)) {
+            width = maxWidth
+        }
+    }
+
+    onUseUpPossibleWidthChanged: recommendedMaxWidthChanged()
+
+    onDoNotRestrictWidthChanged: {
+        if (doNotRestrictWidth) {
             width = undefined
-            if (implicitWidth > textWidthLimit) {
-                width = textWidthLimit
-            } else {
-                width = recommendedWidth
-            }
         } else {
-            width = recommendedWidth
+            recommendedMaxWidthChanged()
         }
     }
 
     verticalAlignment: Text.AlignVCenter
+    horizontalAlignment: plasmoid.configuration.controlPartTitleHorizontalAlignment === 0 ? Text.AlignLeft : Text.AlignRight
     text: plasmoid.configuration.noWindowText
     wrapMode: Text.Wrap
-    width: recommendedWidth
+    //width: recommendedMaxWidth
     height: properHeight
     elide: noElide ? Text.ElideNone : Text.ElideRight
     font.pixelSize: fontPixelSize
@@ -49,7 +57,7 @@ PlasmaComponents.Label {
     onTextChanged: {
         font.pixelSize = fontPixelSize
         allowFontSizeChange = 3
-        recommendedWidthChanged()
+        recommendedMaxWidthChanged()
     }
 
     onNoElideChanged: {

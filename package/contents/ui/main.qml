@@ -33,6 +33,8 @@ Item {
     property bool autoFillWidth: plasmoid.configuration.autoFillWidth
     property double widthForHorizontalPanel: (Screen.width * horizontalScreenWidthPercent + plasmoid.configuration.widthFineTuning)
 
+    property int useUpWidthItem: plasmoid.configuration.useUpWidthItem
+
     property int textType: plasmoid.configuration.textType
     property int tooltipTextType: plasmoid.configuration.tooltipTextType
     property string tooltipText: ''
@@ -67,7 +69,7 @@ Item {
 
     anchors.fill: parent
 
-    Layout.fillWidth: plasmoid.configuration.autoFillWidth
+    Layout.fillWidth: autoFillWidth
     Layout.preferredWidth: autoFillWidth ? -1 : (vertical ? parent.width : (widthForHorizontalPanel > 0 ? widthForHorizontalPanel : 0.0001))
     Layout.minimumWidth: Layout.preferredWidth
     Layout.maximumWidth: Layout.preferredWidth
@@ -238,14 +240,23 @@ Item {
         return plasmoid.configuration['controlPart' + configName + 'Position']
     }
 
+    /*
+     * Alignment can be:
+     *   0 ... left
+     *   1 ... right
+     */
+    function getAlignment(itemName) {
+        var configName = getConfigName(itemName)
+        print('getAlignment: ' + configName)
+        print('ALI: ' + plasmoid.configuration['controlPart' + configName + 'HorizontalAlignment'])
+        return plasmoid.configuration['controlPart' + configName + 'HorizontalAlignment']
+    }
+
     function isRelevant(itemName) {
         var configName = getConfigName(itemName)
-        print('isRelevant: ' + configName)
-        print('1IR: ' + plasmoid.configuration['controlPart' + configName + 'ShowOnMouseIn'])
-        print('2IR: ' + plasmoid.configuration['controlPart' + configName + 'ShowOnMouseOut'])
-        var result = plasmoid.configuration['controlPart' + configName + 'ShowOnMouseIn'] || plasmoid.configuration['controlPart' + configName + 'ShowOnMouseOut']
-        print('res: ' + result)
-        return result
+        var mouseInConfigName = 'controlPart' + configName + 'ShowOnMouseIn'
+        var mouseOutConfigName = 'controlPart' + configName + 'ShowOnMouseOut'
+        return plasmoid.configuration[mouseInConfigName] || plasmoid.configuration[mouseOutConfigName]
     }
 
     function getItem(itemName) {
@@ -265,39 +276,48 @@ Item {
     }
 
     function getItemWidth(itemName) {
+        if (itemName === 'title' && !titleItem.useUpPossibleWidth) {
+            return getItem(itemName).implicitWidth
+        }
         return getItem(itemName).width
     }
 
     function getLeftMargin(itemName) {
         var itemPosition = getPosition(itemName)
+        var itemAlignment = getAlignment(itemName)
         print('position of ' + itemName + ' is ' + itemPosition)
         if (itemPosition === 2) {
             return 0
         }
         var anchorSize = 0
-        itemPartOrder.some(function (iName, index) {
+        var itemPartOrderArray = itemAlignment === 0 ? itemPartOrder : itemPartOrder.slice().reverse()
+        itemPartOrderArray.some(function (iName, index) {
             print('iterating: ' + iName)
             if (iName === itemName) {
                 return true
             }
-            if (getPosition(iName) === itemPosition && isRelevant(iName)) {
+            if (getPosition(iName) === itemPosition && getAlignment(iName) === itemAlignment && isRelevant(iName)) {
                 var currentItemWidth = getItemWidth(iName)
                 print('width of ' + iName + ' is ' + currentItemWidth)
                 anchorSize += currentItemWidth
                 anchorSize += plasmoid.configuration.controlPartSpacing
             }
         });
+        if (itemAlignment === 1) {
+            var computedWidth = autoFillWidth ? main.width : widthForHorizontalPanel
+            anchorSize = computedWidth - anchorSize - getItemWidth(itemName)
+        }
         print('leftMargin of ' + itemName + ' is ' + anchorSize)
         return anchorSize
     }
 
-    function getWidth(itemName) {
+    function getMaxWidth(itemName) {
         var itemPosition = getPosition(itemName)
-        print('getWidth(): position of ' + itemName + ' is ' + itemPosition)
+        print('getMaxWidth(): position of ' + itemName + ' is ' + itemPosition)
         if (itemPosition === 2) {
             return 0
         }
-        var computedWidth = widthForHorizontalPanel
+        var computedWidth = autoFillWidth ? main.width : widthForHorizontalPanel
         itemPartOrder.forEach(function (iName, index) {
             print('iterating: ' + iName)
             if (iName === itemName) {
@@ -315,8 +335,13 @@ Item {
     }
 
     function refreshItemPosition() {
-        titleItem.recommendedWidth = getWidth('title')
-        menuItem.recommendedWidth = getWidth('menu')
+        if (titleItem.useUpPossibleWidth) {
+            titleItem.recommendedMaxWidth = getMaxWidth('title')
+            menuItem.recommendedMaxWidth = getMaxWidth('menu')
+        } else {
+            titleItem.recommendedMaxWidth = getMaxWidth('title')
+            menuItem.recommendedMaxWidth = getMaxWidth('menu')
+        }
 
         iconItem.x = getLeftMargin('icon')
         titleItem.x = getLeftMargin('title')
@@ -333,6 +358,11 @@ Item {
         return title.replace(new RegExp(plasmoid.configuration.replaceTextRegex), plasmoid.configuration.replaceTextReplacement);
     }
 
+    onWidthChanged: {
+        if (autoFillWidth) {
+            refreshItemPosition();
+        }
+    }
     onWidthForHorizontalPanelChanged: refreshItemPosition()
 
     MouseArea {
@@ -427,6 +457,14 @@ Item {
 
         visible: ((mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseIn)
                     || (!mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseOut))
+
+        onImplicitWidthChanged: {
+            if (!titleItem.useUpPossibleWidth) {
+                refreshItemPosition()
+            }
+        }
+
+        onUseUpPossibleWidthChanged: refreshItemPosition()
     }
 
     AppMenu {
@@ -516,6 +554,7 @@ Item {
     property string controlPartOrder: plasmoid.configuration.controlPartOrder
 
     onControlPartOrderChanged: refreshControlPartOrder()
+    onUseUpWidthItemChanged: refreshControlPartOrder()
 
     function refreshControlPartOrder() {
         itemPartOrder.length = 0

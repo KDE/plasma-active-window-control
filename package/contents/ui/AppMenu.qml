@@ -18,11 +18,11 @@ MouseArea {
     visible: appmenuEnabledAndNonEmpty && !main.noWindowActive
 
     property bool showItem
-    property double recommendedWidth
+    property double recommendedMaxWidth
 
     opacity: showItem ? 1 : 0
 
-    width: recommendedWidth
+    width: recommendedMaxWidth
 
     hoverEnabled: true
 

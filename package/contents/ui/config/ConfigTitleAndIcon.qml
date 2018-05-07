@@ -164,7 +164,7 @@ Item {
             TextField {
                 id: replaceTextRegex
                 placeholderText: '^(.*)\\s+[—–\\-:]\\s+([^—–\\-:]+)$'
-                Layout.preferredWidth: 300
+                Layout.preferredWidth: 270
                 onTextChanged: cfg_replaceTextRegex = text
                 enabled: useWindowTitleReplace.checked
             }
@@ -197,12 +197,12 @@ Item {
                 id: noWindowText
                 placeholderText: 'Plasma Desktop :: %activity%'
                 onTextChanged: cfg_noWindowText = text
-                Layout.preferredWidth: 300
+                Layout.preferredWidth: 270
             }
 
             Label {
                 text: i18n('Use %activity% placeholder to show current activity name.')
-                Layout.preferredWidth: 200
+                Layout.preferredWidth: 150
                 wrapMode: Text.Wrap
             }
         }

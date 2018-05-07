@@ -12,7 +12,7 @@
         <entry name="controlPartSpacing" type="Double">
             <default>5.0</default>
         </entry>
-        <entry name="controlPartButtonsPosition" type="Int">
+        <entry name="useUpWidthItem" type="Int">
             <default>0</default>
         </entry>
         <entry name="controlPartButtonsShowOnMouseIn" type="Bool">
@@ -21,10 +21,10 @@
         <entry name="controlPartButtonsShowOnMouseOut" type="Bool">
             <default>true</default>
         </entry>
-        <entry name="controlPartButtonsHorizontalAlignment" type="Int">
+        <entry name="controlPartButtonsPosition" type="Int">
             <default>0</default>
         </entry>
-        <entry name="controlPartIconPosition" type="Int">
+        <entry name="controlPartButtonsHorizontalAlignment" type="Int">
             <default>0</default>
         </entry>
         <entry name="controlPartIconShowOnMouseIn" type="Bool">
@@ -33,10 +33,10 @@
         <entry name="controlPartIconShowOnMouseOut" type="Bool">
             <default>true</default>
         </entry>
-        <entry name="controlPartIconHorizontalAlignment" type="Int">
+        <entry name="controlPartIconPosition" type="Int">
             <default>0</default>
         </entry>
-        <entry name="controlPartTitlePosition" type="Int">
+        <entry name="controlPartIconHorizontalAlignment" type="Int">
             <default>0</default>
         </entry>
         <entry name="controlPartTitleShowOnMouseIn" type="Bool">
@@ -45,10 +45,10 @@
         <entry name="controlPartTitleShowOnMouseOut" type="Bool">
             <default>true</default>
         </entry>
-        <entry name="controlPartTitleHorizontalAlignment" type="Int">
+        <entry name="controlPartTitlePosition" type="Int">
             <default>0</default>
         </entry>
-        <entry name="controlPartMenuPosition" type="Int">
+        <entry name="controlPartTitleHorizontalAlignment" type="Int">
             <default>0</default>
         </entry>
         <entry name="controlPartMenuShowOnMouseIn" type="Bool">
@@ -56,6 +56,9 @@
         </entry>
         <entry name="controlPartMenuShowOnMouseOut" type="Bool">
             <default>true</default>
+        </entry>
+        <entry name="controlPartMenuPosition" type="Int">
+            <default>0</default>
         </entry>
         <entry name="controlPartMenuHorizontalAlignment" type="Int">
             <default>0</default>
