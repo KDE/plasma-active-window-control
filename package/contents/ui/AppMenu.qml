@@ -14,15 +14,50 @@ MouseArea {
     property bool appmenuEnabledAndNonEmpty: appmenuEnabled && appMenuModel !== null && appMenuModel.menuAvailable
     property bool appmenuOpened: appmenuEnabled && plasmoid.nativeInterface.currentIndex > -1
     property var appMenuModel: null
-
-    visible: appmenuEnabledAndNonEmpty && !main.noWindowActive
+    property int appmenuVerticalPosition: plasmoid.configuration.appmenuVerticalPosition;
 
     property bool showItem
     property double recommendedMaxWidth
+    property bool useUpPossibleWidth: main.useUpWidthItem === 1
+    property bool doNotRestrictWidth: useUpPossibleWidth && autoFillWidth
+    property double innerItemWidth: buttonGrid.implicitWidth
 
+    visible: appmenuEnabledAndNonEmpty && !main.noWindowActive
     opacity: showItem ? 1 : 0
 
     width: recommendedMaxWidth
+
+    signal contentChanged()
+
+    Timer {
+        id: contentChangedTimer
+        interval: 100
+        onTriggered: contentChanged()
+    }
+
+    onInnerItemWidthChanged: {
+        contentChangedTimer.restart()
+    }
+
+    onRecommendedMaxWidthChanged: {
+        width = undefined
+        if (useUpPossibleWidth || (innerItemWidth > recommendedMaxWidth)) {
+            width = recommendedMaxWidth
+        }
+        print('menu: width set to ' + width)
+    }
+
+    onUseUpPossibleWidthChanged: recommendedMaxWidthChanged()
+
+    onDoNotRestrictWidthChanged: {
+        if (doNotRestrictWidth) {
+            width = undefined
+        } else {
+            recommendedMaxWidthChanged()
+        }
+    }
+
+    y: appmenuVerticalPosition === 0 ? 0 : main.height - buttonGrid.implicitHeight
 
     hoverEnabled: true
 

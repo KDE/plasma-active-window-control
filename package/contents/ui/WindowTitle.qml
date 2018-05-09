@@ -22,12 +22,15 @@ PlasmaComponents.Label {
     property bool useUpPossibleWidth: main.useUpWidthItem === 0
     property bool doNotRestrictWidth: useUpPossibleWidth && autoFillWidth
 
+    signal contentChanged()
+
     onRecommendedMaxWidthChanged: {
         var maxWidth = limitTextWidth ? Math.min(textWidthLimit, recommendedMaxWidth) : recommendedMaxWidth
         width = undefined
-        if (useUpPossibleWidth || (limitTextWidth && implicitWidth > maxWidth)) {
+        if (useUpPossibleWidth || (implicitWidth > maxWidth)) {
             width = maxWidth
         }
+        print('title: width set to ' + width)
     }
 
     onUseUpPossibleWidthChanged: recommendedMaxWidthChanged()
@@ -44,7 +47,6 @@ PlasmaComponents.Label {
     horizontalAlignment: plasmoid.configuration.controlPartTitleHorizontalAlignment === 0 ? Text.AlignLeft : Text.AlignRight
     text: plasmoid.configuration.noWindowText
     wrapMode: Text.Wrap
-    //width: recommendedMaxWidth
     height: properHeight
     elide: noElide ? Text.ElideNone : Text.ElideRight
     font.pixelSize: fontPixelSize
@@ -52,12 +54,11 @@ PlasmaComponents.Label {
     font.weight: fontBold === 1 || (fontBold === 2 && menuItem.showItem) ? Font.Bold : theme.defaultFont.weight
     font.family: fontFamily || theme.defaultFont.family
 
-    opacity: menuItem.showItem ? plasmoid.configuration.appmenuIconAndTextOpacity : 1
-
     onTextChanged: {
         font.pixelSize = fontPixelSize
         allowFontSizeChange = 3
         recommendedMaxWidthChanged()
+        contentChanged()
     }
 
     onNoElideChanged: {

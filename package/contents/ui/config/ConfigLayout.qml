@@ -137,7 +137,7 @@ Item {
         }
 
         Label {
-            text: i18n('Item to use up all possible width:')
+            text: i18n('Item to use up remaining width:')
         }
         ComboBox {
             id: useUpWidthItem
@@ -161,40 +161,43 @@ Item {
                 Layout.columnSpan: 2
             }
 
+            Label {
+                text: i18n('Show:')
+                Layout.alignment: Qt.AlignRight
+            }
             CheckBox {
                 id: controlPartIconShowOnMouseIn
-                text: i18n('Show on mouse in')
-                Layout.columnSpan: 2
+                text: i18n('On mouse in')
             }
-
+            Item {
+                width: 2
+                height: 2
+            }
             CheckBox {
                 id: controlPartIconShowOnMouseOut
-                text: i18n('Show on mouse out')
-                Layout.columnSpan: 2
+                text: i18n('On mouse out')
             }
 
-            GridLayout {
-                columns: 2
-                Layout.columnSpan: 2
+            Label {
+                text: i18n('Position:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartIconPosition.enabled
+            }
+            ComboBox {
+                id: controlPartIconPosition
+                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
                 enabled: controlPartIconShowOnMouseIn.checked || controlPartIconShowOnMouseOut.checked
+            }
 
-                Label {
-                    text: i18n('Position:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartIconPosition
-                    model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
-                }
-
-                Label {
-                    text: i18n('Align:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartIconHorizontalAlignment
-                    model: [i18n('Left'), i18n('Right')]
-                }
+            Label {
+                text: i18n('Align:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartIconPosition.enabled
+            }
+            ComboBox {
+                id: controlPartIconHorizontalAlignment
+                model: [i18n('Left'), i18n('Right')]
+                enabled: controlPartIconPosition.enabled
             }
 
 
@@ -210,40 +213,43 @@ Item {
                 Layout.columnSpan: 2
             }
 
+            Label {
+                text: i18n('Show:')
+                Layout.alignment: Qt.AlignRight
+            }
             CheckBox {
                 id: controlPartButtonsShowOnMouseIn
-                text: i18n('Show on mouse in')
-                Layout.columnSpan: 2
+                text: i18n('On mouse in')
             }
-
+            Item {
+                width: 2
+                height: 2
+            }
             CheckBox {
                 id: controlPartButtonsShowOnMouseOut
-                text: i18n('Show on mouse out')
-                Layout.columnSpan: 2
+                text: i18n('On mouse out')
             }
 
-            GridLayout {
-                columns: 2
-                Layout.columnSpan: 2
+            Label {
+                text: i18n('Position:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartButtonsPosition.enabled
+            }
+            ComboBox {
+                id: controlPartButtonsPosition
+                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
                 enabled: controlPartButtonsShowOnMouseIn.checked || controlPartButtonsShowOnMouseOut.checked
+            }
 
-                Label {
-                    text: i18n('Position:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartButtonsPosition
-                    model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
-                }
-
-                Label {
-                    text: i18n('Align:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartButtonsHorizontalAlignment
-                    model: [i18n('Left'), i18n('Right')]
-                }
+            Label {
+                text: i18n('Align:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartButtonsPosition.enabled
+            }
+            ComboBox {
+                id: controlPartButtonsHorizontalAlignment
+                model: [i18n('Left'), i18n('Right')]
+                enabled: controlPartButtonsPosition.enabled
             }
         }
 
@@ -267,40 +273,43 @@ Item {
                 Layout.columnSpan: 2
             }
 
+            Label {
+                text: i18n('Show:')
+                Layout.alignment: Qt.AlignRight
+            }
             CheckBox {
                 id: controlPartTitleShowOnMouseIn
-                text: i18n('Show on mouse in')
-                Layout.columnSpan: 2
+                text: i18n('On mouse in')
             }
-
+            Item {
+                width: 2
+                height: 2
+            }
             CheckBox {
                 id: controlPartTitleShowOnMouseOut
-                text: i18n('Show on mouse out')
-                Layout.columnSpan: 2
+                text: i18n('On mouse out')
             }
 
-            GridLayout {
-                columns: 2
-                Layout.columnSpan: 2
+            Label {
+                text: i18n('Position:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartTitlePosition.enabled
+            }
+            ComboBox {
+                id: controlPartTitlePosition
+                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
                 enabled: controlPartTitleShowOnMouseIn.checked || controlPartTitleShowOnMouseOut.checked
+            }
 
-                Label {
-                    text: i18n('Position:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartTitlePosition
-                    model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
-                }
-
-                Label {
-                    text: i18n('Align:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartTitleHorizontalAlignment
-                    model: [i18n('Left'), i18n('Right')]
-                }
+            Label {
+                text: i18n('Align:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartTitlePosition.enabled
+            }
+            ComboBox {
+                id: controlPartTitleHorizontalAlignment
+                model: [i18n('Left'), i18n('Right')]
+                enabled: controlPartTitlePosition.enabled
             }
 
 
@@ -316,40 +325,43 @@ Item {
                 Layout.columnSpan: 2
             }
 
+            Label {
+                text: i18n('Show:')
+                Layout.alignment: Qt.AlignRight
+            }
             CheckBox {
                 id: controlPartMenuShowOnMouseIn
-                text: i18n('Show on mouse in')
-                Layout.columnSpan: 2
+                text: i18n('On mouse in')
             }
-
+            Item {
+                width: 2
+                height: 2
+            }
             CheckBox {
                 id: controlPartMenuShowOnMouseOut
-                text: i18n('Show on mouse out')
-                Layout.columnSpan: 2
+                text: i18n('On mouse out')
             }
 
-            GridLayout {
-                columns: 2
-                Layout.columnSpan: 2
+            Label {
+                text: i18n('Position:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartMenuPosition.enabled
+            }
+            ComboBox {
+                id: controlPartMenuPosition
+                model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
                 enabled: controlPartMenuShowOnMouseIn.checked || controlPartMenuShowOnMouseOut.checked
+            }
 
-                Label {
-                    text: i18n('Position:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartMenuPosition
-                    model: [i18n('Occupy'), i18n('Floating layer'), i18n('Absolute')]
-                }
-
-                Label {
-                    text: i18n('Align:')
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                }
-                ComboBox {
-                    id: controlPartMenuHorizontalAlignment
-                    model: [i18n('Left'), i18n('Right')]
-                }
+            Label {
+                text: i18n('Align:')
+                Layout.alignment: Qt.AlignRight
+                enabled: controlPartMenuPosition.enabled
+            }
+            ComboBox {
+                id: controlPartMenuHorizontalAlignment
+                model: [i18n('Left'), i18n('Right')]
+                enabled: controlPartMenuPosition.enabled
             }
         }
         // GENERATED controls (end)

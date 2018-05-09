@@ -235,8 +235,6 @@ Item {
      */
     function getPosition(itemName) {
         var configName = getConfigName(itemName)
-        print('getPosition: ' + configName)
-        print('POS: ' + plasmoid.configuration['controlPart' + configName + 'Position'])
         return plasmoid.configuration['controlPart' + configName + 'Position']
     }
 
@@ -247,8 +245,6 @@ Item {
      */
     function getAlignment(itemName) {
         var configName = getConfigName(itemName)
-        print('getAlignment: ' + configName)
-        print('ALI: ' + plasmoid.configuration['controlPart' + configName + 'HorizontalAlignment'])
         return plasmoid.configuration['controlPart' + configName + 'HorizontalAlignment']
     }
 
@@ -276,8 +272,14 @@ Item {
     }
 
     function getItemWidth(itemName) {
-        if (itemName === 'title' && !titleItem.useUpPossibleWidth) {
-            return getItem(itemName).implicitWidth
+        if (itemName === 'title') {
+            return Math.min(titleItem.implicitWidth, titleItem.recommendedMaxWidth)
+        }
+        if (itemName === 'menu') {
+            return Math.min(menuItem.innerItemWidth, menuItem.recommendedMaxWidth)
+        }
+        if (itemName === 'icon' && noWindowActive && !iconItem.source) {
+            return 0
         }
         return getItem(itemName).width
     }
@@ -318,6 +320,8 @@ Item {
             return 0
         }
         var computedWidth = autoFillWidth ? main.width : widthForHorizontalPanel
+        print('available width is ' + computedWidth)
+        var minWidth = main.height
         itemPartOrder.forEach(function (iName, index) {
             print('iterating: ' + iName)
             if (iName === itemName) {
@@ -331,16 +335,20 @@ Item {
             }
         });
         print('computedWidth of ' + itemName + ' is ' + computedWidth)
+        if (computedWidth < minWidth) {
+            print('computedWidth changed to minWidth: ' + minWidth)
+            return minWidth
+        }
         return computedWidth
     }
 
     function refreshItemPosition() {
-        if (titleItem.useUpPossibleWidth) {
+        if (menuItem.useUpPossibleWidth) {
             titleItem.recommendedMaxWidth = getMaxWidth('title')
             menuItem.recommendedMaxWidth = getMaxWidth('menu')
         } else {
-            titleItem.recommendedMaxWidth = getMaxWidth('title')
             menuItem.recommendedMaxWidth = getMaxWidth('menu')
+            titleItem.recommendedMaxWidth = getMaxWidth('title')
         }
 
         iconItem.x = getLeftMargin('icon')
@@ -348,7 +356,7 @@ Item {
         menuItem.x = getLeftMargin('menu')
         buttonsItem.x = getLeftMargin('buttons')
 
-        textSeparator.x = getLeftMargin('menu') - (plasmoid.configuration.controlPartSpacing / 2)
+        textSeparator.x = getLeftMargin('menu')// - (plasmoid.configuration.controlPartSpacing / 2)
     }
 
     function replaceTitle(title) {
@@ -450,6 +458,11 @@ Item {
                     || (!mouseInWidget && plasmoid.configuration.controlPartIconShowOnMouseOut))
 
         onWidthChanged: refreshItemPosition()
+        onSourceChanged: {
+            if (!source) {
+                refreshItemPosition()
+            }
+        }
     }
 
     WindowTitle {
@@ -458,10 +471,9 @@ Item {
         visible: ((mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseIn)
                     || (!mouseInWidget && plasmoid.configuration.controlPartTitleShowOnMouseOut))
 
-        onImplicitWidthChanged: {
-            if (!titleItem.useUpPossibleWidth) {
-                refreshItemPosition()
-            }
+        onContentChanged: {
+            print('onContentChanged - TITLE')
+            refreshItemPosition()
         }
 
         onUseUpPossibleWidthChanged: refreshItemPosition()
@@ -476,6 +488,13 @@ Item {
 
         showItem: !noWindowActive && ((mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseIn)
                     || (!mouseIn && plasmoid.configuration.controlPartMenuShowOnMouseOut))
+
+        onContentChanged: {
+            print('onContentChanged - MENU')
+            refreshItemPosition()
+        }
+
+        onUseUpPossibleWidthChanged: refreshItemPosition()
     }
 
     ControlButtons {

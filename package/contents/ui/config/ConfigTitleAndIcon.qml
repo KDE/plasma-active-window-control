@@ -49,7 +49,7 @@ Item {
         columns: 2
 
         Label {
-            text: i18n('Text')
+            text: i18n('Title')
             Layout.alignment: Qt.AlignLeft
             font.bold: true
             Layout.columnSpan: 2

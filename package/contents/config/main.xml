@@ -7,7 +7,7 @@
 
     <group name="Layout">
         <entry name="controlPartOrder" type="String">
-            <default>buttons|icon|title|menu</default>
+            <default>icon|title|menu|buttons</default>
         </entry>
         <entry name="controlPartSpacing" type="Double">
             <default>5.0</default>
@@ -19,10 +19,10 @@
             <default>true</default>
         </entry>
         <entry name="controlPartButtonsShowOnMouseOut" type="Bool">
-            <default>true</default>
+            <default>false</default>
         </entry>
         <entry name="controlPartButtonsPosition" type="Int">
-            <default>0</default>
+            <default>1</default>
         </entry>
         <entry name="controlPartButtonsHorizontalAlignment" type="Int">
             <default>0</default>
@@ -52,13 +52,13 @@
             <default>0</default>
         </entry>
         <entry name="controlPartMenuShowOnMouseIn" type="Bool">
-            <default>true</default>
+            <default>false</default>
         </entry>
         <entry name="controlPartMenuShowOnMouseOut" type="Bool">
-            <default>true</default>
+            <default>false</default>
         </entry>
         <entry name="controlPartMenuPosition" type="Int">
-            <default>0</default>
+            <default>1</default>
         </entry>
         <entry name="controlPartMenuHorizontalAlignment" type="Int">
             <default>0</default>
@@ -181,17 +181,11 @@
         <entry name="appmenuFontBold" type="Bool">
             <default>false</default>
         </entry>
-        <entry name="appmenuFillHeight" type="Bool">
-            <default>false</default>
-        </entry>
         <entry name="appmenuVerticalPosition" type="Int">
             <default>1</default>
         </entry>
         <entry name="appmenuSeparatorEnabled" type="Bool">
             <default>true</default>
-        </entry>
-        <entry name="appmenuIconAndTextOpacity" type="Double">
-            <default>0.1</default>
         </entry>
         <entry name="appmenuButtonTextSizeScale" type="Double">
             <default>1.0</default>

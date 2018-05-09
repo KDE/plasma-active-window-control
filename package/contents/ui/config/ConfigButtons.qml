@@ -193,7 +193,7 @@ Item {
         }
 
         Label {
-            text: i18n("Position:")
+            text: i18n("Vertical position:")
             Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
         }
         RadioButton {
