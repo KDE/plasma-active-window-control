@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQml.Models 2.1
+import QtQuick.Dialogs 1.2
 import "../code/profiles.js" as Profiles
 
 Item {
@@ -95,6 +96,15 @@ Item {
         print('model count: ' + buttonOrder.model.count)
     }
 
+    function applyJsonProfile(jsonConfig) {
+        for (var key in jsonConfig) {
+            var configPropName = 'cfg_' + key
+            if (configPropName in configLayout) {
+                configLayout[configPropName] = jsonConfig[key]
+            }
+        }
+    }
+
     onCfg_controlPartOrderChanged: sortPartOrder()
 
     GridLayout {
@@ -107,24 +117,40 @@ Item {
         }
 
         Label {
-            text: i18n('Profiles:')
-            Layout.alignment: Qt.AlignLeft
+            text: i18n('Configuration profiles:')
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
         }
-        ComboBox {
-            id: profilesCombo
-            model: []
-            onCurrentIndexChanged: {
-                if (currentIndex < 1) {
-                    return
-                }
-                var item = Profiles.ITEMS[currentIndex - 1]
-                print('setting profile: ' + item.title)
-                var config = item.configuration
-                for (var key in config) {
-                    var configPropName = 'cfg_' + key
-                    if (configPropName in configLayout) {
-                        configLayout[configPropName] = config[key]
+        Row {
+            Layout.columnSpan: 2
+            ComboBox {
+                id: profilesCombo
+                model: []
+                onCurrentIndexChanged: {
+                    if (currentIndex < 1) {
+                        return
                     }
+                    var item = Profiles.ITEMS[currentIndex - 1]
+                    print('setting profile: ' + item.title)
+                    applyJsonProfile(item.configuration)
+                }
+            }
+            Button {
+                iconName: 'exchange-positions'
+                text: i18n('Load / Download')
+                height: profilesCombo.height
+                onClicked: {
+                    var resultJson = {}
+                    for (var key in configLayout) {
+                        if (key.indexOf('cfg_') === 0) {
+                            var propName = key.substring(4)
+                            resultJson[propName] = configLayout[key]
+                        }
+                    }
+                    var resultString = JSON.stringify(resultJson, null, 4)
+
+                    applyCustomProfile.open()
+                    customProfileTextarea.text = resultString
+                    customProfileTextarea.focus = true
                 }
             }
         }
@@ -467,9 +493,36 @@ Item {
 
     }
 
+    Dialog {
+        id: applyCustomProfile
+        title: i18n('Apply Custom Profile from JSON String')
+
+        width: 500
+        height: 300
+
+        standardButtons: StandardButton.Ok | StandardButton.Cancel
+
+        onAccepted: {
+            profilesCombo.currentIndex = 0
+
+            var jsonString = customProfileTextarea.text
+            console.log('profileJsonString: ' + jsonString)
+
+            var jsonConfig = JSON.parse(jsonString)
+            applyJsonProfile(jsonConfig)
+
+            close()
+        }
+
+        TextArea {
+            id: customProfileTextarea
+            anchors.fill: parent
+        }
+    }
+
     Component.onCompleted: {
         sortPartOrder()
-        var profileNames = ['Default']
+        var profileNames = [i18n('Custom')]
         Profiles.ITEMS.forEach(function (item) {
             print('profile: ' + item.title)
             profileNames.push(item.title)
