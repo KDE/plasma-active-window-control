@@ -39,7 +39,7 @@ Item {
     property int tooltipTextType: plasmoid.configuration.tooltipTextType
     property string tooltipText: ''
 
-    property double fontPixelSize: theme.defaultFont.pixelSize * plasmoid.configuration.fontSizeScale
+    property double fontPixelSize: theme.defaultFont.pixelSize * plasmoid.configuration.textFontSizeScale
 
     property bool noWindowActive: true
     property bool currentWindowMaximized: false

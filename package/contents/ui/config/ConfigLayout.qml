@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQml.Models 2.1
+import "../code/profiles.js" as Profiles
 
 Item {
     id: configLayout
@@ -37,6 +38,21 @@ Item {
     property alias cfg_autoFillWidth: autoFillWidth.checked
     property alias cfg_horizontalScreenWidthPercent: horizontalScreenWidthPercent.value
     property alias cfg_widthFineTuning: widthFineTuning.value
+
+    // properties from other config pages
+    // we need them here to be able to apply profiles from this config page
+    property bool cfg_textFontBold
+    property string cfg_buttonOrder
+    property bool cfg_showMaximize
+    property bool cfg_showMinimize
+    property bool cfg_showPinToAllDesktops
+    property bool cfg_showButtonOnlyWhenMaximized
+    property double cfg_controlButtonsSpacing
+    property double cfg_buttonSize
+    property int cfg_buttonsVerticalPosition
+    property bool cfg_appmenuFontBold
+    property bool cfg_appmenuSeparatorEnabled
+    property int cfg_appmenuVerticalPosition
 
     ListModel {
         id: partsToSpend
@@ -79,6 +95,8 @@ Item {
         print('model count: ' + buttonOrder.model.count)
     }
 
+    onCfg_controlPartOrderChanged: sortPartOrder()
+
     GridLayout {
         columns: 3
 
@@ -86,6 +104,29 @@ Item {
             text: i18n('Plasmoid version: ') + '1.8.0-git'
             Layout.alignment: Qt.AlignRight
             Layout.columnSpan: 3
+        }
+
+        Label {
+            text: i18n('Profiles:')
+            Layout.alignment: Qt.AlignLeft
+        }
+        ComboBox {
+            id: profilesCombo
+            model: []
+            onCurrentIndexChanged: {
+                if (currentIndex < 1) {
+                    return
+                }
+                var item = Profiles.ITEMS[currentIndex - 1]
+                print('setting profile: ' + item.title)
+                var config = item.configuration
+                for (var key in config) {
+                    var configPropName = 'cfg_' + key
+                    if (configPropName in configLayout) {
+                        configLayout[configPropName] = config[key]
+                    }
+                }
+            }
         }
 
         Item {
@@ -428,6 +469,12 @@ Item {
 
     Component.onCompleted: {
         sortPartOrder()
+        var profileNames = ['Default']
+        Profiles.ITEMS.forEach(function (item) {
+            print('profile: ' + item.title)
+            profileNames.push(item.title)
+        })
+        profilesCombo.model = profileNames
     }
 
 }

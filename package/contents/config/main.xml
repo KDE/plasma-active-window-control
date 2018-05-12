@@ -89,9 +89,9 @@
         <entry name="widthFineTuning" type="Double">
             <default>0.0</default>
         </entry>
-        <entry name="showWindowTitle" type="Bool">
-            <default>true</default>
-        </entry>
+    </group>
+
+    <group name="TitleAndIcon">
         <entry name="textType" type="Int">
             <default>0</default>
         </entry>
@@ -125,11 +125,11 @@
         <entry name="textFontBold" type="Int">
             <default>0</default>
         </entry>
-        <entry name="fontFamily" type="String">
+        <entry name="textFontFamily" type="String">
             <default></default>
         </entry>
-        <entry name="fontSizeScale" type="Double">
-            <default>1</default>
+        <entry name="textFontSizeScale" type="Double">
+            <default>1.0</default>
         </entry>
     </group>
 

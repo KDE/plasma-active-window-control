@@ -10,7 +10,7 @@ PlasmaComponents.Label {
 
     property double properHeight: parent.height
     property int fontBold: plasmoid.configuration.textFontBold
-    property string fontFamily: plasmoid.configuration.fontFamily
+    property string textFontFamily: plasmoid.configuration.textFontFamily
     property int fitText: plasmoid.configuration.fitText
     property bool noElide: fitText === 2 || (fitText === 1 && mainMouseArea.containsMouse)
     property int allowFontSizeChange: 3
@@ -52,7 +52,7 @@ PlasmaComponents.Label {
     font.pixelSize: fontPixelSize
     font.pointSize: -1
     font.weight: fontBold === 1 || (fontBold === 2 && menuItem.showItem) ? Font.Bold : theme.defaultFont.weight
-    font.family: fontFamily || theme.defaultFont.family
+    font.family: textFontFamily || theme.defaultFont.family
 
     onTextChanged: {
         font.pixelSize = fontPixelSize

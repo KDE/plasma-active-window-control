@@ -17,16 +17,16 @@ Item {
     property alias cfg_textWidthLimit: textWidthLimit.value
 
     property alias cfg_textFontBold: textFontBoldCombo.currentIndex
-    property string cfg_fontFamily
-    property alias cfg_fontSizeScale: fontSizeScale.value
+    property string cfg_textFontFamily
+    property alias cfg_textFontSizeScale: textFontSizeScale.value
 
     /* copied from /usr/share/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configAppearance.qml */
-    onCfg_fontFamilyChanged: {
+    onCfg_textFontFamilyChanged: {
         // HACK by the time we populate our model and/or the ComboBox is finished the value is still undefined
-        if (cfg_fontFamily) {
+        if (cfg_textFontFamily) {
             for (var i = 0, j = fontsModel.count; i < j; ++i) {
-                if (fontsModel.get(i).value == cfg_fontFamily) {
-                    fontFamilyComboBox.currentIndex = i
+                if (fontsModel.get(i).value == cfg_textFontFamily) {
+                    textFontFamilyComboBox.currentIndex = i
                     break
                 }
             }
@@ -41,7 +41,7 @@ Item {
                 arr.push({text: font, value: font})
             })
             append(arr)
-            cfg_fontFamilyChanged();
+            cfg_textFontFamilyChanged();
         }
     }
 
@@ -104,7 +104,7 @@ Item {
             Layout.alignment: Qt.AlignRight
         }
         ComboBox {
-            id: fontFamilyComboBox
+            id: textFontFamilyComboBox
             // ComboBox's sizing is just utterly broken
             Layout.minimumWidth: units.gridUnit * 10
             model: fontsModel
@@ -113,9 +113,9 @@ Item {
             onCurrentIndexChanged: {
                 var current = model.get(currentIndex)
                 if (current) {
-                    cfg_fontFamily = current.value
+                    cfg_textFontFamily = current.value
                     //appearancePage.configurationChanged()
-                    console.log('change: ' + cfg_fontFamily)
+                    console.log('change: ' + cfg_textFontFamily)
                 }
             }
         }
@@ -125,7 +125,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter|Qt.AlignRight
         }
         SpinBox {
-            id: fontSizeScale
+            id: textFontSizeScale
             decimals: 2
             stepSize: 0.05
             minimumValue: 0

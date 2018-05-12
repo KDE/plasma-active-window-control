@@ -14,7 +14,7 @@ ConfigModel {
     }
     ConfigCategory {
          name: i18n("Title and Icon")
-         icon: "preferences-desktop-color"
+         icon: "preferences-system-windows"
          source: "config/ConfigTitleAndIcon.qml"
     }
     ConfigCategory {
