@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Active Window Control
-Name[ast]=Control de ventanes actives
 Name[ca]=Control per a la finestra activa
 Name[ca@valencia]=Control per a la finestra activa
 Name[de]=Steuerung aktiver Fenster
@@ -20,7 +19,6 @@ Name[sv]=Aktiv fönsterstyrning
 Name[uk]=Керування активним вікном
 Name[x-test]=xxActive Window Controlxx
 Comment=Plasmoid for advanced active window control.
-Comment[ast]=Plasmoide pal control de ventanes actives.
 Comment[ca]=Plasmoide per al control avançat de les finestres actives.
 Comment[ca@valencia]=Plasmoide per al control avançat de les finestres actives.
 Comment[de]=Plasmoid für die erweiterte Steuerung aktiver Fenster.
