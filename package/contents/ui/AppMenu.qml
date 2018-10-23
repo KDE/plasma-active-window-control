@@ -68,6 +68,7 @@ Item {
                 id: appmenuButton
 
                 hoverEnabled: true
+                visible: appmenuButtonTitle.text !== ""
 
                 readonly property int buttonIndex: index
 
