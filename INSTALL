@@ -1,5 +1,15 @@
 INSTALATION INSTRUCTIONS
 
+Build dependencies (exact package names may differ by distribution):
+cmake
+extra-cmake-modules
+qtbase5-dev
+qtdeclarative5-dev
+libkf5windowsystem-dev
+libkf5plasma-dev
+libsm-dev
+libqt5x11extras5-dev
+
 $ mkdir build
 $ cd build
 $ cmake .. -DCMAKE_INSTALL_PREFIX=/usr
