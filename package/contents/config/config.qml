@@ -14,7 +14,7 @@ ConfigModel {
     }
     ConfigCategory {
          name: i18n("Buttons")
-         icon: "preferences-activities"
+         icon: "preferences-other"
          source: "config/ConfigButtons.qml"
     }
     ConfigCategory {
