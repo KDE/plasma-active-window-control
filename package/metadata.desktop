@@ -65,6 +65,7 @@ Comment[sl]=Plazmoid za napredno krmiljenje oken.
 Comment[sv]=Plasmoid för avancerad styrning av aktivt fönster.
 Comment[uk]=Плазмоїд для розширеного керування активним вікном.
 Comment[x-test]=xxPlasmoid for advanced active window control.xx
+Comment[zh_CN]=用于进行高级活动窗口控制的 Plasma 部件。
 Comment[zh_TW]=用來控制進階使用中視窗設定的 Plasmoid。
 Type=Service
 X-KDE-ParentApp=
