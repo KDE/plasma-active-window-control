@@ -23,11 +23,11 @@
 #include "../plugin/appmenumodel.h"
 
 #include <QAction>
-#include <QDir>
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #include <QDBusPendingCall>
-#include <QDBusConnectionInterface>
+#include <QDir>
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMouseEvent>
@@ -91,7 +91,8 @@ void AppMenuApplet::refreshAuroraeTheme()
             const QString separator("__");
             const QString themeName = decorationTheme.section(separator, -1, -1);
             const QString themeType = decorationTheme.section(separator, -2, -2);
-            QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("aurorae/themes/") + themeName, QStandardPaths::LocateDirectory);
+            QString themePath =
+                QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("aurorae/themes/") + themeName, QStandardPaths::LocateDirectory);
             if (!themePath.isEmpty()) {
                 m_auroraeDecorationPath = themePath;
                 m_auroraeDecorationType = themeType;
@@ -141,19 +142,19 @@ void AppMenuApplet::registerService()
 {
     qDebug() << "registering appmenu service";
     ++s_refs;
-    //if we're the first, regster the service
+    // if we're the first, regster the service
     if (s_refs == 1) {
         qDebug() << " -> connecting to DBus";
         QDBusConnection::sessionBus().interface()->registerService(s_viewService,
-                QDBusConnectionInterface::QueueService,
-                QDBusConnectionInterface::DontAllowReplacement);
+                                                                   QDBusConnectionInterface::QueueService,
+                                                                   QDBusConnectionInterface::DontAllowReplacement);
     }
 }
 
 void AppMenuApplet::unregisterService()
 {
     qDebug() << "unregistering from appmenu service";
-    //if we were the last, unregister
+    // if we were the last, unregister
     if (--s_refs == 0) {
         qDebug() << " -> disconnecting from DBus";
         QDBusConnection::sessionBus().interface()->unregisterService(s_viewService);
@@ -212,7 +213,7 @@ void AppMenuApplet::setCurrentIndex(int currentIndex)
     if (m_currentIndex != currentIndex) {
         m_currentIndex = currentIndex;
         emit currentIndexChanged();
-   }
+    }
 }
 
 QQuickItem *AppMenuApplet::buttonGrid() const
@@ -234,20 +235,20 @@ QMenu *AppMenuApplet::createMenu(int idx) const
     QAction *action = nullptr;
 
     if (view() == CompactView) {
-       menu = new QMenu();
-       for (int i=0; i<m_model->rowCount(); i++) {
-           const QModelIndex index = m_model->index(i, 0);
-           const QVariant data = m_model->data(index, AppMenuModel::ActionRole);
-           action = (QAction *)data.value<void *>();
-           menu->addAction(action);
-       }
-       menu->setAttribute(Qt::WA_DeleteOnClose);
-   } else if (view() == FullView) {
+        menu = new QMenu();
+        for (int i = 0; i < m_model->rowCount(); i++) {
+            const QModelIndex index = m_model->index(i, 0);
+            const QVariant data = m_model->data(index, AppMenuModel::ActionRole);
+            action = (QAction *)data.value<void *>();
+            menu->addAction(action);
+        }
+        menu->setAttribute(Qt::WA_DeleteOnClose);
+    } else if (view() == FullView) {
         const QModelIndex index = m_model->index(idx, 0);
         const QVariant data = m_model->data(index, AppMenuModel::ActionRole);
         action = (QAction *)data.value<void *>();
         if (action) {
-           menu = action->menu();
+            menu = action->menu();
         }
     }
 
@@ -271,14 +272,13 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
 
     QMenu *actionMenu = createMenu(idx);
     if (actionMenu) {
-
-        //this is a workaround where Qt will fail to realise a mouse has been released
+        // this is a workaround where Qt will fail to realise a mouse has been released
         // this happens if a window which does not accept focus spawns a new window that takes focus and X grab
         // whilst the mouse is depressed
         // https://bugreports.qt.io/browse/QTBUG-59044
         // this causes the next click to go missing
 
-        //by releasing manually we avoid that situation
+        // by releasing manually we avoid that situation
         auto ungrabMouseHack = [ctx]() {
             if (ctx && ctx->window() && ctx->window()->mouseGrabberItem()) {
                 // FIXME event forge thing enters press and hold move mode :/
@@ -287,7 +287,7 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
         };
 
         QTimer::singleShot(0, ctx, ungrabMouseHack);
-        //end workaround
+        // end workaround
 
         const auto &geo = ctx->window()->screen()->availableVirtualGeometry();
 
@@ -299,13 +299,13 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
         actionMenu->adjustSize();
 
         pos = QPoint(qBound(geo.x(), pos.x(), geo.x() + geo.width() - actionMenu->width()),
-                             qBound(geo.y(), pos.y(), geo.y() + geo.height() - actionMenu->height()));
+                     qBound(geo.y(), pos.y(), geo.y() + geo.height() - actionMenu->height()));
 
         if (view() == FullView) {
             actionMenu->installEventFilter(this);
         }
 
-        actionMenu->winId();//create window handle
+        actionMenu->winId(); // create window handle
         actionMenu->windowHandle()->setTransientParent(ctx->window());
 
         actionMenu->popup(pos);
@@ -318,7 +318,7 @@ void AppMenuApplet::trigger(QQuickItem *ctx, int idx)
             if (oldMenu && oldMenu != actionMenu) {
                 //! dont trigger initialization of index because there is a new menu created
                 disconnect(oldMenu, &QMenu::aboutToHide, this, &AppMenuApplet::onMenuAboutToHide);
-                
+
                 oldMenu->hide();
             }
         }

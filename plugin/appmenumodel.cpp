@@ -31,12 +31,12 @@
 #endif
 
 #include <QAction>
-#include <QGuiApplication>
-#include <QMenu>
-#include <QDebug>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusServiceWatcher>
+#include <QDebug>
+#include <QGuiApplication>
+#include <QMenu>
 
 #include <dbusmenuimporter.h>
 
@@ -49,12 +49,10 @@ static QHash<QByteArray, xcb_atom_t> s_atoms;
 
 class KDBusMenuImporter : public DBusMenuImporter
 {
-
 public:
     KDBusMenuImporter(const QString &service, const QString &path, QObject *parent)
         : DBusMenuImporter(service, path, parent)
     {
-
     }
 
 protected:
@@ -62,22 +60,20 @@ protected:
     {
         return QIcon::fromTheme(name);
     }
-
 };
 
 AppMenuModel::AppMenuModel(QObject *parent)
-            : QAbstractListModel(parent),
-              m_serviceWatcher(new QDBusServiceWatcher(this))
+    : QAbstractListModel(parent)
+    , m_serviceWatcher(new QDBusServiceWatcher(this))
 {
     connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &AppMenuModel::onActiveWindowChanged);
     connect(this, &AppMenuModel::modelNeedsUpdate, this, &AppMenuModel::update, Qt::UniqueConnection);
     onActiveWindowChanged(KWindowSystem::activeWindow());
 
     m_serviceWatcher->setConnection(QDBusConnection::sessionBus());
-    //if our current DBus connection gets lost, close the menu
-    //we'll select the new menu when the focus changes
-    connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName)
-    {
+    // if our current DBus connection gets lost, close the menu
+    // we'll select the new menu when the focus changes
+    connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this](const QString &serviceName) {
         if (serviceName == m_serviceName) {
             setMenuAvailable(false);
             emit modelNeedsUpdate();
@@ -125,7 +121,6 @@ void AppMenuModel::update()
     endResetModel();
 }
 
-
 void AppMenuModel::onActiveWindowChanged(WId id)
 {
     qApp->removeNativeEventFilter(this);
@@ -151,7 +146,7 @@ void AppMenuModel::onActiveWindowChanged(WId id)
 
                 s_atoms[name] = atomReply->atom;
                 if (s_atoms[name] == XCB_ATOM_NONE) {
-                     return value;
+                    return value;
                 }
             }
 
@@ -163,7 +158,7 @@ void AppMenuModel::onActiveWindowChanged(WId id)
             }
 
             if (propertyReply->type == XCB_ATOM_STRING && propertyReply->format == 8 && propertyReply->value_len > 0) {
-                const char *data = (const char *) xcb_get_property_value(propertyReply.data());
+                const char *data = (const char *)xcb_get_property_value(propertyReply.data());
                 int len = propertyReply->value_len;
                 if (data) {
                     value = QByteArray(data, data[len - 1] ? len : len - 1);
@@ -185,9 +180,7 @@ void AppMenuModel::onActiveWindowChanged(WId id)
         };
 
         KWindowInfo info(id, NET::WMState | NET::WMWindowType, NET::WM2TransientFor);
-        if (info.hasState(NET::SkipTaskbar) ||
-                info.windowType(NET::UtilityMask) == NET::Utility ||
-                info.windowType(NET::DesktopMask) == NET::Desktop) {
+        if (info.hasState(NET::SkipTaskbar) || info.windowType(NET::UtilityMask) == NET::Utility || info.windowType(NET::DesktopMask) == NET::Desktop) {
             return;
         }
 
@@ -209,14 +202,12 @@ void AppMenuModel::onActiveWindowChanged(WId id)
         qApp->installNativeEventFilter(this);
         m_currentWindowId = id;
 
-        //no menu found, set it to unavailable
+        // no menu found, set it to unavailable
         setMenuAvailable(false);
         emit modelNeedsUpdate();
     }
 #endif
-
 }
-
 
 QHash<int, QByteArray> AppMenuModel::roleNames() const
 {
@@ -229,14 +220,14 @@ QHash<int, QByteArray> AppMenuModel::roleNames() const
 QVariant AppMenuModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
-    if (row < 0 ) {
+    if (row < 0) {
         return QVariant();
     }
 
     if (role == MenuRole) {
         return m_activeMenu.at(row);
-    } else if(role == ActionRole) {
-        const QVariant data = qVariantFromValue((void *) m_activeActions.at(row));
+    } else if (role == ActionRole) {
+        const QVariant data = qVariantFromValue((void *)m_activeActions.at(row));
         return data;
     }
 
@@ -270,8 +261,8 @@ void AppMenuModel::updateApplicationMenu(const QString &serviceName, const QStri
             return;
         }
 
-        //cache first layer of sub menus, which we'll be popping up
-        for(QAction *a: m_menu->actions()) {
+        // cache first layer of sub menus, which we'll be popping up
+        for (QAction *a : m_menu->actions()) {
             if (a->menu()) {
                 m_importer->updateMenu(a->menu());
             }
@@ -304,7 +295,6 @@ bool AppMenuModel::nativeEventFilter(const QByteArray &eventType, void *message,
     if (type == XCB_PROPERTY_NOTIFY) {
         auto *event = reinterpret_cast<xcb_property_notify_event_t *>(e);
         if (event->window == m_currentWindowId) {
-
             auto serviceNameAtom = s_atoms.value(s_x11AppMenuServiceNamePropertyName);
             auto objectPathAtom = s_atoms.value(s_x11AppMenuObjectPathPropertyName);
 
@@ -322,4 +312,3 @@ bool AppMenuModel::nativeEventFilter(const QByteArray &eventType, void *message,
 
     return false;
 }
-

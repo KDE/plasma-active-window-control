@@ -19,11 +19,11 @@
  *
  ******************************************************************/
 
+#include <KWindowSystem>
 #include <QAbstractListModel>
 #include <QAbstractNativeEventFilter>
-#include <QStringList>
-#include <KWindowSystem>
 #include <QPointer>
+#include <QStringList>
 
 class QMenu;
 class QAction;
@@ -42,7 +42,7 @@ public:
     ~AppMenuModel();
 
     enum AppMenuRole {
-        MenuRole = Qt::UserRole+1,
+        MenuRole = Qt::UserRole + 1,
         ActionRole,
     };
 
@@ -84,4 +84,3 @@ private:
 
     QPointer<KDBusMenuImporter> m_importer;
 };
-

@@ -33,7 +33,7 @@ class AppMenuApplet : public Plasma::Applet
 {
     Q_OBJECT
 
-    Q_PROPERTY(AppMenuModel* model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(AppMenuModel *model READ model WRITE setModel NOTIFY modelChanged)
 
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
 
