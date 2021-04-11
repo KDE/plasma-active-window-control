@@ -41,7 +41,7 @@ static void processKeyTokens(QStringList* tokens, int srcCol, int dstCol)
       // cf https://bugs.launchpad.net/libdbusmenu-qt/+bug/712565
       {"+", "plus"},
       {"-", "minus"},
-      {nullptr, nullptr}
+      {nullptr, nullptr},
     };
 
     const Row* ptr = table;
