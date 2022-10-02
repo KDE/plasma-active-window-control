@@ -1,0 +1,387 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the plasma-active-window-control package.
+# Paolo Zamponi <zapaolo@email.it>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-23 00:18+0000\n"
+"PO-Revision-Date: 2018-05-17 16:50+0100\n"
+"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Aspetto"
+
+#: package/contents/config/config.qml:11
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#: package/contents/config/config.qml:16
+msgid "Buttons"
+msgstr "Pulsanti"
+
+#: package/contents/config/config.qml:21
+msgid "Mouse Control"
+msgstr "Controllo del mouse"
+
+#: package/contents/config/config.qml:26
+msgid "Application Menu"
+msgstr "Menu dell'applicazione"
+
+#: package/contents/ui/config/ConfigAppearance.qml:73
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Predefinito"
+
+#: package/contents/ui/config/ConfigAppearance.qml:90
+msgid "Plasmoid version: "
+msgstr "Versione del plasmoide: "
+
+#: package/contents/ui/config/ConfigAppearance.qml:96
+msgid "Width in horizontal panel:"
+msgstr "Larghezza nel pannello orizzontale:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:103
+msgid "Fill width"
+msgstr "Riempi in larghezza"
+
+#: package/contents/ui/config/ConfigAppearance.qml:122
+msgid "Fine tuning:"
+msgstr "Regolazione fine:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:142
+msgid "Hide titlebar for maximized windows (takes effect immediately)"
+msgstr ""
+"Nascondi la barra del titolo delle finestre massimizzate (ha un effetto "
+"immediato)"
+
+#: package/contents/ui/config/ConfigAppearance.qml:158
+msgid "Show window title"
+msgstr "Mostra il titolo della finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:173
+msgid "Text type:"
+msgstr "Tipo di testo:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+#: package/contents/ui/config/ConfigAppearance.qml:201
+msgid "Window title"
+msgstr "Titolo della finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "Application name"
+msgstr "Nome dell'applicazione"
+
+#: package/contents/ui/config/ConfigAppearance.qml:182
+msgid "Fit text:"
+msgstr "Adatta il testo:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Just elide"
+msgstr "Elidi semplicemente"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Fit on hover"
+msgstr "Adatta al passaggio del mouse"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Always fit"
+msgstr "Adatta sempre"
+
+#: package/contents/ui/config/ConfigAppearance.qml:191
+msgid "Tooltip text:"
+msgstr "Testo del suggerimento:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "No tooltip"
+msgstr "Nessun suggerimento"
+
+#: package/contents/ui/config/ConfigAppearance.qml:233
+msgid "No window text:"
+msgstr "Nessun testo della finestra:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:247
+msgid "Use %activity% placeholder to show current activity name."
+msgstr ""
+"Usa il segnaposto %activity% per mostrare il nome dell'attività corrente."
+
+#: package/contents/ui/config/ConfigAppearance.qml:254
+msgid "No window icon:"
+msgstr "Senza icona della finestra:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:265
+msgid "Limit text width"
+msgstr "Limita l'ampiezza del testo"
+
+#: package/contents/ui/config/ConfigAppearance.qml:275
+#: package/contents/ui/config/ConfigAppMenu.qml:95
+msgctxt "Abbreviation for pixels"
+msgid "px"
+msgstr "px"
+
+#: package/contents/ui/config/ConfigAppearance.qml:288
+msgid "Show window icon"
+msgstr "Mostra l'icona della finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:294
+msgid "Window icon on the right"
+msgstr "Icona della finestra a destra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:315
+msgid "Bold text"
+msgstr "Testo in grassetto"
+
+#: package/contents/ui/config/ConfigAppearance.qml:319
+msgid "Text font:"
+msgstr "Carattere del testo:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:340
+msgid "Icon and text spacing:"
+msgstr "Spaziatura dell'icona e del testo:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:352
+msgid "Font size scale:"
+msgstr "Scala delle dimensioni del carattere:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:23
+msgid "Enable application menu"
+msgstr "Abilita il menu dell'applicazione"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:38
+msgid "Fill height"
+msgstr "Riempi in altezza"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:44
+msgid "Bold font"
+msgstr "Carattere in grassetto"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:50
+#: package/contents/ui/config/ConfigButtons.qml:173
+msgid "Do not hide on mouse out"
+msgstr "Non nascondere al passaggio del mouse"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:55
+msgid "Show next to buttons"
+msgstr "Mostra vicino ai pulsanti"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:61
+msgid "Show next to icon and text"
+msgstr "Mostra vicino all'icona ed al testo"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:67
+msgid "Switch sides with icon and text"
+msgstr "Scambia i lati con icona e testo"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:74
+msgid "Show separator"
+msgstr "Mostra un separatore"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:81
+msgid "Make window title bold when menu is displayed"
+msgstr ""
+"Rendi il titolo della finestra in grassetto quando viene visualizzato il menu"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:86
+msgid "Side margin:"
+msgstr "Margine laterale:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:99
+msgid "Icon and text opacity:"
+msgstr "Opacità dell'icona e del testo:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:111
+msgid "Menu button text size scale:"
+msgstr "Scala del testo del pulsante del menu:"
+
+#: package/contents/ui/config/ConfigBehaviour.qml:14
+msgid "Show active window only for plasmoid's screen"
+msgstr "Mostra la finestra dell'attività solo per lo schermo del plasmoide"
+
+#: package/contents/ui/config/ConfigButtons.qml:90
+msgid "Enable Control Buttons"
+msgstr "Abilita i pulsanti di controllo"
+
+#: package/contents/ui/config/ConfigButtons.qml:111
+msgid "Show minimize button"
+msgstr "Mostra il pulsante per minimizzare"
+
+#: package/contents/ui/config/ConfigButtons.qml:116
+msgid "Show maximize button"
+msgstr "Mostra il pulsante per massimizzare"
+
+#: package/contents/ui/config/ConfigButtons.qml:121
+msgid "Show pin to all desktops"
+msgstr "Mostra appuntato a tutti i desktop"
+
+#: package/contents/ui/config/ConfigButtons.qml:131
+msgid "Button order:"
+msgstr "Ordine dei pulsanti:"
+
+#: package/contents/ui/config/ConfigButtons.qml:167
+msgid "Behaviour:"
+msgstr "Comportamento:"
+
+#: package/contents/ui/config/ConfigButtons.qml:184
+msgid "Show only when maximized"
+msgstr "Mostra solo quando massimizzata"
+
+#: package/contents/ui/config/ConfigButtons.qml:189
+msgid "Buttons next to icon and text"
+msgstr "Pulsanti vicino all'icona ed al testo"
+
+#: package/contents/ui/config/ConfigButtons.qml:194
+msgid "Buttons between icon and text"
+msgstr "Pulsanti tra l'icona ed il testo"
+
+#: package/contents/ui/config/ConfigButtons.qml:200
+msgid "Dynamic width"
+msgstr "Ampiezza dinamica"
+
+#: package/contents/ui/config/ConfigButtons.qml:206
+msgid "Sliding icon and text"
+msgstr "Icona e testo scorrevoli"
+
+#: package/contents/ui/config/ConfigButtons.qml:218
+msgid "Position:"
+msgstr "Posizione:"
+
+#: package/contents/ui/config/ConfigButtons.qml:224
+msgid "Upper left"
+msgstr "In alto a sinistra"
+
+#: package/contents/ui/config/ConfigButtons.qml:235
+msgid "Upper right"
+msgstr "In alto a destra"
+
+#: package/contents/ui/config/ConfigButtons.qml:241
+msgid "Bottom left"
+msgstr "In basso a sinistra"
+
+#: package/contents/ui/config/ConfigButtons.qml:247
+msgid "Bottom right"
+msgstr "In basso a destra"
+
+#: package/contents/ui/config/ConfigButtons.qml:253
+msgid "Vertical center"
+msgstr "Centro verticale"
+
+#: package/contents/ui/config/ConfigButtons.qml:263
+msgid "Button size:"
+msgstr "Dimensione del pulsante:"
+
+#: package/contents/ui/config/ConfigButtons.qml:275
+msgid "Buttons spacing:"
+msgstr "Spaziatura tra i pulsanti:"
+
+#: package/contents/ui/config/ConfigButtons.qml:294
+msgid "Theme"
+msgstr "Tema"
+
+#: package/contents/ui/config/ConfigButtons.qml:300
+msgid "Automatic"
+msgstr "Automatico"
+
+#: package/contents/ui/config/ConfigButtons.qml:304
+msgid "Absolute path to aurorae button theme folder"
+msgstr "Percorso assoluto della cartella del tema di pulsanti aurorae"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:84
+msgid "Mouse Buttons:"
+msgstr "Pulsanti del mouse:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:89
+msgid "Doubleclick to toggle maximizing"
+msgstr "Doppio clic per attivare la massimizzazione"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:101
+msgid "Left click disabled"
+msgstr "Clic sinistro disabilitato"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:108
+msgid "Left click to present windows (Current Desktop)"
+msgstr "Clic sinistro per presentare le finestre (del desktop corrente)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:115
+msgid "Left click to present windows (All Desktops)"
+msgstr "Clic sinistro per presentare le finestre (tutti i desktop)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:122
+msgid "Left click to present windows (Window Class)"
+msgstr "Clic sinistro per presentare le finestre (classe della finestra)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:140
+msgid "Middle click disabled"
+msgstr "Clic centrale disabilitato"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:146
+msgid "Middle click to close active window"
+msgstr "Clic centrale per chiudere la finestra dell'attività"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:152
+msgid "Middle click to toggle fullscreen"
+msgstr "Clic centrale per passare a schermo intero"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:163
+msgid "Mouse Wheel:"
+msgstr "Rotellina del mouse:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:168
+msgid "Mouse wheel up to maximize"
+msgstr "Rotellina del mouse in su per massimizzare"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:178
+msgid "Mouse wheel down disabled"
+msgstr "Rotellina del mouse in giù disabilitata"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:184
+msgid "Mouse wheel down to minimize"
+msgstr "Rotellina del mouse in giù per minimizzare"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:190
+msgid "Mouse wheel down to unmaximize"
+msgstr "Rotellina del mouse in giù per non massimizzare"
+
+#: package/contents/ui/config/IconPicker.qml:73
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr "Scegli..."
+
+#: package/contents/ui/config/IconPicker.qml:78
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "Ripristina icona"
+
+#: package/contents/ui/main.qml:583
+msgid "Switch to activity: %1"
+msgstr "Passa all'attività: %1"
+
+#: package/contents/ui/main.qml:591
+msgid "Close"
+msgstr "Chiudi"
+
+#: package/contents/ui/main.qml:592
+msgid "Toggle Maximise"
+msgstr "Commuta su massimizzazione"
+
+#: package/contents/ui/main.qml:593
+msgid "Minimise"
+msgstr "Minimizza"
+
+#: package/contents/ui/main.qml:594
+msgid "Toggle Pin To All Desktops"
+msgstr "Commuta su appunta a tutti i desktop"
+
+#: package/contents/ui/main.qml:596
+msgid "Reload Theme"
+msgstr "Ricarica il tema"

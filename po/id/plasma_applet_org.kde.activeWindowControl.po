@@ -1,0 +1,386 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-active-window-control package.
+# Wantoyo <wantoyek@gmail.com>, 2021, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-active-window-control\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-23 00:18+0000\n"
+"PO-Revision-Date: 2022-09-27 18:12+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Penampilan"
+
+#: package/contents/config/config.qml:11
+msgid "Behaviour"
+msgstr "Perilaku"
+
+#: package/contents/config/config.qml:16
+msgid "Buttons"
+msgstr "Tombol"
+
+#: package/contents/config/config.qml:21
+msgid "Mouse Control"
+msgstr "Kontrol Mouse"
+
+#: package/contents/config/config.qml:26
+msgid "Application Menu"
+msgstr "Menu Aplikasi"
+
+#: package/contents/ui/config/ConfigAppearance.qml:73
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Default"
+
+#: package/contents/ui/config/ConfigAppearance.qml:90
+msgid "Plasmoid version: "
+msgstr "Versi Plasmoid: "
+
+#: package/contents/ui/config/ConfigAppearance.qml:96
+msgid "Width in horizontal panel:"
+msgstr "Lebarnya panel mendatar:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:103
+msgid "Fill width"
+msgstr "Lebar seisi"
+
+#: package/contents/ui/config/ConfigAppearance.qml:122
+msgid "Fine tuning:"
+msgstr "Penalaan halus:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:142
+msgid "Hide titlebar for maximized windows (takes effect immediately)"
+msgstr ""
+"Sembunyikan titlebar untuk jendela yang dimaksimalkan (berpengaruh secara "
+"langsung)"
+
+#: package/contents/ui/config/ConfigAppearance.qml:158
+msgid "Show window title"
+msgstr "Tampilkan judul jendela"
+
+#: package/contents/ui/config/ConfigAppearance.qml:173
+msgid "Text type:"
+msgstr "Ketikan teks:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+#: package/contents/ui/config/ConfigAppearance.qml:201
+msgid "Window title"
+msgstr "Judul jendela"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "Application name"
+msgstr "Nama aplikasi"
+
+#: package/contents/ui/config/ConfigAppearance.qml:182
+msgid "Fit text:"
+msgstr "Teks pas:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Just elide"
+msgstr "Hanya elide"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Fit on hover"
+msgstr "Paskan saat melayangi"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Always fit"
+msgstr "Selalu paskan"
+
+#: package/contents/ui/config/ConfigAppearance.qml:191
+msgid "Tooltip text:"
+msgstr "Teks tooltip:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "No tooltip"
+msgstr "Tanpa tooltip"
+
+#: package/contents/ui/config/ConfigAppearance.qml:233
+msgid "No window text:"
+msgstr "Tanpa teks jendela:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:247
+msgid "Use %activity% placeholder to show current activity name."
+msgstr ""
+"Gunakan placeholder %activity% untuk menampilkan nama aktivitas saat ini."
+
+#: package/contents/ui/config/ConfigAppearance.qml:254
+msgid "No window icon:"
+msgstr "Tanpa ikon jendela:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:265
+msgid "Limit text width"
+msgstr "Batas lebar teks"
+
+#: package/contents/ui/config/ConfigAppearance.qml:275
+#: package/contents/ui/config/ConfigAppMenu.qml:95
+msgctxt "Abbreviation for pixels"
+msgid "px"
+msgstr "px"
+
+#: package/contents/ui/config/ConfigAppearance.qml:288
+msgid "Show window icon"
+msgstr "Tampilkan ikon jendela"
+
+#: package/contents/ui/config/ConfigAppearance.qml:294
+msgid "Window icon on the right"
+msgstr "Ikon jendela di sebelah kanan"
+
+#: package/contents/ui/config/ConfigAppearance.qml:315
+msgid "Bold text"
+msgstr "Teks tebal"
+
+#: package/contents/ui/config/ConfigAppearance.qml:319
+msgid "Text font:"
+msgstr "Font teks:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:340
+msgid "Icon and text spacing:"
+msgstr "Ikon dan penyepasian teks:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:352
+msgid "Font size scale:"
+msgstr "Skala ukuran font:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:23
+msgid "Enable application menu"
+msgstr "Fungsikan menu aplikasi"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:38
+msgid "Fill height"
+msgstr "Tinggi seisi"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:44
+msgid "Bold font"
+msgstr "Font tebal"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:50
+#: package/contents/ui/config/ConfigButtons.qml:173
+msgid "Do not hide on mouse out"
+msgstr "Jangan sembunyikan saat mouse keluar"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:55
+msgid "Show next to buttons"
+msgstr "Tampilkan selanjutnya untuk tombol-tombol"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:61
+msgid "Show next to icon and text"
+msgstr "Tampilkan selanjutnya untuk ikon dan teks"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:67
+msgid "Switch sides with icon and text"
+msgstr "Alihkan sisi-sisi dengan ikon dan teks"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:74
+msgid "Show separator"
+msgstr "Tampilkan pemisah"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:81
+msgid "Make window title bold when menu is displayed"
+msgstr "Buat judul jendela tebal ketika menu sedang ditampilkan"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:86
+msgid "Side margin:"
+msgstr "Margin sisi:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:99
+msgid "Icon and text opacity:"
+msgstr "Ikon dan opasitas teks:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:111
+msgid "Menu button text size scale:"
+msgstr "Skala ukuran trks tombol menu:"
+
+#: package/contents/ui/config/ConfigBehaviour.qml:14
+msgid "Show active window only for plasmoid's screen"
+msgstr "Tampilkan hanya jendela aktifuntuk layar plasmoid"
+
+#: package/contents/ui/config/ConfigButtons.qml:90
+msgid "Enable Control Buttons"
+msgstr "Fungsikan Tombol Kontrol"
+
+#: package/contents/ui/config/ConfigButtons.qml:111
+msgid "Show minimize button"
+msgstr "Tampilkan tombol minimal"
+
+#: package/contents/ui/config/ConfigButtons.qml:116
+msgid "Show maximize button"
+msgstr "Tampilkan tombol maksimal"
+
+#: package/contents/ui/config/ConfigButtons.qml:121
+msgid "Show pin to all desktops"
+msgstr "Tampilkan pin untuk semua desktop"
+
+#: package/contents/ui/config/ConfigButtons.qml:131
+msgid "Button order:"
+msgstr "Urutan tombol:"
+
+#: package/contents/ui/config/ConfigButtons.qml:167
+msgid "Behaviour:"
+msgstr "Perilaku:"
+
+#: package/contents/ui/config/ConfigButtons.qml:184
+msgid "Show only when maximized"
+msgstr "Tampilkan hanya ketika dimaksimalkan"
+
+#: package/contents/ui/config/ConfigButtons.qml:189
+msgid "Buttons next to icon and text"
+msgstr "Tombol selanjutnya untuk ikon dan teks"
+
+#: package/contents/ui/config/ConfigButtons.qml:194
+msgid "Buttons between icon and text"
+msgstr "Tombol antara ikon dan teks"
+
+#: package/contents/ui/config/ConfigButtons.qml:200
+msgid "Dynamic width"
+msgstr "Lebar dinamis"
+
+#: package/contents/ui/config/ConfigButtons.qml:206
+msgid "Sliding icon and text"
+msgstr "Pergeseran ikon dan teks"
+
+#: package/contents/ui/config/ConfigButtons.qml:218
+msgid "Position:"
+msgstr "Posisi:"
+
+#: package/contents/ui/config/ConfigButtons.qml:224
+msgid "Upper left"
+msgstr "Kiri atas"
+
+#: package/contents/ui/config/ConfigButtons.qml:235
+msgid "Upper right"
+msgstr "Kanan atas"
+
+#: package/contents/ui/config/ConfigButtons.qml:241
+msgid "Bottom left"
+msgstr "Kiri bawah"
+
+#: package/contents/ui/config/ConfigButtons.qml:247
+msgid "Bottom right"
+msgstr "Kanan bawah"
+
+#: package/contents/ui/config/ConfigButtons.qml:253
+msgid "Vertical center"
+msgstr "Tengah tegak"
+
+#: package/contents/ui/config/ConfigButtons.qml:263
+msgid "Button size:"
+msgstr "Ukuran tombol:"
+
+#: package/contents/ui/config/ConfigButtons.qml:275
+msgid "Buttons spacing:"
+msgstr "Jarak ruang tombol:"
+
+#: package/contents/ui/config/ConfigButtons.qml:294
+msgid "Theme"
+msgstr "Tema"
+
+#: package/contents/ui/config/ConfigButtons.qml:300
+msgid "Automatic"
+msgstr "Otomatis"
+
+#: package/contents/ui/config/ConfigButtons.qml:304
+msgid "Absolute path to aurorae button theme folder"
+msgstr "Alur mutlak untuk folder tema tombol aurorae"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:84
+msgid "Mouse Buttons:"
+msgstr "Tombol-tombol Mouse:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:89
+msgid "Doubleclick to toggle maximizing"
+msgstr "Klik ganda untuk menjungkitkan pemaksimalan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:101
+msgid "Left click disabled"
+msgstr "Klik kiri dinonfungsikan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:108
+msgid "Left click to present windows (Current Desktop)"
+msgstr "Klik kiri untuk jendela yang hadir (Desktop Saat Ini)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:115
+msgid "Left click to present windows (All Desktops)"
+msgstr "Klik kiri untuk jendela yang hadir (Semua Desktop)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:122
+msgid "Left click to present windows (Window Class)"
+msgstr "Klik kiri untuk jendela yang hadir (Kelas Desktop)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:140
+msgid "Middle click disabled"
+msgstr "Klik tengah dinonfungsikan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:146
+msgid "Middle click to close active window"
+msgstr "Klik tengah untuk menutup jendela yang aktif"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:152
+msgid "Middle click to toggle fullscreen"
+msgstr "Klik tengah untuk menjungkit fullscreen"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:163
+msgid "Mouse Wheel:"
+msgstr "Roda Mouse:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:168
+msgid "Mouse wheel up to maximize"
+msgstr "Gulung roda mouse naik untuk memaksimalkan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:178
+msgid "Mouse wheel down disabled"
+msgstr "Roda mouse turun dinonfungsikan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:184
+msgid "Mouse wheel down to minimize"
+msgstr "Roda mouse turun untuk meminimalkan"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:190
+msgid "Mouse wheel down to unmaximize"
+msgstr "Roda mouse turun untuk tak memaksimalkan"
+
+#: package/contents/ui/config/IconPicker.qml:73
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr "Pilih..."
+
+#: package/contents/ui/config/IconPicker.qml:78
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "Buang Ikon"
+
+#: package/contents/ui/main.qml:583
+msgid "Switch to activity: %1"
+msgstr "Beralih ke aktivitas: %1"
+
+#: package/contents/ui/main.qml:591
+msgid "Close"
+msgstr "Tutup"
+
+#: package/contents/ui/main.qml:592
+msgid "Toggle Maximise"
+msgstr "Jungkit Maksimalkan"
+
+#: package/contents/ui/main.qml:593
+msgid "Minimise"
+msgstr "Minimalkan"
+
+#: package/contents/ui/main.qml:594
+msgid "Toggle Pin To All Desktops"
+msgstr "Jungkit Pin Untuk Semua Desktop"
+
+#: package/contents/ui/main.qml:596
+msgid "Reload Theme"
+msgstr "Muat Ulang Tema"

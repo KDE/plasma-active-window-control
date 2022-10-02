@@ -1,0 +1,387 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-active-window-control package.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-active-window-control\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-23 00:18+0000\n"
+"PO-Revision-Date: 2022-02-15 11:21+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: package/contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Aspect"
+
+#: package/contents/config/config.qml:11
+msgid "Behaviour"
+msgstr "Comportament"
+
+#: package/contents/config/config.qml:16
+msgid "Buttons"
+msgstr "Butoane"
+
+#: package/contents/config/config.qml:21
+msgid "Mouse Control"
+msgstr "Control cu mausul"
+
+#: package/contents/config/config.qml:26
+msgid "Application Menu"
+msgstr "Meniu de aplicații"
+
+#: package/contents/ui/config/ConfigAppearance.qml:73
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Implicit"
+
+#: package/contents/ui/config/ConfigAppearance.qml:90
+msgid "Plasmoid version: "
+msgstr "Versiune plasmoid: "
+
+#: package/contents/ui/config/ConfigAppearance.qml:96
+msgid "Width in horizontal panel:"
+msgstr "Lățime în panou orizontal:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:103
+msgid "Fill width"
+msgstr "Umple lățimea"
+
+#: package/contents/ui/config/ConfigAppearance.qml:122
+msgid "Fine tuning:"
+msgstr "Reglaj fin:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:142
+msgid "Hide titlebar for maximized windows (takes effect immediately)"
+msgstr ""
+"Ascunde bara de titlu pentru ferestre maximizate (intră în vigoare imediat)"
+
+#: package/contents/ui/config/ConfigAppearance.qml:158
+msgid "Show window title"
+msgstr "Arată titlul ferestrei"
+
+#: package/contents/ui/config/ConfigAppearance.qml:173
+msgid "Text type:"
+msgstr "Tip text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+#: package/contents/ui/config/ConfigAppearance.qml:201
+msgid "Window title"
+msgstr "Titlu fereastră"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "Application name"
+msgstr "Denumire aplicație"
+
+#: package/contents/ui/config/ConfigAppearance.qml:182
+msgid "Fit text:"
+msgstr "Potrivește textul:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Just elide"
+msgstr "Doar elidare"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Fit on hover"
+msgstr "Potrivește la planare"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Always fit"
+msgstr "Potrivește întotdeauna"
+
+#: package/contents/ui/config/ConfigAppearance.qml:191
+msgid "Tooltip text:"
+msgstr "Text indiciu:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "No tooltip"
+msgstr "Fără indiciu"
+
+#: package/contents/ui/config/ConfigAppearance.qml:233
+msgid "No window text:"
+msgstr "Text pentru nicio fereastră:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:247
+msgid "Use %activity% placeholder to show current activity name."
+msgstr ""
+"Folosiți substituentul %activity% pentru a arăta denumirea activității "
+"actuale."
+
+#: package/contents/ui/config/ConfigAppearance.qml:254
+msgid "No window icon:"
+msgstr "Pictogramă pentru nicio fereastră:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:265
+msgid "Limit text width"
+msgstr "Limitează lățimea textului"
+
+#: package/contents/ui/config/ConfigAppearance.qml:275
+#: package/contents/ui/config/ConfigAppMenu.qml:95
+msgctxt "Abbreviation for pixels"
+msgid "px"
+msgstr "px"
+
+#: package/contents/ui/config/ConfigAppearance.qml:288
+msgid "Show window icon"
+msgstr "Arată pictograma ferestrei"
+
+#: package/contents/ui/config/ConfigAppearance.qml:294
+msgid "Window icon on the right"
+msgstr "Pictograma ferestrei la dreapta"
+
+#: package/contents/ui/config/ConfigAppearance.qml:315
+msgid "Bold text"
+msgstr "Text aldin"
+
+#: package/contents/ui/config/ConfigAppearance.qml:319
+msgid "Text font:"
+msgstr "Fontul textului:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:340
+msgid "Icon and text spacing:"
+msgstr "Spațiere pictograme și text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:352
+msgid "Font size scale:"
+msgstr "Scara dimensiunii fontului:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:23
+msgid "Enable application menu"
+msgstr "Activează meniul aplicației"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:38
+msgid "Fill height"
+msgstr "Umple înălțimea"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:44
+msgid "Bold font"
+msgstr "Font aldin"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:50
+#: package/contents/ui/config/ConfigButtons.qml:173
+msgid "Do not hide on mouse out"
+msgstr "Nu ascunde la ieșirea mausului"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:55
+msgid "Show next to buttons"
+msgstr "Arată lângă butoane"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:61
+msgid "Show next to icon and text"
+msgstr "Arată lângă pictogramă și text"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:67
+msgid "Switch sides with icon and text"
+msgstr "Schimbă cu locul cu pictogramă și text"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:74
+msgid "Show separator"
+msgstr "Arată separator"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:81
+msgid "Make window title bold when menu is displayed"
+msgstr "Îngroașă titlul ferestrei la afișarea meniului"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:86
+msgid "Side margin:"
+msgstr "Margine laterală:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:99
+msgid "Icon and text opacity:"
+msgstr "Opacitate pictogramă și text:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:111
+msgid "Menu button text size scale:"
+msgstr "Scalarea dimensiunii textului butoanelor de meniu:"
+
+#: package/contents/ui/config/ConfigBehaviour.qml:14
+msgid "Show active window only for plasmoid's screen"
+msgstr "Arată fereastra activă doar pentru ecranul plasmoidului"
+
+#: package/contents/ui/config/ConfigButtons.qml:90
+msgid "Enable Control Buttons"
+msgstr "Activează butoane de control"
+
+#: package/contents/ui/config/ConfigButtons.qml:111
+msgid "Show minimize button"
+msgstr "Arată butonul de minimizare"
+
+#: package/contents/ui/config/ConfigButtons.qml:116
+msgid "Show maximize button"
+msgstr "Arată butonul de maximizare"
+
+#: package/contents/ui/config/ConfigButtons.qml:121
+msgid "Show pin to all desktops"
+msgstr "Arată acul pentru toate birourile"
+
+#: package/contents/ui/config/ConfigButtons.qml:131
+msgid "Button order:"
+msgstr "Ordine butoane:"
+
+#: package/contents/ui/config/ConfigButtons.qml:167
+msgid "Behaviour:"
+msgstr "Comportament:"
+
+#: package/contents/ui/config/ConfigButtons.qml:184
+msgid "Show only when maximized"
+msgstr "Arată numai când e maximizată"
+
+#: package/contents/ui/config/ConfigButtons.qml:189
+msgid "Buttons next to icon and text"
+msgstr "Butoane lângă pictogramă și text"
+
+#: package/contents/ui/config/ConfigButtons.qml:194
+msgid "Buttons between icon and text"
+msgstr "Butoane între pictogramă și text"
+
+#: package/contents/ui/config/ConfigButtons.qml:200
+msgid "Dynamic width"
+msgstr "Lățime dinamică"
+
+#: package/contents/ui/config/ConfigButtons.qml:206
+msgid "Sliding icon and text"
+msgstr "Pictogramă și text glisante"
+
+#: package/contents/ui/config/ConfigButtons.qml:218
+msgid "Position:"
+msgstr "Poziție:"
+
+#: package/contents/ui/config/ConfigButtons.qml:224
+msgid "Upper left"
+msgstr "Stânga sus"
+
+#: package/contents/ui/config/ConfigButtons.qml:235
+msgid "Upper right"
+msgstr "Dreapta sus"
+
+#: package/contents/ui/config/ConfigButtons.qml:241
+msgid "Bottom left"
+msgstr "Stânga jos"
+
+#: package/contents/ui/config/ConfigButtons.qml:247
+msgid "Bottom right"
+msgstr "Dreapta jos"
+
+#: package/contents/ui/config/ConfigButtons.qml:253
+msgid "Vertical center"
+msgstr "Centru vertical"
+
+#: package/contents/ui/config/ConfigButtons.qml:263
+msgid "Button size:"
+msgstr "Dimensiune butoane:"
+
+#: package/contents/ui/config/ConfigButtons.qml:275
+msgid "Buttons spacing:"
+msgstr "Spațiere butoane:"
+
+#: package/contents/ui/config/ConfigButtons.qml:294
+msgid "Theme"
+msgstr "Tematică"
+
+#: package/contents/ui/config/ConfigButtons.qml:300
+msgid "Automatic"
+msgstr "Automat"
+
+#: package/contents/ui/config/ConfigButtons.qml:304
+msgid "Absolute path to aurorae button theme folder"
+msgstr "Cale absolută către dosarul cu tematici de buton Aurorae"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:84
+msgid "Mouse Buttons:"
+msgstr "Butoanele mausului:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:89
+msgid "Doubleclick to toggle maximizing"
+msgstr "Clicul dublu comută maximizarea"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:101
+msgid "Left click disabled"
+msgstr "Clic stâng dezactivat"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:108
+msgid "Left click to present windows (Current Desktop)"
+msgstr "Clicul stâng prezintă ferestrele (biroul actual)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:115
+msgid "Left click to present windows (All Desktops)"
+msgstr "Clicul stâng prezintă ferestrele (toate birourile)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:122
+msgid "Left click to present windows (Window Class)"
+msgstr "Clicul stâng prezintă ferestrele (clasa Fereastră)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:140
+msgid "Middle click disabled"
+msgstr "Clic mijlociu dezactivat"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:146
+msgid "Middle click to close active window"
+msgstr "Clicul mijlociu închide fereastra activă"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:152
+msgid "Middle click to toggle fullscreen"
+msgstr "Clicul mijlociu comută ecranul complet"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:163
+msgid "Mouse Wheel:"
+msgstr "Rotița mausului:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:168
+msgid "Mouse wheel up to maximize"
+msgstr "Derularea în sus maximizează"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:178
+msgid "Mouse wheel down disabled"
+msgstr "Derulare în jos dezactivată"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:184
+msgid "Mouse wheel down to minimize"
+msgstr "Derularea în jos minimizează"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:190
+msgid "Mouse wheel down to unmaximize"
+msgstr "Derularea în jos dez-maximizează"
+
+#: package/contents/ui/config/IconPicker.qml:73
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr "Alege..."
+
+#: package/contents/ui/config/IconPicker.qml:78
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "Șterge pictograma"
+
+#: package/contents/ui/main.qml:583
+msgid "Switch to activity: %1"
+msgstr "Comută la activitate: %1"
+
+#: package/contents/ui/main.qml:591
+msgid "Close"
+msgstr "Închide"
+
+#: package/contents/ui/main.qml:592
+msgid "Toggle Maximise"
+msgstr "Comută maximizarea"
+
+#: package/contents/ui/main.qml:593
+msgid "Minimise"
+msgstr "Minimizează"
+
+#: package/contents/ui/main.qml:594
+msgid "Toggle Pin To All Desktops"
+msgstr "Comută fixarea pe toate birourile"
+
+#: package/contents/ui/main.qml:596
+msgid "Reload Theme"
+msgstr "Reîncarcă tematica"

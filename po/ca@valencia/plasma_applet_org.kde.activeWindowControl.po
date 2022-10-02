@@ -1,0 +1,393 @@
+# Translation of plasma_applet_org.kde.activeWindowControl.po to Catalan (Valencian)
+# Copyright (C) 2017-2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017, 2020, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2017, 2018, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-active-window-control\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-23 00:18+0000\n"
+"PO-Revision-Date: 2022-08-28 13:26+0200\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.0\n"
+
+#: package/contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Aparença"
+
+#: package/contents/config/config.qml:11
+msgid "Behaviour"
+msgstr "Comportament"
+
+#: package/contents/config/config.qml:16
+msgid "Buttons"
+msgstr "Botons"
+
+#: package/contents/config/config.qml:21
+msgid "Mouse Control"
+msgstr "Control amb el ratolí"
+
+#: package/contents/config/config.qml:26
+msgid "Application Menu"
+msgstr "Menú d'aplicacions"
+
+#: package/contents/ui/config/ConfigAppearance.qml:73
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Predeterminat"
+
+#: package/contents/ui/config/ConfigAppearance.qml:90
+msgid "Plasmoid version: "
+msgstr "Versió del plasmoide: "
+
+#: package/contents/ui/config/ConfigAppearance.qml:96
+msgid "Width in horizontal panel:"
+msgstr "Amplària en el quadro horitzontal:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:103
+msgid "Fill width"
+msgstr "Òmpliga l'amplària"
+
+#: package/contents/ui/config/ConfigAppearance.qml:122
+msgid "Fine tuning:"
+msgstr "Ajusta amb més detall:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:142
+msgid "Hide titlebar for maximized windows (takes effect immediately)"
+msgstr ""
+"Oculta la barra de títol per a les finestres maximitzades (té efecte "
+"immediat)"
+
+#: package/contents/ui/config/ConfigAppearance.qml:158
+msgid "Show window title"
+msgstr "Mostra el títol de la finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:173
+msgid "Text type:"
+msgstr "Tipus de text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+#: package/contents/ui/config/ConfigAppearance.qml:201
+msgid "Window title"
+msgstr "Títol de la finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "Application name"
+msgstr "Nom de l'aplicació"
+
+#: package/contents/ui/config/ConfigAppearance.qml:182
+msgid "Fit text:"
+msgstr "Ajusta el text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Just elide"
+msgstr "Només elidit"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Fit on hover"
+msgstr "Ajusta en passar-hi per damunt"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Always fit"
+msgstr "Ajusta sempre"
+
+#: package/contents/ui/config/ConfigAppearance.qml:191
+msgid "Tooltip text:"
+msgstr "Text del consell:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "No tooltip"
+msgstr "Sense consell"
+
+#: package/contents/ui/config/ConfigAppearance.qml:233
+msgid "No window text:"
+msgstr "Sense text de la finestra:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:247
+msgid "Use %activity% placeholder to show current activity name."
+msgstr ""
+"Utilitza el marcador de posició %activity% per a mostrar el nom de "
+"l'activitat actual."
+
+#: package/contents/ui/config/ConfigAppearance.qml:254
+msgid "No window icon:"
+msgstr "Sense icona de la finestra:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:265
+msgid "Limit text width"
+msgstr "Limita l'amplària del text"
+
+#: package/contents/ui/config/ConfigAppearance.qml:275
+#: package/contents/ui/config/ConfigAppMenu.qml:95
+msgctxt "Abbreviation for pixels"
+msgid "px"
+msgstr "px"
+
+#: package/contents/ui/config/ConfigAppearance.qml:288
+msgid "Show window icon"
+msgstr "Mostra la icona de la finestra"
+
+#: package/contents/ui/config/ConfigAppearance.qml:294
+msgid "Window icon on the right"
+msgstr "Mostra la icona a la dreta"
+
+#: package/contents/ui/config/ConfigAppearance.qml:315
+msgid "Bold text"
+msgstr "Text en negreta"
+
+#: package/contents/ui/config/ConfigAppearance.qml:319
+msgid "Text font:"
+msgstr "Tipus de lletra del text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:340
+msgid "Icon and text spacing:"
+msgstr "Espaiat de la icona i el text:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:352
+msgid "Font size scale:"
+msgstr "Escala la mida del tipus de lletra:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:23
+msgid "Enable application menu"
+msgstr "Activa el menú de l'aplicació"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:38
+msgid "Fill height"
+msgstr "Òmpliga l'alçària"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:44
+msgid "Bold font"
+msgstr "Tipus de lletra en negreta"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:50
+#: package/contents/ui/config/ConfigButtons.qml:173
+msgid "Do not hide on mouse out"
+msgstr "No ocultes l'eixida del ratolí"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:55
+msgid "Show next to buttons"
+msgstr "Mostra al costat dels botons"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:61
+msgid "Show next to icon and text"
+msgstr "Mostra al costat de la icona i el text"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:67
+msgid "Switch sides with icon and text"
+msgstr "Canvia els costats amb la icona i el text"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:74
+msgid "Show separator"
+msgstr "Mostra el separador"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:81
+msgid "Make window title bold when menu is displayed"
+msgstr "Fes que el títol de la finestra siga en negreta quan es mostre el menú"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:86
+msgid "Side margin:"
+msgstr "Marge lateral:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:99
+msgid "Icon and text opacity:"
+msgstr "Opacitat de la icona i el text:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:111
+msgid "Menu button text size scale:"
+msgstr "Escala de mida el text en el botó del menú:"
+
+#: package/contents/ui/config/ConfigBehaviour.qml:14
+msgid "Show active window only for plasmoid's screen"
+msgstr "Mostra la finestra activa només per a la pantalla del plasmoide"
+
+#: package/contents/ui/config/ConfigButtons.qml:90
+msgid "Enable Control Buttons"
+msgstr "Activa els botons de control"
+
+#: package/contents/ui/config/ConfigButtons.qml:111
+msgid "Show minimize button"
+msgstr "Mostra el botó minimitza"
+
+#: package/contents/ui/config/ConfigButtons.qml:116
+msgid "Show maximize button"
+msgstr "Mostra el botó maximitza"
+
+#: package/contents/ui/config/ConfigButtons.qml:121
+msgid "Show pin to all desktops"
+msgstr "Mostra el pin a tots els escriptoris"
+
+#: package/contents/ui/config/ConfigButtons.qml:131
+msgid "Button order:"
+msgstr "Ordre del botó:"
+
+#: package/contents/ui/config/ConfigButtons.qml:167
+msgid "Behaviour:"
+msgstr "Comportament:"
+
+#: package/contents/ui/config/ConfigButtons.qml:184
+msgid "Show only when maximized"
+msgstr "Mostra'l només quan estiga maximitzat"
+
+#: package/contents/ui/config/ConfigButtons.qml:189
+msgid "Buttons next to icon and text"
+msgstr "Botons al costat de la icona i el text"
+
+#: package/contents/ui/config/ConfigButtons.qml:194
+msgid "Buttons between icon and text"
+msgstr "Botons entre la icona i el text"
+
+#: package/contents/ui/config/ConfigButtons.qml:200
+msgid "Dynamic width"
+msgstr "Amplària dinàmica"
+
+#: package/contents/ui/config/ConfigButtons.qml:206
+msgid "Sliding icon and text"
+msgstr "Icona i text lliscant"
+
+#: package/contents/ui/config/ConfigButtons.qml:218
+msgid "Position:"
+msgstr "Posició:"
+
+#: package/contents/ui/config/ConfigButtons.qml:224
+msgid "Upper left"
+msgstr "Superior esquerra"
+
+#: package/contents/ui/config/ConfigButtons.qml:235
+msgid "Upper right"
+msgstr "Superior dreta"
+
+#: package/contents/ui/config/ConfigButtons.qml:241
+msgid "Bottom left"
+msgstr "Inferior esquerra"
+
+#: package/contents/ui/config/ConfigButtons.qml:247
+msgid "Bottom right"
+msgstr "Inferior dreta"
+
+#: package/contents/ui/config/ConfigButtons.qml:253
+msgid "Vertical center"
+msgstr "Centre vertical"
+
+#: package/contents/ui/config/ConfigButtons.qml:263
+msgid "Button size:"
+msgstr "Mida dels botons:"
+
+#: package/contents/ui/config/ConfigButtons.qml:275
+msgid "Buttons spacing:"
+msgstr "Espaiat entre els botons:"
+
+#: package/contents/ui/config/ConfigButtons.qml:294
+msgid "Theme"
+msgstr "Tema"
+
+#: package/contents/ui/config/ConfigButtons.qml:300
+msgid "Automatic"
+msgstr "Automàtic"
+
+#: package/contents/ui/config/ConfigButtons.qml:304
+msgid "Absolute path to aurorae button theme folder"
+msgstr "Camí absolut cap a la carpeta de tema de botons «aurorae»"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:84
+msgid "Mouse Buttons:"
+msgstr "Botons del ratolí:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:89
+msgid "Doubleclick to toggle maximizing"
+msgstr "Cal fer doble clic per a alternar la maximització"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:101
+msgid "Left click disabled"
+msgstr "S'ha desactivat el clic esquerre"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:108
+msgid "Left click to present windows (Current Desktop)"
+msgstr ""
+"Cal fer clic esquerre per a presentar les finestres (escriptori actual)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:115
+msgid "Left click to present windows (All Desktops)"
+msgstr ""
+"Cal fer clic esquerre per a presentar les finestres (tots els escriptoris)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:122
+msgid "Left click to present windows (Window Class)"
+msgstr ""
+"Cal fer clic esquerre per a presentar les finestres (classe de finestra)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:140
+msgid "Middle click disabled"
+msgstr "Desactiva el clic del mig"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:146
+msgid "Middle click to close active window"
+msgstr "Cal fer clic del mig per a tancar la finestra activa"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:152
+msgid "Middle click to toggle fullscreen"
+msgstr "Cal fer clic del mig per a alternar a pantalla completa"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:163
+msgid "Mouse Wheel:"
+msgstr "Roda del ratolí:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:168
+msgid "Mouse wheel up to maximize"
+msgstr "Moure amunt la roda del ratolí per a maximitzar"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:178
+msgid "Mouse wheel down disabled"
+msgstr "Desactiva moure avall la roda del ratolí"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:184
+msgid "Mouse wheel down to minimize"
+msgstr "Moure avall la roda del ratolí per a minimitzar"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:190
+msgid "Mouse wheel down to unmaximize"
+msgstr "Moure avall la roda del ratolí per a eixir de la maximització"
+
+#: package/contents/ui/config/IconPicker.qml:73
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr "Tria..."
+
+#: package/contents/ui/config/IconPicker.qml:78
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "Neteja la icona"
+
+#: package/contents/ui/main.qml:583
+msgid "Switch to activity: %1"
+msgstr "Canvia a l'activitat: %1"
+
+#: package/contents/ui/main.qml:591
+msgid "Close"
+msgstr "Tanca"
+
+#: package/contents/ui/main.qml:592
+msgid "Toggle Maximise"
+msgstr "Alterna la maximització"
+
+#: package/contents/ui/main.qml:593
+msgid "Minimise"
+msgstr "Minimitza"
+
+#: package/contents/ui/main.qml:594
+msgid "Toggle Pin To All Desktops"
+msgstr "Canvia el pin a tots els escriptoris"
+
+#: package/contents/ui/main.qml:596
+msgid "Reload Theme"
+msgstr "Torna a carregar el tema"

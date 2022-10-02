@@ -1,0 +1,389 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stelios <sstavra@gmail.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-05-23 00:18+0000\n"
+"PO-Revision-Date: 2019-07-31 12:31+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 18.12.3\n"
+
+#: package/contents/config/config.qml:6
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: package/contents/config/config.qml:11
+msgid "Behaviour"
+msgstr "Συμπεριφορά"
+
+#: package/contents/config/config.qml:16
+msgid "Buttons"
+msgstr "Κουμπιά"
+
+#: package/contents/config/config.qml:21
+msgid "Mouse Control"
+msgstr "Έλεγχος ποντικιού"
+
+#: package/contents/config/config.qml:26
+msgid "Application Menu"
+msgstr "Μενού εφαρμογής"
+
+#: package/contents/ui/config/ConfigAppearance.qml:73
+msgctxt "Use default font"
+msgid "Default"
+msgstr "Προκαθορισμένη"
+
+#: package/contents/ui/config/ConfigAppearance.qml:90
+msgid "Plasmoid version: "
+msgstr "Έκδοση γραφικού συστατικού: "
+
+#: package/contents/ui/config/ConfigAppearance.qml:96
+msgid "Width in horizontal panel:"
+msgstr "Πλάτος στον οριζόντιο πίνακα:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:103
+msgid "Fill width"
+msgstr "Γέμισμα πλάτους"
+
+#: package/contents/ui/config/ConfigAppearance.qml:122
+msgid "Fine tuning:"
+msgstr "Ακριβής προσαρμογή:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:142
+msgid "Hide titlebar for maximized windows (takes effect immediately)"
+msgstr ""
+"Απόκρυψη γραμμής τίτλου για τα μεγιστοποιημένα παράθυρα (άμεση εφαρμογή)"
+
+#: package/contents/ui/config/ConfigAppearance.qml:158
+msgid "Show window title"
+msgstr "Εμφάνιση τίτλου παραθύρου"
+
+#: package/contents/ui/config/ConfigAppearance.qml:173
+msgid "Text type:"
+msgstr "Τύπος κειμένου:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+#: package/contents/ui/config/ConfigAppearance.qml:201
+msgid "Window title"
+msgstr "Τίτλος παραθύρου"
+
+#: package/contents/ui/config/ConfigAppearance.qml:178
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "Application name"
+msgstr "Όνομα εφαρμογής"
+
+#: package/contents/ui/config/ConfigAppearance.qml:182
+msgid "Fit text:"
+msgstr "Προσαρμογή κειμένου στο πλάτος:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Just elide"
+msgstr "Αποκοπή κειμένου"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Fit on hover"
+msgstr "Προσαρμογή στο πέρασμα του ποντικιού"
+
+#: package/contents/ui/config/ConfigAppearance.qml:187
+msgid "Always fit"
+msgstr "Να εμφανίζεται πάντα"
+
+#: package/contents/ui/config/ConfigAppearance.qml:191
+msgid "Tooltip text:"
+msgstr "Επεξήγηση:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:196
+msgid "No tooltip"
+msgstr "Χωρίς επεξήγηση"
+
+#: package/contents/ui/config/ConfigAppearance.qml:233
+msgid "No window text:"
+msgstr "Χωρίς κείμενο παραθύρου:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:247
+msgid "Use %activity% placeholder to show current activity name."
+msgstr ""
+"Χρήση αντικαταστάτη %δραστηριότητας% για να εμφανίζεται το τρέχον όνομα."
+
+#: package/contents/ui/config/ConfigAppearance.qml:254
+msgid "No window icon:"
+msgstr "Χωρίς εικονίδιο εφαρμογής:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:265
+msgid "Limit text width"
+msgstr "Περιορισμός πλάρους κειμένου"
+
+#: package/contents/ui/config/ConfigAppearance.qml:275
+#: package/contents/ui/config/ConfigAppMenu.qml:95
+msgctxt "Abbreviation for pixels"
+msgid "px"
+msgstr "px"
+
+#: package/contents/ui/config/ConfigAppearance.qml:288
+msgid "Show window icon"
+msgstr "Εμφάνιση εικονιδίου παραθύρου"
+
+#: package/contents/ui/config/ConfigAppearance.qml:294
+msgid "Window icon on the right"
+msgstr "Εικονίδιο εφαρμογής στα δεξιά"
+
+#: package/contents/ui/config/ConfigAppearance.qml:315
+msgid "Bold text"
+msgstr "Έντονο κείμενο"
+
+#: package/contents/ui/config/ConfigAppearance.qml:319
+msgid "Text font:"
+msgstr "Γραμματοσειρά:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:340
+msgid "Icon and text spacing:"
+msgstr "Απόσταση εικονιδίου και τίτλου:"
+
+#: package/contents/ui/config/ConfigAppearance.qml:352
+msgid "Font size scale:"
+msgstr "Μέγεθος γραμματοσειράς:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:23
+msgid "Enable application menu"
+msgstr "Ενεργοποίηση μενού εφαρμογής"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:38
+msgid "Fill height"
+msgstr "Γέμισμα ύψους"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:44
+msgid "Bold font"
+msgstr "Έντονη γραμματοσειρά"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:50
+#: package/contents/ui/config/ConfigButtons.qml:173
+msgid "Do not hide on mouse out"
+msgstr "Να μη γίνεται απόκρυψη με την απομάκρυνση του ποντικιού"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:55
+msgid "Show next to buttons"
+msgstr "Εμφάνιση δίπλα από κουμπιά"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:61
+msgid "Show next to icon and text"
+msgstr "Εμφάνιση δίπλα από εικονίδιο και τίτλο"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:67
+msgid "Switch sides with icon and text"
+msgstr "Εναλλαγή πλευρών με εικονίδιο και κείμενο"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:74
+msgid "Show separator"
+msgstr "Εμφάνιση διαχωριστή"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:81
+msgid "Make window title bold when menu is displayed"
+msgstr "Να γίνεται ο τίτλος του παραθύρου έντονος όταν εμφανίζεται το μενού"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:86
+msgid "Side margin:"
+msgstr "Περιθώριο πλευράς:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:99
+msgid "Icon and text opacity:"
+msgstr "Αδιαφάνεια εικονιδίου και τίτλου:"
+
+#: package/contents/ui/config/ConfigAppMenu.qml:111
+msgid "Menu button text size scale:"
+msgstr "Κλιμάκωση μεγέθους κειμένου κουμπιού του μενού:"
+
+#: package/contents/ui/config/ConfigBehaviour.qml:14
+msgid "Show active window only for plasmoid's screen"
+msgstr ""
+"Να εμφανίζεται το ενεργό παράθυρο μόνο για την οθόνη του γραφικού συστατικού"
+
+#: package/contents/ui/config/ConfigButtons.qml:90
+msgid "Enable Control Buttons"
+msgstr "Ενεργοποίηση κουμπιών ελέγχου"
+
+#: package/contents/ui/config/ConfigButtons.qml:111
+msgid "Show minimize button"
+msgstr "Εμφάνιση κουμπιού ελαχιστοποίησης"
+
+#: package/contents/ui/config/ConfigButtons.qml:116
+msgid "Show maximize button"
+msgstr "Εμφάνιση κουμπιού μεγιστοποίησης"
+
+#: package/contents/ui/config/ConfigButtons.qml:121
+msgid "Show pin to all desktops"
+msgstr "Εμφάνιση σήμανσης σε όλες τις επιφάνειες εργασίας"
+
+#: package/contents/ui/config/ConfigButtons.qml:131
+msgid "Button order:"
+msgstr "Σειρά εμφάνισης κουμπιών:"
+
+#: package/contents/ui/config/ConfigButtons.qml:167
+msgid "Behaviour:"
+msgstr "Συμπεριφορά:"
+
+#: package/contents/ui/config/ConfigButtons.qml:184
+msgid "Show only when maximized"
+msgstr "Εμφάνιση μόνο στα μεγιστοποιημένα"
+
+#: package/contents/ui/config/ConfigButtons.qml:189
+msgid "Buttons next to icon and text"
+msgstr "Κουμπιά δίπλα από εικονίδιο και τίτλο"
+
+#: package/contents/ui/config/ConfigButtons.qml:194
+msgid "Buttons between icon and text"
+msgstr "Κουμπιά ανάμεσα σε εικονίδιο και τίτλο"
+
+#: package/contents/ui/config/ConfigButtons.qml:200
+msgid "Dynamic width"
+msgstr "Δυναμικό πλάτος"
+
+#: package/contents/ui/config/ConfigButtons.qml:206
+msgid "Sliding icon and text"
+msgstr "Εφέ κύλισης εικονιδίου και τίτλου"
+
+#: package/contents/ui/config/ConfigButtons.qml:218
+msgid "Position:"
+msgstr "Θέση:"
+
+#: package/contents/ui/config/ConfigButtons.qml:224
+msgid "Upper left"
+msgstr "Άνω αριστερά"
+
+#: package/contents/ui/config/ConfigButtons.qml:235
+msgid "Upper right"
+msgstr "Άνω δεξιά"
+
+#: package/contents/ui/config/ConfigButtons.qml:241
+msgid "Bottom left"
+msgstr "Κάτω αριστερά"
+
+#: package/contents/ui/config/ConfigButtons.qml:247
+msgid "Bottom right"
+msgstr "Κάτω δεξιά"
+
+#: package/contents/ui/config/ConfigButtons.qml:253
+msgid "Vertical center"
+msgstr "Κάθετο κεντράρισμα"
+
+#: package/contents/ui/config/ConfigButtons.qml:263
+msgid "Button size:"
+msgstr "Μέγεθος κουμπιού:"
+
+#: package/contents/ui/config/ConfigButtons.qml:275
+msgid "Buttons spacing:"
+msgstr "Απόσταση κουμπιών:"
+
+#: package/contents/ui/config/ConfigButtons.qml:294
+msgid "Theme"
+msgstr "Θέμα"
+
+#: package/contents/ui/config/ConfigButtons.qml:300
+msgid "Automatic"
+msgstr "Αυτόματο"
+
+#: package/contents/ui/config/ConfigButtons.qml:304
+msgid "Absolute path to aurorae button theme folder"
+msgstr "Απόλυτη διαδρομή στο φάκελο θεμάτων κουμπιού aurorae"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:84
+msgid "Mouse Buttons:"
+msgstr "Κουμπιά ποντικιού:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:89
+msgid "Doubleclick to toggle maximizing"
+msgstr "Διπλό κλικ για εναλλαγή μεγιστοποίησης"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:101
+msgid "Left click disabled"
+msgstr "Απενεργοποιημένο αριστερό κλικ"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:108
+msgid "Left click to present windows (Current Desktop)"
+msgstr "Αριστερό κλικ για την εμφάνιση παραθύρων (Ενεργή Επιφάνεια Εργασίας)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:115
+msgid "Left click to present windows (All Desktops)"
+msgstr "Αριστερό κλικ για την εμφάνιση παραθύρων (Όλες Οι Επιφάνειες Εργασίας)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:122
+msgid "Left click to present windows (Window Class)"
+msgstr "Αριστερό κλικ για την εμφάνιση παραθύρων (παράθυρα ίδιας εφαρμογής)"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:140
+msgid "Middle click disabled"
+msgstr "Απενεργοποίηση μεσαίου κλικ"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:146
+msgid "Middle click to close active window"
+msgstr "Κλείσιμο ενεργού παραθύρου με το μεσαίο κλικ"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:152
+msgid "Middle click to toggle fullscreen"
+msgstr "Μεσαίο κλικ για εναλλαγή πλήρους οθόνης"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:163
+msgid "Mouse Wheel:"
+msgstr "Ροδέλα ποντικιού:"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:168
+msgid "Mouse wheel up to maximize"
+msgstr "Άνω κύλιση ροδέλας για μεγιστοποίηση"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:178
+msgid "Mouse wheel down disabled"
+msgstr "Απενεργοποιημένη κάτω κύλιση ροδέλας"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:184
+msgid "Mouse wheel down to minimize"
+msgstr "Κάτω κύλιση ροδέλας για ελαχιστοποίηση"
+
+#: package/contents/ui/config/ConfigMouseControl.qml:190
+msgid "Mouse wheel down to unmaximize"
+msgstr "Κάτω κύλιση ροδέλας για επαναφορά"
+
+#: package/contents/ui/config/IconPicker.qml:73
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr "Επιλογή..."
+
+#: package/contents/ui/config/IconPicker.qml:78
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr "Καθαρισμός εικονιδίου"
+
+#: package/contents/ui/main.qml:583
+msgid "Switch to activity: %1"
+msgstr "Εναλλαγή σε δραστηριότητα: %1"
+
+#: package/contents/ui/main.qml:591
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: package/contents/ui/main.qml:592
+msgid "Toggle Maximise"
+msgstr "Εναλλαγή μεγιστοποίησης"
+
+#: package/contents/ui/main.qml:593
+msgid "Minimise"
+msgstr "Ελαχιστοποίηση"
+
+#: package/contents/ui/main.qml:594
+msgid "Toggle Pin To All Desktops"
+msgstr "Εναλλαγή σήμανσης σε όλες τις επιφάνειες εργασίας"
+
+#: package/contents/ui/main.qml:596
+msgid "Reload Theme"
+msgstr "Επαναφόρτωση θέματος"
+
+#~ msgid "Plasma Desktop"
+#~ msgstr "Επιφάνεια Εργασίας Plasma"
