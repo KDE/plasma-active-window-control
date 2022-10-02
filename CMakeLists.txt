@@ -14,7 +14,7 @@ include(KDEClangFormat)
 include(KDEGitCommitHooks)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Quick Widgets DBus)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma WindowSystem)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma WindowSystem I18n)
 
 add_subdirectory(plugin)
 add_subdirectory(lib)

@@ -7,3 +7,4 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@latest'
     'frameworks/plasma-framework': '@latest'
     'frameworks/kwindowsystem': '@latest'
+    'frameworks/ki18n': '@latest'
