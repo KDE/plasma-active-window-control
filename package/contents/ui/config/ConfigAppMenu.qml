@@ -83,7 +83,7 @@ Item {
             }
 
             Label {
-                text: i18n('Side margin:')
+                text: i18n("Side margin:")
                 Layout.alignment: Qt.AlignRight
             }
             SpinBox {
@@ -92,11 +92,11 @@ Item {
                 stepSize: 1
                 minimumValue: 0
                 maximumValue: 100
-                suffix: i18nc('Abbreviation for pixels', 'px')
+                suffix: i18nc("Abbreviation for pixels", "px")
             }
 
             Label {
-                text: i18n('Icon and text opacity:')
+                text: i18n("Icon and text opacity:")
                 Layout.alignment: Qt.AlignRight
             }
             SpinBox {
@@ -108,7 +108,7 @@ Item {
             }
 
             Label {
-                text: i18n('Menu button text size scale:')
+                text: i18n("Menu button text size scale:")
                 Layout.alignment: Qt.AlignRight
             }
             SpinBox {

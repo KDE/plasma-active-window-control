@@ -580,7 +580,7 @@ Item {
                 return;
             }
             var activityName = activityInfo.activityName(activityId)
-            plasmoid.setAction('switchToActivity_' + index, i18n('Switch to activity: %1', activityName), 'activities')
+            plasmoid.setAction("switchToActivity_" + index, i18n("Switch to activity: %1", activityName), "activities")
         })
         plasmoid.setActionSeparator("separator2")
     }
@@ -588,12 +588,12 @@ Item {
     Component.onCompleted: {
         initializeControlButtonsModel()
         updateActiveWindowInfo()
-        plasmoid.setAction('close', i18n('Close'), 'window-close');
-        plasmoid.setAction('maximise', i18n('Toggle Maximise'), 'arrow-up-double');
-        plasmoid.setAction('minimise', i18n('Minimise'), 'draw-arrow-down');
-        plasmoid.setAction('pinToAllDesktops', i18n('Toggle Pin To All Desktops'), 'window-pin');
+        plasmoid.setAction("close", i18n("Close"), "window-close");
+        plasmoid.setAction("maximise", i18n("Toggle Maximise"), "arrow-up-double");
+        plasmoid.setAction("minimise", i18n("Minimise"), "draw-arrow-down");
+        plasmoid.setAction("pinToAllDesktops", i18n("Toggle Pin To All Desktops"), "window-pin");
         plasmoid.setActionSeparator("separator0")
-        plasmoid.setAction('reloadTheme', i18n('Reload Theme'), 'system-reboot');
+        plasmoid.setAction("reloadTheme", i18n("Reload Theme"), "system-reboot");
         reAddActivityActions()
     }
 

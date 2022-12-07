@@ -87,7 +87,7 @@ Item {
         columns: 2
 
         Label {
-            text: i18n('Plasmoid version: ') + '1.7.4'
+            text: i18n("Plasmoid version: ") + '1.7.4'
             Layout.alignment: Qt.AlignRight
             Layout.columnSpan: 2
         }
@@ -170,35 +170,35 @@ Item {
                 }
 
                 Label {
-                    text: i18n('Text type:')
+                    text: i18n("Text type:")
                     Layout.alignment: Qt.AlignRight
                 }
                 ComboBox {
                     id: textTypeCombo
-                    model: [i18n('Window title'), i18n('Application name')]
+                    model: [i18n("Window title"), i18n("Application name")]
                 }
 
                 Label {
-                    text: i18n('Fit text:')
+                    text: i18n("Fit text:")
                     Layout.alignment: Qt.AlignRight
                 }
                 ComboBox {
                     id: fitTextCombo
-                    model: [i18n('Just elide'), i18n('Fit on hover'), i18n('Always fit')]
+                    model: [i18n("Just elide"), i18n("Fit on hover"), i18n("Always fit")]
                 }
 
                 Label {
-                    text: i18n('Tooltip text:')
+                    text: i18n("Tooltip text:")
                     Layout.alignment: Qt.AlignRight
                 }
                 ComboBox {
                     id: tooltipTextTypeCombo
-                    model: [i18n('No tooltip'), i18n('Window title'), i18n('Application name')]
+                    model: [i18n("No tooltip"), i18n("Window title"), i18n("Application name")]
                 }
 
                 CheckBox {
                     id: useWindowTitleReplace
-                    text: '"' + i18n('Window title') + '".replace(/'
+                    text: '"' + i18n("Window title") + '".replace(/'
                     Layout.alignment: Qt.AlignRight
                 }
                 GridLayout {
@@ -230,7 +230,7 @@ Item {
                 }
 
                 Label {
-                    text: i18n('No window text:')
+                    text: i18n("No window text:")
                     Layout.alignment: Qt.AlignRight
                 }
                 GridLayout {
@@ -244,7 +244,7 @@ Item {
                     }
 
                     Label {
-                        text: i18n('Use %activity% placeholder to show current activity name.')
+                        text: i18n("Use %activity% placeholder to show current activity name.")
                         Layout.preferredWidth: 200
                         wrapMode: Text.Wrap
                     }
@@ -262,7 +262,7 @@ Item {
 
                 CheckBox {
                     id: limitTextWidth
-                    text: i18n('Limit text width')
+                    text: i18n("Limit text width")
                     Layout.alignment: Qt.AlignRight
                 }
                 SpinBox {
@@ -272,7 +272,7 @@ Item {
                     minimumValue: 0
                     maximumValue: 10000
                     enabled: limitTextWidth.checked
-                    suffix: i18nc('Abbreviation for pixels', 'px')
+                    suffix: i18nc("Abbreviation for pixels", "px")
                 }
             }
         }
@@ -316,7 +316,7 @@ Item {
             }
 
             Label {
-                text: i18n('Text font:')
+                text: i18n("Text font:")
                 Layout.alignment: Qt.AlignRight
             }
             ComboBox {
