@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Active Window Control
 Name[az]=Aktiv Pəncərə İdarəetməsi
+Name[be]=Кіраванне актыўнымі вокнамі
 Name[bg]=Контрол на активен прозорец
 Name[ca]=Control de la finestra activa
 Name[ca@valencia]=Control de la finestra activa
@@ -39,6 +40,7 @@ Name[zh_CN]=活动窗口控制
 Name[zh_TW]=控制使用中視窗
 Comment=Plasmoid for advanced active window control.
 Comment[az]=Əlavə aktiv pəncərələri idarə etmək üçün plasmoid.
+Comment[be]=Плазмоід для дадатковага кіравання актыўнымі вокнамі.
 Comment[bg]=Минипрограма на Plasma за разширен контрол на активни прозорци
 Comment[ca]=Plasmoide per al control avançat de les finestres actives.
 Comment[ca@valencia]=Plasmoide per al control avançat de les finestres actives.
